@@ -1,0 +1,10 @@
+{
+  "name": "@efs-project/content",
+  "private": true,
+  "type": "module",
+  "license": "SEE LICENSE IN LICENSE",
+  "scripts": {
+    "validate": "node scripts/validate-manifests.mjs"
+  }
+}
+

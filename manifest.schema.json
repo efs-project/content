@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/efs-project/content/blob/main/manifest.schema.json",
+  "title": "EFS content dataset manifest",
+  "type": "object",
+  "required": ["dataset", "anchorPath", "files"],
+  "additionalProperties": true,
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "description": "Manifest schema version. Current target: efs-content-manifest/v1."
+    },
+    "dataset": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$"
+    },
+    "title": {
+      "type": "string"
+    },
+    "anchorPath": {
+      "type": "string",
+      "pattern": "^/[A-Za-z0-9._~!$'()*+,;=:@%-]+(?:/[A-Za-z0-9._~!$'()*+,;=:@%-]+)*$"
+    },
+    "description": {
+      "type": "string"
+    },
+    "defaults": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "contentType": { "type": "string" },
+        "license": { "type": "string" }
+      }
+    },
+    "files": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/file" }
+    }
+  },
+  "$defs": {
+    "file": {
+      "type": "object",
+      "required": ["path"],
+      "additionalProperties": true,
+      "properties": {
+        "path": {
+          "type": "string",
+          "pattern": "^[^/\\\\.][^\\\\]*(?:/[^/\\\\.][^\\\\]*)*$"
+        },
+        "name": {
+          "type": "string",
+          "description": "Legacy/current deploy display field. Prefer title for new human labels."
+        },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "contentType": { "type": "string" },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" },
+          "uniqueItems": true
+        },
+        "license": { "type": "string" },
+        "licenseUrl": { "type": "string" },
+        "author": { "type": "string" },
+        "authors": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "rightsHolder": { "type": "string" },
+        "source": {
+          "oneOf": [
+            { "type": "string" },
+            {
+              "type": "object",
+              "additionalProperties": true,
+              "properties": {
+                "url": { "type": "string" },
+                "retrievedAt": { "type": "string" }
+              }
+            }
+          ]
+        },
+        "mirrors": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "aboutCard": { "type": "string" }
+      }
+    }
+  }
+}
+

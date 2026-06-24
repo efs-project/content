@@ -1,0 +1,145 @@
+{
+  "schemaVersion": "efs-content-manifest/v1",
+  "dataset": "web-games",
+  "title": "Web Games",
+  "anchorPath": "/games",
+  "description": "EFS Arcade: single-file HTML5 games, playable in a sandboxed iframe.",
+  "defaults": { "contentType": "text/html" },
+  "files": [
+    {
+      "path": "snake.html",
+      "name": "snake.html",
+      "tags": ["arcade", "classic"],
+      "license": "CC0-1.0",
+      "author": "straker",
+      "source": "https://gist.github.com/straker/ff00b4b49669ad3dec890306d348adc4",
+      "mirrors": ["https://gist.githubusercontent.com/straker/ff00b4b49669ad3dec890306d348adc4/raw/snake.html"]
+    },
+    {
+      "path": "tetris.html",
+      "name": "tetris.html",
+      "tags": ["puzzle", "classic"],
+      "license": "CC0-1.0",
+      "author": "straker",
+      "source": "https://gist.github.com/straker/3c98304f8a6a9174efd8292800891ea1",
+      "mirrors": ["https://gist.githubusercontent.com/straker/3c98304f8a6a9174efd8292800891ea1/raw/tetris.html"]
+    },
+    {
+      "path": "breakout.html",
+      "name": "breakout.html",
+      "tags": ["arcade", "classic"],
+      "license": "CC0-1.0",
+      "author": "straker",
+      "source": "https://gist.github.com/straker/98a2aed6a7686d26c04810f08bfaf66b",
+      "mirrors": ["https://gist.githubusercontent.com/straker/98a2aed6a7686d26c04810f08bfaf66b/raw/breakout.html"]
+    },
+    {
+      "path": "block-dude.html",
+      "name": "block-dude.html",
+      "tags": ["puzzle", "platformer", "classic"],
+      "license": "CC0-1.0",
+      "author": "straker",
+      "source": "https://gist.github.com/straker/df855f22e57576c80d6126aa5609654e",
+      "mirrors": ["https://gist.githubusercontent.com/straker/df855f22e57576c80d6126aa5609654e/raw/block-dude.html"]
+    },
+    {
+      "path": "helicopter.html",
+      "name": "helicopter.html",
+      "tags": ["arcade", "endless", "classic"],
+      "license": "CC0-1.0",
+      "author": "straker",
+      "source": "https://gist.github.com/straker/0d25ae9d235f6a62f8287fd36a097043",
+      "mirrors": ["https://gist.githubusercontent.com/straker/0d25ae9d235f6a62f8287fd36a097043/raw/helicopter.html"]
+    },
+    {
+      "path": "puzzle-bobble.html",
+      "name": "puzzle-bobble.html",
+      "tags": ["puzzle", "arcade", "classic"],
+      "license": "CC0-1.0",
+      "author": "straker",
+      "source": "https://gist.github.com/straker/afc5bedc7f4b4bc65ba8b05c435f6d32",
+      "mirrors": ["https://gist.githubusercontent.com/straker/afc5bedc7f4b4bc65ba8b05c435f6d32/raw/puzzle-bobble.html"]
+    },
+    {
+      "path": "doodle-jump.html",
+      "name": "doodle-jump.html",
+      "tags": ["arcade", "platformer", "classic"],
+      "license": "CC0-1.0",
+      "author": "straker",
+      "source": "https://gist.github.com/straker/b96a4a68bd6d79cf75a833d98a2b654f",
+      "mirrors": ["https://gist.githubusercontent.com/straker/b96a4a68bd6d79cf75a833d98a2b654f/raw/doodle-jump.html"]
+    },
+    {
+      "path": "sokoban.html",
+      "name": "sokoban.html",
+      "tags": ["puzzle", "classic"],
+      "license": "CC0-1.0",
+      "author": "straker",
+      "source": "https://gist.github.com/straker/2fddb507d4bb6bec54ea2fdb022d020c",
+      "mirrors": ["https://gist.githubusercontent.com/straker/2fddb507d4bb6bec54ea2fdb022d020c/raw/sokoban.html"]
+    },
+    {
+      "path": "missile-command.html",
+      "name": "missile-command.html",
+      "tags": ["arcade", "classic"],
+      "license": "CC0-1.0",
+      "author": "straker",
+      "source": "https://gist.github.com/straker/afc4e2a30b6df772a5f9f6ef01751d41",
+      "mirrors": ["https://gist.githubusercontent.com/straker/afc4e2a30b6df772a5f9f6ef01751d41/raw/missile-command.html"]
+    },
+    {
+      "path": "frogger.html",
+      "name": "frogger.html",
+      "tags": ["arcade", "classic"],
+      "license": "CC0-1.0",
+      "author": "straker",
+      "source": "https://gist.github.com/straker/82a4368849cbd441b05bd6a044f2b2d3",
+      "mirrors": ["https://gist.githubusercontent.com/straker/82a4368849cbd441b05bd6a044f2b2d3/raw/frogger.html"]
+    },
+    {
+      "path": "bomberman.html",
+      "name": "bomberman.html",
+      "tags": ["arcade", "maze", "classic"],
+      "license": "CC0-1.0",
+      "author": "straker",
+      "source": "https://gist.github.com/straker/769fb461e066147ea16ac2cb9463beae",
+      "mirrors": ["https://gist.githubusercontent.com/straker/769fb461e066147ea16ac2cb9463beae/raw/bomberman.html"]
+    },
+    {
+      "path": "pong.html",
+      "name": "pong.html",
+      "tags": ["arcade", "classic"],
+      "license": "MIT",
+      "author": "Drake Axelrod",
+      "source": "https://github.com/drakeaxelrod/single-html-file-apps",
+      "mirrors": ["https://raw.githubusercontent.com/drakeaxelrod/single-html-file-apps/main/apps/pong.html"]
+    },
+    {
+      "path": "tiny-yurts.html",
+      "name": "tiny-yurts.html",
+      "tags": ["cozy", "sim", "js13k"],
+      "license": "MIT",
+      "author": "burntcustard",
+      "source": "https://github.com/burntcustard/tiny-yurts",
+      "mirrors": ["https://raw.githubusercontent.com/burntcustard/tiny-yurts/main/dist/index.html"]
+    },
+    {
+      "path": "infernal-throne.html",
+      "name": "infernal-throne.html",
+      "tags": ["action", "platformer", "js13k"],
+      "license": "MIT",
+      "author": "Ariel Wexler",
+      "source": "https://github.com/arikwex/infernal-sigil",
+      "mirrors": ["https://raw.githubusercontent.com/arikwex/infernal-sigil/master/index.html"]
+    },
+    {
+      "path": "dante.html",
+      "name": "dante.html",
+      "tags": ["webgl", "exploration", "js13k"],
+      "license": "MIT",
+      "author": "Salvatore Previti",
+      "source": "https://github.com/SalvatorePreviti/js13k-2022",
+      "mirrors": ["https://raw.githubusercontent.com/SalvatorePreviti/js13k-2022/master/dist/3-bundle/index.html"]
+    }
+  ]
+}

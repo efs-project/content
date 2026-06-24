@@ -1,0 +1,27 @@
+EFS Content Repository License
+
+This repository is a mixed-license content collection.
+
+EFS-created metadata, manifests, catalog files, dataset READMEs, curation notes,
+and original summaries are dedicated to the public domain under CC0 1.0
+Universal unless a file says otherwise.
+
+EFS-created software and scripts are licensed under the MIT License unless a
+file says otherwise. New scripts should include:
+
+  SPDX-License-Identifier: MIT
+
+Third-party works are not relicensed by EFS. Each third-party file remains
+under its original license or distribution terms. The relevant manifest,
+dataset README, in-file notices, and NOTICE.md should record the known author,
+source, license, redistribution status, and modification status.
+
+Files marked link-only, review-required, unclear, unknown, NOASSERTION, or
+not-allowed must not be pinned, mirrored, or redistributed as EFS-hosted bytes
+until their rights status is resolved.
+
+License references:
+
+- CC0 1.0 Universal: https://creativecommons.org/publicdomain/zero/1.0/
+- MIT License: https://opensource.org/license/mit
+

@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "efs-content-manifest/v1",
+  "dataset": "cypherpunk-canon",
+  "title": "Cypherpunk Canon",
+  "anchorPath": "/cypherpunk",
+  "description": "Founding texts of the cypherpunk movement.",
+  "defaults": { "contentType": "text/markdown" },
+  "files": [
+    {
+      "path": "cypherpunks-manifesto-full.md",
+      "name": "cypherpunks-manifesto-full.md",
+      "aboutCard": "cypherpunks-manifesto.md",
+      "tags": ["foundational","privacy","philosophy"],
+      "license": "LicenseRef-Freely-Distributable-Attribution",
+      "author": "Eric Hughes",
+      "source": "https://www.activism.net/cypherpunk/manifesto.html",
+      "mirrors": ["https://www.activism.net/cypherpunk/manifesto.html"]
+    },
+    {
+      "path": "crypto-anarchist-manifesto-full.md",
+      "name": "crypto-anarchist-manifesto-full.md",
+      "aboutCard": "crypto-anarchist-manifesto.md",
+      "tags": ["foundational","markets","philosophy"],
+      "license": "LicenseRef-Freely-Distributable-Attribution",
+      "author": "Timothy C. May",
+      "source": "https://www.activism.net/cypherpunk/crypto-anarchy.html",
+      "mirrors": ["https://www.activism.net/cypherpunk/crypto-anarchy.html"]
+    }
+  ]
+}

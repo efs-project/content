@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "efs-content-catalog/v1",
+  "name": "EFS Content",
+  "description": "Portable curated datasets for Ethereum File System deployments.",
+  "datasets": [
+    {
+      "id": "web-games",
+      "title": "Web Games",
+      "path": "datasets/web-games",
+      "manifest": "datasets/web-games/manifest.json",
+      "anchorPath": "/games",
+      "fileCount": 15,
+      "bytes": 363017,
+      "status": "deployable",
+      "licensePosture": "CC0-1.0 and MIT; preserve in-file MIT notices",
+      "description": "Single-file HTML5 games, playable in a sandboxed iframe."
+    },
+    {
+      "id": "crypto-whitepapers",
+      "title": "Crypto Whitepapers",
+      "path": "datasets/crypto-whitepapers",
+      "manifest": "datasets/crypto-whitepapers/manifest.json",
+      "anchorPath": "/whitepapers",
+      "fileCount": 40,
+      "bytes": 14474579,
+      "status": "deployable-with-review",
+      "licensePosture": "mixed; review per-file markdown and README notes",
+      "description": "Major cryptocurrency whitepapers and reference notes."
+    },
+    {
+      "id": "ethereum-eips",
+      "title": "Ethereum Standards",
+      "path": "datasets/ethereum-eips",
+      "manifest": "datasets/ethereum-eips/manifest.json",
+      "anchorPath": "/standards",
+      "fileCount": 10,
+      "bytes": 245523,
+      "status": "deployable",
+      "licensePosture": "CC0-1.0",
+      "description": "Landmark Ethereum standards (EIPs/ERCs), public domain under CC0."
+    },
+    {
+      "id": "cypherpunk-canon",
+      "title": "Cypherpunk Canon",
+      "path": "datasets/cypherpunk-canon",
+      "manifest": "datasets/cypherpunk-canon/manifest.json",
+      "anchorPath": "/cypherpunk",
+      "fileCount": 2,
+      "bytes": 9707,
+      "status": "deployable-with-attribution",
+      "licensePosture": "freely distributable with attribution; not formally CC0 or MIT",
+      "description": "Founding texts of the cypherpunk movement."
+    }
+  ]
+}
