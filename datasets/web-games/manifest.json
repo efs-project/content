@@ -22,6 +22,8 @@
       "license": "CC0-1.0",
       "author": "straker",
       "source": "https://gist.github.com/straker/3c98304f8a6a9174efd8292800891ea1",
+      "modificationStatus": "presentation-adjusted",
+      "changes": "Added CSS so the fixed-size canvas scales down inside an EFS iframe without document scrollbars.",
       "mirrors": ["https://gist.githubusercontent.com/straker/3c98304f8a6a9174efd8292800891ea1/raw/tetris.html"]
     },
     {
@@ -67,6 +69,8 @@
       "license": "CC0-1.0",
       "author": "straker",
       "source": "https://gist.github.com/straker/b96a4a68bd6d79cf75a833d98a2b654f",
+      "modificationStatus": "presentation-adjusted",
+      "changes": "Added CSS so the fixed-size canvas scales down inside an EFS iframe without document scrollbars.",
       "mirrors": ["https://gist.githubusercontent.com/straker/b96a4a68bd6d79cf75a833d98a2b654f/raw/doodle-jump.html"]
     },
     {
@@ -94,6 +98,8 @@
       "license": "CC0-1.0",
       "author": "straker",
       "source": "https://gist.github.com/straker/82a4368849cbd441b05bd6a044f2b2d3",
+      "modificationStatus": "presentation-adjusted",
+      "changes": "Added CSS so the fixed-size canvas scales down inside an EFS iframe without document scrollbars.",
       "mirrors": ["https://gist.githubusercontent.com/straker/82a4368849cbd441b05bd6a044f2b2d3/raw/frogger.html"]
     },
     {
@@ -103,6 +109,8 @@
       "license": "CC0-1.0",
       "author": "straker",
       "source": "https://gist.github.com/straker/769fb461e066147ea16ac2cb9463beae",
+      "modificationStatus": "presentation-adjusted",
+      "changes": "Added CSS so the fixed-size canvas scales down inside an EFS iframe without document scrollbars.",
       "mirrors": ["https://gist.githubusercontent.com/straker/769fb461e066147ea16ac2cb9463beae/raw/bomberman.html"]
     },
     {
@@ -112,6 +120,8 @@
       "license": "MIT",
       "author": "Drake Axelrod",
       "source": "https://github.com/drakeaxelrod/single-html-file-apps",
+      "modificationStatus": "presentation-adjusted",
+      "changes": "Adjusted page layout so the Pong playfield and controls fit inside an EFS iframe without document scrollbars.",
       "mirrors": ["https://raw.githubusercontent.com/drakeaxelrod/single-html-file-apps/main/apps/pong.html"]
     },
     {
@@ -130,6 +140,8 @@
       "license": "MIT",
       "author": "Ariel Wexler",
       "source": "https://github.com/arikwex/infernal-sigil",
+      "modificationStatus": "presentation-adjusted",
+      "changes": "Added a responsive HTML/CSS wrapper so the game canvas and start screen fit inside an EFS iframe without document scrollbars.",
       "mirrors": ["https://raw.githubusercontent.com/arikwex/infernal-sigil/master/index.html"]
     },
     {

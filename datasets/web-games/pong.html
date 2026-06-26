@@ -5,41 +5,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Multiplayer Pong</title>
     <style>
+        html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
-            padding: 20px;
+            width: 100%;
+            height: 100%;
+            padding: clamp(8px, 2vmin, 16px);
             background: #1a1a1a;
             color: white;
             font-family: 'Courier New', monospace;
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-height: 100vh;
+            gap: clamp(6px, 1.5vmin, 12px);
+            overflow: hidden;
+        }
+
+        h1 {
+            flex: 0 0 auto;
+            margin: 0;
+            font-size: clamp(18px, 4vmin, 32px);
         }
 
         #gameContainer {
+            width: 100%;
+            max-width: 800px;
+            min-height: 0;
+            flex: 0 1 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             text-align: center;
-            margin-bottom: 20px;
+            margin: 0;
         }
 
         canvas {
             border: 2px solid #fff;
             background: #000;
             display: block;
-            margin: 20px auto;
+            aspect-ratio: 2 / 1;
+            width: min(100%, calc((100vh - 260px) * 2));
+            height: auto;
+            max-width: 100%;
+            max-height: min(400px, 48vh);
+            margin: 0 auto;
         }
 
         #controls {
+            width: 100%;
             max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
+            min-height: 0;
+            flex: 1 1 auto;
+            margin: 0 auto;
+            padding: clamp(8px, 2vmin, 14px);
             background: #333;
-            border-radius: 10px;
+            border-radius: 8px;
+            overflow: auto;
         }
 
         #serverStatus {
-            margin: 10px 0;
-            padding: 10px;
+            margin: 0 0 4px;
+            padding: clamp(4px, 1.2vmin, 8px);
             border-radius: 5px;
             font-weight: bold;
         }
@@ -52,11 +87,11 @@
             background: #0066cc;
             color: white;
             border: none;
-            padding: 10px 20px;
-            margin: 5px;
+            padding: clamp(6px, 1.5vmin, 10px) clamp(10px, 2.5vmin, 20px);
+            margin: 3px;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 14px;
+            font-size: clamp(12px, 2vmin, 14px);
         }
 
         button:hover {
@@ -69,8 +104,9 @@
         }
 
         input {
-            padding: 8px;
-            margin: 5px;
+            max-width: 100%;
+            padding: clamp(5px, 1.4vmin, 8px);
+            margin: 3px;
             border: 1px solid #666;
             background: #222;
             color: white;
@@ -78,14 +114,19 @@
         }
 
         .score {
-            font-size: 36px;
+            font-size: clamp(20px, 5vmin, 36px);
             font-weight: bold;
-            margin: 10px 0;
+            margin: 4px 0;
         }
 
         .instructions {
-            margin: 20px 0;
-            line-height: 1.6;
+            margin: 8px 0;
+            line-height: 1.35;
+        }
+
+        #controls h3,
+        .instructions p {
+            margin: 0 0 6px;
         }
 
         #serverCode {
@@ -108,6 +149,16 @@
 
         .copy-button:hover {
             background: #34ce57;
+        }
+
+        @media (max-height: 620px) {
+            h1 {
+                display: none;
+            }
+
+            .instructions p:nth-of-type(n+3) {
+                display: none;
+            }
         }
     </style>
 </head>

@@ -10,7 +10,7 @@
       "manifest": "datasets/web-games/manifest.json",
       "anchorPath": "/games",
       "fileCount": 15,
-      "bytes": 363017,
+      "bytes": 365441,
       "status": "deployable",
       "licensePosture": "CC0-1.0 and MIT; preserve in-file MIT notices",
       "description": "Single-file HTML5 games, playable in a sandboxed iframe."

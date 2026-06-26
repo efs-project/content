@@ -26,7 +26,7 @@ A flat collection of **real, existing single-file HTML5 games**: each one is a w
 | Infernal Throne | `infernal-throne.html` | Ariel Wexler | MIT | [repo](https://github.com/arikwex/infernal-sigil) (js13k 2022) | action, platformer, js13k |
 | Dante | `dante.html` | Salvatore Previti (music: Ryan Malm) | MIT | [repo](https://github.com/SalvatorePreviti/js13k-2022) (js13k 2022 winner) | webgl, exploration, js13k |
 
-All fifteen games were verified in a local headless Chrome smoke test: every file rendered, and the run reported zero console errors, exceptions, network failures, or external requests. Files are kept **verbatim** from upstream so content hashes match the source and attribution/licensing stays clean. The eight added straker games carry the same upstream CC0 notice used by the existing straker entries.
+All fifteen games were verified in a local headless Chrome smoke test: every file rendered, and the run reported zero console errors, exceptions, network failures, or external requests. Most files are kept **verbatim** from upstream; a small number have presentation-only CSS/layout adjustments so they fit cleanly inside the EFS iframe without document scrollbars. Those adjusted files are marked in `manifest.json`. The eight added straker games carry the same upstream CC0 notice used by the existing straker entries.
 
 **Caveat — Pong:** single-player works fully offline; it also has an *optional* online-multiplayer mode that needs a WebSocket server you run yourself. Ignore that and it's a clean self-contained game.
 

@@ -4,7 +4,7 @@
   "type": "module",
   "license": "SEE LICENSE IN LICENSE",
   "scripts": {
+    "test:games:fit": "node scripts/check-game-fit.mjs",
     "validate": "node scripts/validate-manifests.mjs"
   }
 }
-
