@@ -1,27 +1,78 @@
-# The Cypherpunk Canon — EFS reference dataset
+# Cypherpunk Canon
 
-Founding texts of the cypherpunk movement — the intellectual headwaters of crypto. Assembled as a second reference dataset for the EFS × OnionDAO buildathon (the first is [`../crypto-whitepapers/`](../crypto-whitepapers/)).
+A rights-aware reading shelf for foundational cypherpunk writing, privacy
+research, and adjacent books. The dataset is deployed at `/cypherpunk`.
 
-**Modeled the EFS way: flat files + tags, not folders.** Each text is one item with a stable identity; its themes are **tags**, not a location. May's *Crypto Anarchist Manifesto* is both `foundational` and `markets`; nobody has to file it under one true heading. On EFS each text = a DATA at a stable anchor, with TAG edges for themes, and a short about-card readme.
+The initial 21-work shelf was discovered through
+[The Cypherpunk Library](https://www.cypherpunkbooks.com/collection). That
+collection is a useful editorial source, but its blanket public-domain claim is
+not treated as sufficient rights evidence. EFS verifies redistribution terms
+against the work, author, publisher, or another primary source before copying
+third-party bytes.
 
-**Convention (matches the whitepapers dataset + the seeding script):**
-- about-card = the file named exactly `<slug>.md` (title, author, date, source, license, summary).
-- content = the suffixed file `<slug>-full.md` (the verbatim text, renders natively in the markdown pane).
+## Contents
 
-## Manifest
+- 21 represented works.
+- 3 works included locally as PDFs.
+- 18 link-only metadata records.
+- 25 deployable EFS entries: one index, three PDFs, three human-readable about
+  cards, and eighteen records.
 
-| Text | Author | Year | About-card | Content | Tags | Status |
-|---|---|---|---|---|---|---|
-| A Cypherpunk's Manifesto | Eric Hughes | 1993 | `cypherpunks-manifesto.md` | `cypherpunks-manifesto-full.md` | foundational, privacy, philosophy | ✅ assembled |
-| The Crypto Anarchist Manifesto | Timothy C. May | 1988/1992 | `crypto-anarchist-manifesto.md` | `crypto-anarchist-manifesto-full.md` | foundational, markets, philosophy | ✅ assembled |
-| A Declaration of the Independence of Cyberspace | John Perry Barlow | 1996 | `cyberspace-independence.md` | — | foundational, philosophy | 🔜 CC-BY, easy to add |
-| Smart Contracts | Nick Szabo | 1994 | `szabo-smart-contracts.md` | — | foundational, smart-contracts | 🔜 fetch on go-ahead |
-| Bit Gold | Nick Szabo | 2005 | `szabo-bit-gold.md` | — | foundational, money | 🔜 fetch on go-ahead |
-| The Cyphernomicon (excerpt) | Timothy C. May | 1994 | `cyphernomicon.md` | — | reference, philosophy | 🔜 long; excerpt only |
+Open [`collection.md`](./collection.md) for the human-readable shelf.
+`manifest.json` is the deployable, machine-readable inventory.
 
-The first two are fully assembled (verbatim text + about-cards). The rest are a planned menu — say the word and I'll fetch + card them the same way.
+## Locally Included Works
 
-## License note
-These are historical movement texts, written to be spread. Both assembled items are widely and freely redistributed with attribution to their authors; sourced from activism.net (the canonical archive). They are **not** formally CC-licensed — they predate those licenses — so we treat them as "freely distributable, attribution required" and record the source per item. Barlow's Declaration is the cleanest case (released CC-BY). Per-item license status lives in each about-card, same as the whitepapers dataset.
+| Work | Format | Rights basis |
+|---|---|---|
+| The Praxeology of Privacy | PDF | Explicit public-domain dedication in the work and on the author's site |
+| 21 Lessons | PDF | CC BY-SA 4.0 in the work and on the author's site |
+| Farewell to Westphalia | PDF | CC BY-SA 4.0 in the book |
 
-Retrieval/seeding addresses (IPFS CID / Arweave) get recorded in an `ADDRESSES.md` here once we pin, matching the whitepapers flow.
+The binary files are unmodified.
+
+## Link-Only Records
+
+The remaining works are represented by EFS-authored Markdown records. Those
+records are CC0-1.0 and may be deployed, pinned, and mirrored. The underlying
+third-party works are not included and retain their own rights.
+
+A record remains link-only when:
+
+- no explicit redistribution license was found;
+- the license has noncommercial or no-derivatives restrictions that need an
+  operator decision; or
+- availability from a website was the only evidence found.
+
+This lets EFS preserve discovery and provenance without confusing "available
+online" with "safe to mirror everywhere."
+
+## Metadata Convention
+
+- `redistributionStatus: deployable` means the local bytes may be seeded.
+- `redistributionStatus: link-only` applies to an EFS-authored record, not the
+  linked work.
+- `workLicense: NOASSERTION` means the linked work's redistribution terms have
+  not been established.
+- `aboutCard` points from included content to its human-readable provenance and
+  rights note. Each referenced card is also a manifest payload so it follows
+  the dataset into EFS.
+- `sha256` records the retrieved binary artifact; the deployment seeder also
+  computes the on-chain content hash from local bytes.
+
+## Validation
+
+From the repository root:
+
+```sh
+npm run validate
+```
+
+The current v1 dataset seeder deploys payload paths, content types, hashes,
+sizes, and tags. Rich manifest fields remain catalog metadata; the about-card
+payloads make the important human-readable details available inside EFS.
+
+The seeder skips an existing on-chain placement when its content hash already
+matches. A metadata-only change to the manifest therefore does not update an
+unchanged payload's on-chain tags or properties; change the relevant card file
+when the human-readable metadata needs a new deployment.

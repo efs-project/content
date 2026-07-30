@@ -22,6 +22,5 @@ The current datasets were assembled quickly for a visible EFS demo. Some machine
 |---|---|
 | `web-games` | Mostly CC0-1.0 and MIT single-file games. Preserve MIT notices in the files. |
 | `ethereum-eips` | CC0-1.0. EIPs/ERCs are public-domain per the EIP process. |
-| `cypherpunk-canon` | Historical texts treated as freely distributable with attribution; not formally CC0 or MIT. |
+| `cypherpunk-canon` | Mixed. Three works are included under recorded public-domain or CC BY-SA terms. Eighteen additional works are represented only by CC0 metadata records because their bytes are not cleared for EFS mirroring. |
 | `crypto-whitepapers` | Mixed. Some files are freely redistributable, some are academic/public references, and some entries are link-only because rights are unclear. Review per-file notes before broad redistribution. |
-

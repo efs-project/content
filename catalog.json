@@ -45,11 +45,11 @@
       "path": "datasets/cypherpunk-canon",
       "manifest": "datasets/cypherpunk-canon/manifest.json",
       "anchorPath": "/cypherpunk",
-      "fileCount": 2,
-      "bytes": 9707,
-      "status": "deployable-with-attribution",
-      "licensePosture": "freely distributable with attribution; not formally CC0 or MIT",
-      "description": "Founding texts of the cypherpunk movement."
+      "fileCount": 25,
+      "bytes": 23391250,
+      "status": "deployable-mixed",
+      "licensePosture": "local payloads are CC0, CC BY-SA, or public domain; linked works are represented by CC0 records and are not mirrored",
+      "description": "A rights-aware shelf representing 21 cypherpunk works with local reading files or link-only records."
     }
   ]
 }

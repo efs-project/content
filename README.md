@@ -11,7 +11,7 @@ This repository is the portable content source for EFS demos and chain deploymen
 | [Web Games](./datasets/web-games/) | `/games` | 15 | 365441 | Single-file HTML5 games, playable in a sandboxed iframe. |
 | [Crypto Whitepapers](./datasets/crypto-whitepapers/) | `/whitepapers` | 40 | 14474579 | Major cryptocurrency whitepapers and reference notes. |
 | [Ethereum Standards](./datasets/ethereum-eips/) | `/standards` | 10 | 245523 | Landmark EIPs/ERCs, public domain under CC0. |
-| [Cypherpunk Canon](./datasets/cypherpunk-canon/) | `/cypherpunk` | 2 | 9707 | Founding texts of the cypherpunk movement. |
+| [Cypherpunk Canon](./datasets/cypherpunk-canon/) | `/cypherpunk` | 25 | 23391250 | A rights-aware shelf representing 21 works with local files or link-only records. |
 
 `catalog.json` is the machine-readable table of contents. Each dataset folder owns its own `manifest.json`, `README.md`, and source files.
 
@@ -64,12 +64,10 @@ Validation checks manifest shape, local files, catalog consistency, and the same
 
 ## Deployment
 
-Deploy from the contracts repo using the dataset manifest path:
-
-```sh
-cd ../contracts
-yarn hardhat:seed:dataset --manifest ../content/datasets/web-games/manifest.json --execute --pin --network sepolia
-```
+Deployment tooling is intentionally not vendored in this content repository.
+Pass the desired `manifest.json` path to the active EFS deployment checkout and
+run its manifest-only dry run before enabling IPFS pins or transactions. Do not
+assume a sibling `contracts` checkout contains the dataset seeder.
 
 The seeder pins local bytes, writes IPFS mirrors, records content type/hash/size, and tags files. Deployment receipts should be committed under `deployments/<chain-id>/` so source manifests stay chain-neutral.
 
