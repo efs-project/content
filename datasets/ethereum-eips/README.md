@@ -2,7 +2,7 @@
 
 The landmark standards that define how Ethereum works — the token standards, the fee market, account abstraction, typed signing. A fourth reference dataset for the EFS × OnionDAO buildathon, alongside [`../crypto-whitepapers/`](../crypto-whitepapers/), [`../cypherpunk-canon/`](../cypherpunk-canon/), and [`../web-games/`](../web-games/).
 
-**License: CC0** — EIPs and ERCs are released into the public domain ([EIP-1](https://eips.ethereum.org/EIPS/eip-1)), so they are cleanly redistributable onto EFS. Fetched verbatim from the canonical repos (`ethereum/EIPs`, `ethereum/ERCs`).
+**License: CC0** — EIPs and ERCs are released into the public domain ([EIP-1](https://eips.ethereum.org/EIPS/eip-1)), so they are cleanly redistributable onto EFS. Fetched from the canonical repos (`ethereum/EIPs`, `ethereum/ERCs`). The text is verbatim except that links to other EIPs (`./eip-N.md`) and to the CC0 licence (`../LICENSE.md`) were converted to absolute URLs, so they work outside the EIPs repo.
 
 **Modeled the EFS way: flat files + tags, not folders.** Each standard is one item; its category is a **tag** (a token standard is `tokens`; ERC-721 is both `tokens` and `nft`). On EFS each `.md` = a DATA at a stable anchor with TAG edges. They render natively in the markdown pane.
 
