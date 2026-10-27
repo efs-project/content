@@ -8,10 +8,10 @@ This repository is the portable content source for EFS demos and chain deploymen
 
 | Dataset | Anchor | Files | Bytes | Description |
 |---|---:|---:|---:|---|
-| [Web Games](./datasets/web-games/) | `/games` | 15 | 365441 | Single-file HTML5 games, playable in a sandboxed iframe. |
-| [Crypto Whitepapers](./datasets/crypto-whitepapers/) | `/whitepapers` | 40 | 14474579 | Major cryptocurrency whitepapers and reference notes. |
-| [Ethereum Standards](./datasets/ethereum-eips/) | `/standards` | 10 | 245523 | Landmark EIPs/ERCs, public domain under CC0. |
-| [Cypherpunk Canon](./datasets/cypherpunk-canon/) | `/cypherpunk` | 25 | 23391250 | A rights-aware shelf representing 21 works with local files or link-only records. |
+| [Web Games](./datasets/web-games/) | `/games` | 15 | 413841 | Single-file HTML5 games, playable in a sandboxed iframe. |
+| [Crypto Whitepapers](./datasets/crypto-whitepapers/) | `/whitepapers` | 40 | 14475183 | Major cryptocurrency whitepapers and reference notes. |
+| [Ethereum Standards](./datasets/ethereum-eips/) | `/standards` | 10 | 247026 | Landmark EIPs/ERCs, public domain under CC0. |
+| [Cypherpunk Canon](./datasets/cypherpunk-canon/) | `/cypherpunk` | 25 | 23400126 | A rights-aware shelf representing 21 works with local files or link-only records. |
 
 `catalog.json` is the machine-readable table of contents. Each dataset folder owns its own `manifest.json`, `README.md`, and source files.
 

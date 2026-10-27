@@ -1,640 +1,1051 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multiplayer Pong</title>
-    <style>
-        html {
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pong!</title>
+<!--
+Javascript Pong by Jake Gordon - https://github.com/jakesgordon/javascript-pong
+Source revision ca3240536e4f79ab7144388e56ed19de715b6662 (game.js, pong.js, images/, sounds/).
+EFS single-file adaptation: scripts, images and sounds inlined; sidebar replaced by on-page hint;
+canvas scaled to fit its frame; added Enter/W/S/arrow keys and mouse/touch control; Esc abandons without window.confirm (blocked in sandboxed iframes).
 
-        * {
-            box-sizing: border-box;
-        }
+Copyright (c) 2011, 2012, 2013, 2014, 2015, 2016 Jake Gordon and contributors
 
-        body {
-            margin: 0;
-            width: 100%;
-            height: 100%;
-            padding: clamp(8px, 2vmin, 16px);
-            background: #1a1a1a;
-            color: white;
-            font-family: 'Courier New', monospace;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: clamp(6px, 1.5vmin, 12px);
-            overflow: hidden;
-        }
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-        h1 {
-            flex: 0 0 auto;
-            margin: 0;
-            font-size: clamp(18px, 4vmin, 32px);
-        }
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-        #gameContainer {
-            width: 100%;
-            max-width: 800px;
-            min-height: 0;
-            flex: 0 1 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            margin: 0;
-        }
-
-        canvas {
-            border: 2px solid #fff;
-            background: #000;
-            display: block;
-            aspect-ratio: 2 / 1;
-            width: min(100%, calc((100vh - 260px) * 2));
-            height: auto;
-            max-width: 100%;
-            max-height: min(400px, 48vh);
-            margin: 0 auto;
-        }
-
-        #controls {
-            width: 100%;
-            max-width: 800px;
-            min-height: 0;
-            flex: 1 1 auto;
-            margin: 0 auto;
-            padding: clamp(8px, 2vmin, 14px);
-            background: #333;
-            border-radius: 8px;
-            overflow: auto;
-        }
-
-        #serverStatus {
-            margin: 0 0 4px;
-            padding: clamp(4px, 1.2vmin, 8px);
-            border-radius: 5px;
-            font-weight: bold;
-        }
-
-        .connected { background: #2d5a27; }
-        .disconnected { background: #5a2727; }
-        .waiting { background: #5a5a27; }
-
-        button {
-            background: #0066cc;
-            color: white;
-            border: none;
-            padding: clamp(6px, 1.5vmin, 10px) clamp(10px, 2.5vmin, 20px);
-            margin: 3px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: clamp(12px, 2vmin, 14px);
-        }
-
-        button:hover {
-            background: #0080ff;
-        }
-
-        button:disabled {
-            background: #666;
-            cursor: not-allowed;
-        }
-
-        input {
-            max-width: 100%;
-            padding: clamp(5px, 1.4vmin, 8px);
-            margin: 3px;
-            border: 1px solid #666;
-            background: #222;
-            color: white;
-            border-radius: 3px;
-        }
-
-        .score {
-            font-size: clamp(20px, 5vmin, 36px);
-            font-weight: bold;
-            margin: 4px 0;
-        }
-
-        .instructions {
-            margin: 8px 0;
-            line-height: 1.35;
-        }
-
-        #controls h3,
-        .instructions p {
-            margin: 0 0 6px;
-        }
-
-        #serverCode {
-            background: #222;
-            padding: 20px;
-            border-radius: 5px;
-            margin: 20px 0;
-            font-family: monospace;
-            font-size: 12px;
-            white-space: pre-wrap;
-            max-height: 300px;
-            overflow-y: auto;
-            border: 1px solid #666;
-        }
-
-        .copy-button {
-            background: #28a745;
-            margin-top: 10px;
-        }
-
-        .copy-button:hover {
-            background: #34ce57;
-        }
-
-        @media (max-height: 620px) {
-            h1 {
-                display: none;
-            }
-
-            .instructions p:nth-of-type(n+3) {
-                display: none;
-            }
-        }
-    </style>
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+-->
+<style>
+html, body { height: 100%; margin: 0; background: black; overflow: hidden; }
+body { display: flex; flex-direction: column; align-items: center; justify-content: center; font: 12px/1.4 sans-serif; color: #888; }
+#game { display: block; width: 100%; flex: 1 1 auto; min-height: 0; object-fit: contain; touch-action: none; }
+#help { padding: 4px 8px; text-align: center; }
+#help b { color: #fff; font-weight: normal; }
+</style>
 </head>
 <body>
-    <h1>🏓 Multiplayer Pong</h1>
+<canvas id="game"></canvas>
+<div id="help"><b>Click</b>, <b>tap</b>, <b>Enter</b> or <b>1</b>: play the computer &middot; <b>2</b>: two players &middot; <b>0</b>: demo<br>P1: <b>W</b>/<b>S</b>, <b>&uarr;</b>/<b>&darr;</b>, <b>Q</b>/<b>A</b> or mouse/touch &middot; P2: <b>P</b>/<b>L</b> or <b>&uarr;</b>/<b>&darr;</b> &middot; <b>Esc</b>: quit &middot; first to 9</div>
+<script>
+var PONG_IMAGES = {"images/press1.png": "data:image/png;base64,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", "images/press2.png": "data:image/png;base64,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", "images/winner.png": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAG4AAAAeCAYAAAG6fhusAAAAB3RJTUUH2QgeETodIhj3zQAAAAlwSFlzAAASdAAAEnQB3mYfeAAAAARnQU1BAACxjwv8YQUAAAKPSURBVHja7ZqhTgNBEEBLUxIEAhIkAsEHIBCICiQCgYCkgo9AguYDKvkAPqAWFAJRUVHBB1QgIEEiKiqW2TCXDMfs7szutUfCvORyd7M7szOzt3tzhU6nCdw3UzgGjNxzJzW0oMqNeNcM1B0Sl+Nc7QYM9KrrNQAvH9oObPm5mlE5sM9NrepZqSe/egDrDnBnRjZpO2H/BeF8VOcB1aNzTPWozq/BcFcKPW37ZLBZyJhmMBcZbFEz0gsZA9EZlz1uW7nhPITdZb3W78e2SpcK8B6NzDD+MtxyTfWpZKFlnWpr2hdPtxMhc2Vug9qnto3ZIWjbVqVHipg8Qju/NINw6sMx5mYn1pZKsG2DhmEYKyH20qzqd668LnmBp2wKyvmP4uBSMnx/9QMBBNtKfQHuVcHRzzJFcD2HP/cwwQXbYr4IZ+5SG1xudfKJ5ZKTtsUcx/MbHLuRBOysKjj/7TwLBBdsi/mS6iemNDg6G9q2hM1rOIalwd1Gdq/obkmuB5o2ic1YUhuZVcMwDMMwjD8C1lxTbTtXqzFwehWvjvxJWTBeqV6unxz+8+eO84Ox8xIao3TiooWptHDV9kMmUjulek3mBcQH1QQq4h1Lx+5KO7bEBRyHENBoRXpt89ioNe7zMXYvtSPpB6crvB2m7DShl5OXxFa5qbBzVD5bkcBWOXF4P0TRlWYCtHo1ku8bZrwBilQr3SVqiGzanjiUjVB8rlk5uXo5eUHZHhxz910gJVfbUkFHPMdwnJKn0t+f4PU8J1BNPxBN6JJYtl6Bn/4vBr5S9P9mdSiw84ymxMWJ1MEN97O0f6rd+8SEyu8Uoc8ITt7DJzmUsFw9CWI/Sbv/WftFkN9paAzDMAzD+G98AW3jrxgTadAHAAAAAElFTkSuQmCC"};
+</script>
+<script>
+//=============================================================================
+//
+// We need some ECMAScript 5 methods but we need to implement them ourselves
+// for older browsers (compatibility: http://kangax.github.com/es5-compat-table/)
+//
+//  Function.bind:        https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/bind
+//  Object.create:        http://javascript.crockford.com/prototypal.html
+//  Object.extend:        (defacto standard like jquery $.extend or prototype's Object.extend)
+//
+//  Object.construct:     our own wrapper around Object.create that ALSO calls
+//                        an initialize constructor method if one exists
+//
+//=============================================================================
 
-    <div id="gameContainer">
-        <div id="serverStatus" class="disconnected">Not Connected</div>
-        <div class="score">
-            <span id="player1Score">0</span> - <span id="player2Score">0</span>
-        </div>
-        <canvas id="gameCanvas" width="800" height="400"></canvas>
-    </div>
-
-    <div id="controls">
-        <div>
-            <h3>Connection</h3>
-            <input type="text" id="serverUrl" placeholder="ws://localhost:8080" value="ws://localhost:8080">
-            <button id="connectBtn">Connect to Game</button>
-            <button id="hostBtn">Host New Game</button>
-            <button id="newGameBtn" disabled>New Game</button>
-        </div>
-
-        <div class="instructions">
-            <h3>How to Play</h3>
-            <p><strong>Controls:</strong> Use W/S keys (Player 1) or Up/Down arrows (Player 2)</p>
-            <p><strong>Important:</strong> Click on the game area first to enable controls!</p>
-            <p><strong>Multiplayer:</strong> One player hosts a game, others connect using the server URL</p>
-            <p><strong>Objective:</strong> First to 10 points wins!</p>
-        </div>
-
-        <div id="serverSetup" style="display: none;">
-            <h3>Server Setup</h3>
-            <p>To host a game, you need to run the WebSocket server. Copy this code into a file called <code>server.js</code> and run <code>node server.js</code>:</p>
-            <div id="serverCode">const WebSocket = require('ws');
-
-const port = 8080; // Port for the WebSocket server
-const host = "0.0.0.0"; // Host for the WebSocket server
-const server = new WebSocket.Server({ port: port, host: host });
-
-let gameState = {
-    ball: { x: 400, y: 200, dx: 5, dy: 3, radius: 8 },
-    paddle1: { x: 20, y: 150, width: 10, height: 100 },
-    paddle2: { x: 770, y: 150, width: 10, height: 100 },
-    score1: 0,
-    score2: 0,
-    gameStarted: false,
-    ballSpeed: 5, // Track current ball speed
-    speedIncrement: 0.3 // How much to increase speed each hit
-};
-
-let players = [];
-let gameInterval;
-
-function broadcast(data) {
-    players.forEach(player => {
-        if (player.ws.readyState === WebSocket.OPEN) {
-            player.ws.send(JSON.stringify(data));
-        }
-    });
+if (!Function.prototype.bind) {
+  Function.prototype.bind = function(obj) {
+    var slice = [].slice,
+        args  = slice.call(arguments, 1),
+        self  = this,
+        nop   = function () {},
+        bound = function () {
+          return self.apply(this instanceof nop ? this : (obj || {}), args.concat(slice.call(arguments)));   
+        };
+    nop.prototype   = self.prototype;
+    bound.prototype = new nop();
+    return bound;
+  };
 }
 
-function updateGame() {
-    if (!gameState.gameStarted || players.length < 2) return;
-
-    // Update ball position
-    gameState.ball.x += gameState.ball.dx;
-    gameState.ball.y += gameState.ball.dy;
-
-    // Ball collision with top/bottom walls
-    if (gameState.ball.y <= gameState.ball.radius ||
-        gameState.ball.y >= 400 - gameState.ball.radius) {
-        gameState.ball.dy = -gameState.ball.dy;
-    }
-
-    // Ball collision with paddles
-    const ball = gameState.ball;
-    const p1 = gameState.paddle1;
-    const p2 = gameState.paddle2;
-
-    // Left paddle collision
-    if (ball.x - ball.radius <= p1.x + p1.width &&
-        ball.y >= p1.y && ball.y <= p1.y + p1.height &&
-        ball.dx < 0) {
-        ball.dx = -ball.dx;
-        ball.x = p1.x + p1.width + ball.radius;
-        // Increase ball speed on paddle hit
-        gameState.ballSpeed += gameState.speedIncrement;
-        const speedMultiplier = gameState.ballSpeed / 5; // 5 is the initial speed
-        ball.dx = ball.dx > 0 ? gameState.ballSpeed : -gameState.ballSpeed;
-        ball.dy = ball.dy * speedMultiplier;
-    }
-
-    // Right paddle collision
-    if (ball.x + ball.radius >= p2.x &&
-        ball.y >= p2.y && ball.y <= p2.y + p2.height &&
-        ball.dx > 0) {
-        ball.dx = -ball.dx;
-        ball.x = p2.x - ball.radius;
-        // Increase ball speed on paddle hit
-        gameState.ballSpeed += gameState.speedIncrement;
-        const speedMultiplier = gameState.ballSpeed / 5; // 5 is the initial speed
-        ball.dx = ball.dx > 0 ? gameState.ballSpeed : -gameState.ballSpeed;
-        ball.dy = ball.dy * speedMultiplier;
-    }
-
-    // Scoring
-    if (ball.x < 0) {
-        gameState.score2++;
-        resetBall();
-    } else if (ball.x > 800) {
-        gameState.score1++;
-        resetBall();
-    }
-
-    // Check for game end
-    if (gameState.score1 >= 10 || gameState.score2 >= 10) {
-        gameState.gameStarted = false;
-        broadcast({ type: 'gameEnd', winner: gameState.score1 >= 10 ? 1 : 2 });
-    }
-
-    broadcast({ type: 'gameUpdate', gameState });
+if (!Object.create) {
+  Object.create = function(base) {
+    function F() {};
+    F.prototype = base;
+    return new F();
+  }
 }
 
-function resetBall() {
-    gameState.ball.x = 400;
-    gameState.ball.y = 200;
-    // Reset ball speed to initial value on scoring
-    gameState.ballSpeed = 5;
-    gameState.ball.dx = Math.random() > 0.5 ? 5 : -5;
-    gameState.ball.dy = (Math.random() - 0.5) * 6;
+if (!Object.construct) {
+  Object.construct = function(base) {
+    var instance = Object.create(base);
+    if (instance.initialize)
+      instance.initialize.apply(instance, [].slice.call(arguments, 1));
+    return instance;
+  }
 }
 
-function resetGame() {
-    gameState.score1 = 0;
-    gameState.score2 = 0;
-    gameState.ballSpeed = 5;
-    resetBall();
-    gameState.gameStarted = players.length === 2;
-    broadcast({ type: 'gameReset' });
+if (!Object.extend) {
+  Object.extend = function(destination, source) {
+    for (var property in source) {
+      if (source.hasOwnProperty(property))
+        destination[property] = source[property];
+    }
+    return destination;
+  };
 }
 
-server.on('connection', (ws) => {
-    console.log('New player connected');
+/* NOT READY FOR PRIME TIME
+if (!window.requestAnimationFrame) {// http://paulirish.com/2011/requestanimationframe-for-smart-animating/
+  window.requestAnimationFrame = window.webkitRequestAnimationFrame || 
+                                 window.mozRequestAnimationFrame    || 
+                                 window.oRequestAnimationFrame      || 
+                                 window.msRequestAnimationFrame     || 
+                                 function(callback, element) {
+                                   window.setTimeout(callback, 1000 / 60);
+                                 }
+}
+*/
 
-    const playerId = players.length < 2 ? players.length + 1 : null;
+//=============================================================================
+// GAME
+//=============================================================================
 
-    if (playerId) {
-        players.push({ ws, id: playerId });
-        ws.send(JSON.stringify({ type: 'playerAssigned', playerId }));
+Game = {
 
-        if (players.length === 2) {
-            gameState.gameStarted = true;
-            broadcast({ type: 'gameStart' });
-            gameInterval = setInterval(updateGame, 1000/60);
-        }
-    } else {
-        ws.send(JSON.stringify({ type: 'gameFull' }));
-        ws.close();
+  compatible: function() {
+    return Object.create &&
+           Object.extend &&
+           Function.bind &&
+           document.addEventListener && // HTML5 standard, all modern browsers that support canvas should also support add/removeEventListener
+           Game.ua.hasCanvas
+  },
+
+  start: function(id, game, cfg) {
+    if (Game.compatible())
+      return Object.construct(Game.Runner, id, game, cfg).game; // return the game instance, not the runner (caller can always get at the runner via game.runner)
+  },
+
+  ua: function() { // should avoid user agent sniffing... but sometimes you just gotta do what you gotta do
+    var ua  = navigator.userAgent.toLowerCase();
+    var key =        ((ua.indexOf("opera")   > -1) ? "opera"   : null);
+        key = key || ((ua.indexOf("firefox") > -1) ? "firefox" : null);
+        key = key || ((ua.indexOf("chrome")  > -1) ? "chrome"  : null);
+        key = key || ((ua.indexOf("safari")  > -1) ? "safari"  : null);
+        key = key || ((ua.indexOf("msie")    > -1) ? "ie"      : null);
+
+    try {
+      var re      = (key == "ie") ? "msie (\\d)" : key + "\\/(\\d\\.\\d)"
+      var matches = ua.match(new RegExp(re, "i"));
+      var version = matches ? parseFloat(matches[1]) : null;
+    } catch (e) {}
+
+    return {
+      full:      ua, 
+      name:      key + (version ? " " + version.toString() : ""),
+      version:   version,
+      isFirefox: (key == "firefox"),
+      isChrome:  (key == "chrome"),
+      isSafari:  (key == "safari"),
+      isOpera:   (key == "opera"),
+      isIE:      (key == "ie"),
+      hasCanvas: (document.createElement('canvas').getContext),
+      hasAudio:  (typeof(Audio) != 'undefined')
+    }
+  }(),
+
+  addEvent:    function(obj, type, fn) { obj.addEventListener(type, fn, false);    },
+  removeEvent: function(obj, type, fn) { obj.removeEventListener(type, fn, false); },
+
+  ready: function(fn) {
+    if (Game.compatible())
+      Game.addEvent(document, 'DOMContentLoaded', fn);
+  },
+
+  createCanvas: function() {
+    return document.createElement('canvas');
+  },
+
+  createAudio: function(src) {
+    try {
+      var a = new Audio(src);
+      a.volume = 0.1; // lets be real quiet please
+      return a;
+    } catch (e) {
+      return null;
+    }
+  },
+
+  loadImages: function(sources, callback) { /* load multiple images and callback when ALL have finished loading */
+    var images = {};
+    var count = sources ? sources.length : 0;
+    if (count == 0) {
+      callback(images);
+    }
+    else {
+      for(var n = 0 ; n < sources.length ; n++) {
+        var source = sources[n];
+        var image = document.createElement('img');
+        images[source] = image;
+        Game.addEvent(image, 'load', function() { if (--count == 0) callback(images); });
+        image.src = (window.PONG_IMAGES && PONG_IMAGES[source]) || source;
+      }
+    }
+  },
+
+  random: function(min, max) {
+    return (min + (Math.random() * (max - min)));
+  },
+
+  timestamp: function() { 
+    return new Date().getTime();
+  },
+
+  KEY: {
+    BACKSPACE: 8,
+    TAB:       9,
+    RETURN:   13,
+    ESC:      27,
+    SPACE:    32,
+    LEFT:     37,
+    UP:       38,
+    RIGHT:    39,
+    DOWN:     40,
+    DELETE:   46,
+    HOME:     36,
+    END:      35,
+    PAGEUP:   33,
+    PAGEDOWN: 34,
+    INSERT:   45,
+    ZERO:     48,
+    ONE:      49,
+    TWO:      50,
+    A:        65,
+    L:        76,
+    P:        80,
+    Q:        81,
+    TILDA:    192
+  },
+
+  //-----------------------------------------------------------------------------
+
+  Runner: {
+
+    initialize: function(id, game, cfg) {
+      this.cfg          = Object.extend(game.Defaults || {}, cfg || {}); // use game defaults (if any) and extend with custom cfg (if any)
+      this.fps          = this.cfg.fps || 60;
+      this.interval     = 1000.0 / this.fps;
+      this.canvas       = document.getElementById(id);
+      this.width        = this.cfg.width  || this.canvas.offsetWidth;
+      this.height       = this.cfg.height || this.canvas.offsetHeight;
+      this.front        = this.canvas;
+      this.front.width  = this.width;
+      this.front.height = this.height;
+      this.back         = Game.createCanvas();
+      this.back.width   = this.width;
+      this.back.height  = this.height;
+      this.front2d      = this.front.getContext('2d');
+      this.back2d       = this.back.getContext('2d');
+      this.addEvents();
+      this.resetStats();
+
+      this.game = Object.construct(game, this, this.cfg); // finally construct the game object itself
+    },
+
+    start: function() { // game instance should call runner.start() when its finished initializing and is ready to start the game loop
+      this.lastFrame = Game.timestamp();
+      this.timer     = setInterval(this.loop.bind(this), this.interval);
+    },
+
+    stop: function() {
+      clearInterval(this.timer);
+    },
+
+    loop: function() {
+      var start  = Game.timestamp(); this.update((start - this.lastFrame)/1000.0); // send dt as seconds
+      var middle = Game.timestamp(); this.draw();
+      var end    = Game.timestamp();
+      this.updateStats(middle - start, end - middle);
+      this.lastFrame = start;
+    },
+
+    update: function(dt) {
+      this.game.update(dt);
+    },
+
+    draw: function() {
+      this.back2d.clearRect(0, 0, this.width, this.height);
+      this.game.draw(this.back2d);
+      this.drawStats(this.back2d);
+      this.front2d.clearRect(0, 0, this.width, this.height);
+      this.front2d.drawImage(this.back, 0, 0);
+    },
+
+    resetStats: function() {
+      this.stats = {
+        count:  0,
+        fps:    0,
+        update: 0,
+        draw:   0, 
+        frame:  0  // update + draw
+      };
+    },
+
+    updateStats: function(update, draw) {
+      if (this.cfg.stats) {
+        this.stats.update = Math.max(1, update);
+        this.stats.draw   = Math.max(1, draw);
+        this.stats.frame  = this.stats.update + this.stats.draw;
+        this.stats.count  = this.stats.count == this.fps ? 0 : this.stats.count + 1;
+        this.stats.fps    = Math.min(this.fps, 1000 / this.stats.frame);
+      }
+    },
+
+    drawStats: function(ctx) {
+      if (this.cfg.stats) {
+        ctx.fillText("frame: "  + this.stats.count,         this.width - 100, this.height - 60);
+        ctx.fillText("fps: "    + this.stats.fps,           this.width - 100, this.height - 50);
+        ctx.fillText("update: " + this.stats.update + "ms", this.width - 100, this.height - 40);
+        ctx.fillText("draw: "   + this.stats.draw   + "ms", this.width - 100, this.height - 30);
+      }
+    },
+
+    addEvents: function() {
+      Game.addEvent(document, 'keydown', this.onkeydown.bind(this));
+      Game.addEvent(document, 'keyup',   this.onkeyup.bind(this));
+    },
+
+    onkeydown: function(ev) { if (this.game.onkeydown) this.game.onkeydown(ev.keyCode); },
+    onkeyup:   function(ev) { if (this.game.onkeyup)   this.game.onkeyup(ev.keyCode);   },
+
+    hideCursor: function() { this.canvas.style.cursor = 'none'; },
+    showCursor: function() { this.canvas.style.cursor = 'auto'; },
+
+    alert: function(msg) {
+      this.stop(); // alert blocks thread, so need to stop game loop in order to avoid sending huge dt values to next update
+      result = window.alert(msg);
+      this.start();
+      return result;
+    },
+
+    confirm: function(msg) {
+      this.stop(); // alert blocks thread, so need to stop game loop in order to avoid sending huge dt values to next update
+      result = window.confirm(msg);
+      this.start();
+      return result;
     }
 
-    ws.on('message', (message) => {
-        try {
-            const data = JSON.parse(message);
+    //-------------------------------------------------------------------------
 
-            if (data.type === 'paddleUpdate') {
-                const player = players.find(p => p.ws === ws);
-                if (player) {
-                    if (player.id === 1) {
-                        gameState.paddle1.y = Math.max(0, Math.min(300, data.y));
-                    } else if (player.id === 2) {
-                        gameState.paddle2.y = Math.max(0, Math.min(300, data.y));
-                    }
-                }
-            } else if (data.type === 'newGame') {
-                // Allow any connected player to reset the game
-                resetGame();
-            }
-        } catch (e) {
-            console.error('Invalid message:', e);
+  } // Game.Runner
+} // Game
+
+</script>
+<script>
+//=============================================================================
+// PONG
+//=============================================================================
+
+Pong = {
+
+  Defaults: {
+    width:        640,   // logical canvas width (browser will scale to physical canvas size - which is controlled by @media css queries)
+    height:       480,   // logical canvas height (ditto)
+    wallWidth:    12,
+    paddleWidth:  12,
+    paddleHeight: 60,
+    paddleSpeed:  2,     // should be able to cross court vertically   in 2 seconds
+    ballSpeed:    4,     // should be able to cross court horizontally in 4 seconds, at starting speed ...
+    ballAccel:    8,     // ... but accelerate as time passes
+    ballRadius:   5,
+    sound:        true
+  },
+
+  Colors: {
+    walls:           'white',
+    ball:            'white',
+    score:           'white',
+    footprint:       '#333',
+    predictionGuess: 'yellow',
+    predictionExact: 'red'
+  },
+
+  Images: [
+    "images/press1.png",
+    "images/press2.png",
+    "images/winner.png"
+  ],
+
+  Levels: [
+    {aiReaction: 0.2, aiError:  40}, // 0:  ai is losing by 8
+    {aiReaction: 0.3, aiError:  50}, // 1:  ai is losing by 7
+    {aiReaction: 0.4, aiError:  60}, // 2:  ai is losing by 6
+    {aiReaction: 0.5, aiError:  70}, // 3:  ai is losing by 5
+    {aiReaction: 0.6, aiError:  80}, // 4:  ai is losing by 4
+    {aiReaction: 0.7, aiError:  90}, // 5:  ai is losing by 3
+    {aiReaction: 0.8, aiError: 100}, // 6:  ai is losing by 2
+    {aiReaction: 0.9, aiError: 110}, // 7:  ai is losing by 1
+    {aiReaction: 1.0, aiError: 120}, // 8:  tie
+    {aiReaction: 1.1, aiError: 130}, // 9:  ai is winning by 1
+    {aiReaction: 1.2, aiError: 140}, // 10: ai is winning by 2
+    {aiReaction: 1.3, aiError: 150}, // 11: ai is winning by 3
+    {aiReaction: 1.4, aiError: 160}, // 12: ai is winning by 4
+    {aiReaction: 1.5, aiError: 170}, // 13: ai is winning by 5
+    {aiReaction: 1.6, aiError: 180}, // 14: ai is winning by 6
+    {aiReaction: 1.7, aiError: 190}, // 15: ai is winning by 7
+    {aiReaction: 1.8, aiError: 200}  // 16: ai is winning by 8
+  ],
+
+  //-----------------------------------------------------------------------------
+
+  initialize: function(runner, cfg) {
+    Game.loadImages(Pong.Images, function(images) {
+      this.cfg         = cfg;
+      this.runner      = runner;
+      this.width       = runner.width;
+      this.height      = runner.height;
+      this.images      = images;
+      this.playing     = false;
+      this.scores      = [0, 0];
+      this.menu        = Object.construct(Pong.Menu,   this);
+      this.court       = Object.construct(Pong.Court,  this);
+      this.leftPaddle  = Object.construct(Pong.Paddle, this);
+      this.rightPaddle = Object.construct(Pong.Paddle, this, true);
+      this.ball        = Object.construct(Pong.Ball,   this);
+      this.sounds      = Object.construct(Pong.Sounds, this);
+      this.runner.start();
+    }.bind(this));
+  },
+
+  startDemo:         function() { this.start(0); },
+  startSinglePlayer: function() { this.start(1); },
+  startDoublePlayer: function() { this.start(2); },
+
+  start: function(numPlayers) {
+    if (!this.playing) {
+      this.scores = [0, 0];
+      this.playing = true;
+      this.leftPaddle.setAuto(numPlayers < 1, this.level(0));
+      this.rightPaddle.setAuto(numPlayers < 2, this.level(1));
+      this.ball.reset();
+      this.runner.hideCursor();
+    }
+  },
+
+  stop: function(ask) {
+    if (this.playing) {
+      if (!ask || this.runner.confirm('Abandon game in progress ?')) {
+        this.playing = false;
+        this.leftPaddle.setAuto(false);
+        this.rightPaddle.setAuto(false);
+        this.runner.showCursor();
+      }
+    }
+  },
+
+  level: function(playerNo) {
+    return 8 + (this.scores[playerNo] - this.scores[playerNo ? 0 : 1]);
+  },
+
+  goal: function(playerNo) {
+    this.sounds.goal();
+    this.scores[playerNo] += 1;
+    if (this.scores[playerNo] == 9) {
+      this.menu.declareWinner(playerNo);
+      this.stop();
+    }
+    else {
+      this.ball.reset(playerNo);
+      this.leftPaddle.setLevel(this.level(0));
+      this.rightPaddle.setLevel(this.level(1));
+    }
+  },
+
+  update: function(dt) {
+    this.leftPaddle.update(dt, this.ball);
+    this.rightPaddle.update(dt, this.ball);
+    if (this.playing) {
+      var dx = this.ball.dx;
+      var dy = this.ball.dy;
+      this.ball.update(dt, this.leftPaddle, this.rightPaddle);
+      if (this.ball.dx < 0 && dx > 0)
+        this.sounds.ping();
+      else if (this.ball.dx > 0 && dx < 0)
+        this.sounds.pong();
+      else if (this.ball.dy * dy < 0)
+        this.sounds.wall();
+
+      if (this.ball.left > this.width)
+        this.goal(0);
+      else if (this.ball.right < 0)
+        this.goal(1);
+    }
+  },
+
+  draw: function(ctx) {
+    this.court.draw(ctx, this.scores[0], this.scores[1]);
+    this.leftPaddle.draw(ctx);
+    this.rightPaddle.draw(ctx);
+    if (this.playing)
+      this.ball.draw(ctx);
+    else
+      this.menu.draw(ctx);
+  },
+
+  onkeydown: function(keyCode) {
+    switch(keyCode) {
+      case Game.KEY.ZERO: this.startDemo();            break;
+      case Game.KEY.ONE:  this.startSinglePlayer();    break;
+      case Game.KEY.TWO:  this.startDoublePlayer();    break;
+      case Game.KEY.ESC:  this.stop(false);             break;
+      case Game.KEY.Q:    if (!this.leftPaddle.auto)  this.leftPaddle.moveUp();    break;
+      case Game.KEY.A:    if (!this.leftPaddle.auto)  this.leftPaddle.moveDown();  break;
+      case Game.KEY.P:    if (!this.rightPaddle.auto) this.rightPaddle.moveUp();   break;
+      case Game.KEY.L:    if (!this.rightPaddle.auto) this.rightPaddle.moveDown(); break;
+    }
+  },
+
+  onkeyup: function(keyCode) {
+    switch(keyCode) {
+      case Game.KEY.Q: if (!this.leftPaddle.auto)  this.leftPaddle.stopMovingUp();    break;
+      case Game.KEY.A: if (!this.leftPaddle.auto)  this.leftPaddle.stopMovingDown();  break;
+      case Game.KEY.P: if (!this.rightPaddle.auto) this.rightPaddle.stopMovingUp();   break;
+      case Game.KEY.L: if (!this.rightPaddle.auto) this.rightPaddle.stopMovingDown(); break;
+    }
+  },
+
+  showStats:       function(on) { this.cfg.stats = on; },
+  showFootprints:  function(on) { this.cfg.footprints = on; this.ball.footprints = []; },
+  showPredictions: function(on) { this.cfg.predictions = on; },
+  enableSound:     function(on) { this.cfg.sound = on; },
+
+  //=============================================================================
+  // MENU
+  //=============================================================================
+
+  Menu: {
+
+    initialize: function(pong) {
+      var press1 = pong.images["images/press1.png"];
+      var press2 = pong.images["images/press2.png"];
+      var winner = pong.images["images/winner.png"];
+      this.press1  = { image: press1, x: 10,                                                 y: pong.cfg.wallWidth     };
+      this.press2  = { image: press2, x: (pong.width - press2.width - 10),                   y: pong.cfg.wallWidth     };
+      this.winner1 = { image: winner, x: (pong.width/2) - winner.width - pong.cfg.wallWidth, y: 6 * pong.cfg.wallWidth };
+      this.winner2 = { image: winner, x: (pong.width/2)                + pong.cfg.wallWidth, y: 6 * pong.cfg.wallWidth };
+    },
+
+    declareWinner: function(playerNo) {
+      this.winner = playerNo;
+    },
+
+    draw: function(ctx) {
+      ctx.drawImage(this.press1.image, this.press1.x, this.press1.y);
+      ctx.drawImage(this.press2.image, this.press2.x, this.press2.y);
+      if (this.winner == 0)
+        ctx.drawImage(this.winner1.image, this.winner1.x, this.winner1.y);
+      else if (this.winner == 1)
+        ctx.drawImage(this.winner2.image, this.winner2.x, this.winner2.y);
+    }
+
+  },
+
+  //=============================================================================
+  // SOUNDS
+  //=============================================================================
+
+  Sounds: {
+
+    initialize: function(pong) {
+      this.game      = pong;
+      this.supported = Game.ua.hasAudio;
+      if (this.supported) {
+        this.files = {
+          ping: Game.createAudio('data:audio/wav;base64,UklGRlQSAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABAAZGF0YTASAAAJ/PH7tvvu+hj5M/nQ+tH8iPZX6GvtwQAVCTkCLvMP7iX30fsW+cj1wvZ4+jH5N/jY+Mb2pPay++z/FP1x+UX6Wvp6+Pz49/vw/YP8X/qM+e75Svy1/kz/bABAAtMDmAFm+yj4/PeT9+D1vvlPAsoCZP6T/FgAHgIa/6n/Xf/K/cv+5wTvCr8FCf7h/acClwRhAKj/lASjBggEov5F+5j+FgFU/vj8QwBSA0z9FfulCzsZTRXsBrz+6wWDCrAHuwakB0AI1AWcBaEJKgu+CAQFuwVRBzMERgOdBfoGFQDE997+1AVJAhz+rQFDB7UBIv71AlAFdQEdAJgIGQrbAcb8e/6zA/0B2f0KARgF6QUsAygApQGXA0YDVQCd+kz3xfhU+3r+IALkBP4Cav5h/4kBUgHOAL3/A/8J/+b+Gf6I/b3/agDA/Z7/fAK8AkYEiQY6BD3/t/yJ/Nj9HQDY/6P94v40AsUB1v0X/bT+WP7t/QoAhwKUAGr9Sfgp75ftQ/j5CJYNOwFC+QP6af26/F34NPoS/KP7Jvvh9171mPdV+oT7C/wp+7D4L/a29kr6sf0V/lP3YPCx9K/7Uf8fAHb9Lfyy/QX+cP33/Mn9GgDqAfABYv7d+Nn1y/jT/SL9ifhV9eH1FfY784701fdj+K72e/Wg9j/1T/OQ8yP1f/ff+DH6Cv5z/H3xM9+psi6CAYBggQCAmoACgACAD4AAgBuAAIAAgAKAAYAAgACAAIAAgAGAH4ApgCuAQ4AMgGOAAYBTgDqAAIDogACAzoECgHGC+86vPi19/3/7ffB/wn5PfzN/CX9Rfwh/QX8ffy5/MX8lfxp/AX8BfwF/tX7qftV+jX5pf91973/mffN+/3+Xe/9/Mnf/f1FxV8YAgIqGAYAjggKAAYDmgACAo4AAgAKAAIACgAGAAIABgAGAOoApgCCAaYAAgMCAAYB2gIeAAICDggGAYIQBgJCE6hb/f7l9hH+mf0F+/39bfql/+34ff09/BH9Hfx1/NH8lfwN/AH/7fuN+xn7efsZ+yX7zfoR+QH9UfiZ/5H4Pfv9/L3zbcJsbWZgAgCmDAoBIgQCAAIA/gACARIABgAGAAoAAgAGAAoAAgDGAJYAngFmAAICtgAKAj4BFgACAAoIAgBGEAYAGhY38QGEkfP9/Kn5rf2V/vX6Xf9p+Vn8bfyh/NX8ffzl/IX8OfwJ/AX/sfrB+9X66frp+MX8Jfu5/nX2ZfxV/3Hz+f1p4/39fPRSKAIDQhwCAV4MAgACAvIABgNWAAIAhgACAAIACgACAAoAAgE2AFYApgHeAAoAugQGAHIEcgACAp4MAgDGIAICWils7/39weP9/AX2Wf95/AH7/f1t+lH8Pfxl/TX8Nf0Z/FX8DfwF//H7kfrt+6n6/fsF+FH9Efpl/9X1jf/9+a33/fx56FnfJH3CHAYDahQCAkIIAgACAeoAAgJmAAIARgAGAAYAAgAGAAIABgFSAEoAqgH+AAIBOgQKAQoEJgAGAA4QBgDOJAIAKjFVI/39Wd/9/jXzBf+Z/233/fzZ+rH8Ffxl/UX8Gf0t/EX8BfwJ/7H7Xfs9+zX7Zfr9+6X6vfu1+xn6xfjh/Bn7/fxJ9jUvi21qCAIDbgQGA1oAAgAGAAIACgBaAAIABgAGAAIABgAGAA4AagD6AIIA5gD6AAICYgAGAwIABgACATIEBgIeD+Yge1M9f/39je/9/pH24f1J/pX7Bf69+dH8Ofyl/On8cfzV/DH8BfwJ/5X7Sftd+wX7mfrV+5H7NfrN+Fn9cfnh//H3Kf8F9GjnOwteAAYCSgAGAOIACgACAAYAAgAGAAIAAgAGAAIAAgAGABYAbgDeAJIA4gDWAGIBogAGAkoAAgCqAtYACgCCCGY5Q3q5Yo32gfP9/C36lfy5/3n6Mf9V+YH8Sfy1/Nn8gfy9/Dn8Cf/1+5n7WftB+zH7ZfsB+5H65fuJ+zn6yfiR/PH6xfwtzADF/xm6BAYAZgQCAeIABgAGAAYAAgACAAoAAgAGAAYAAgAGABoAbgCSAMYAygCeARYAVgE2AHYArgF6AAIDIgAGAqJJ/1mUsLGuzf9t+TX8vfxR/Rn8Sfzt/IX8sfy1/KX8wfyR/F38Kf/R+6X7Zfsd+3369ftp+136pfhp/Z35If2t+Bn/vfu1gNCIfy5aGAIAjgQGAfoAAgAGAAIABgAGAAIABgACAAYAAgAGAAIAQgCeAK4AvgDaAI4BIgBaARYAxgAmAiIABgPaAIoq4tikP9FV+dYt/BH8of0l/A39OfxF/NX8qfyV/Mn8mfyx/HX8Nf/x+7H7ffs5+1X7LftJ+0H7Kftx+vX7rfqh+En9wftRmCC9j6+2p5YAAgLmAAYBLgACAAIAAgAKAAIAAgACAAoAAgACAAYANgBaAIYAsgDCALoA2gCeAPIApgC2ARoAAgICAz4nqrPTkIxx6T8NyzX5sfwd/On8qfyR/MX8kfy9/KH8tfyp/IH8Xf/5+9X7nftJ+5H62fut+vn7GfgN/Z351f/t9wH/kfXxd0i6q/xDQoqKVgwCAZoAAgCGAAYAAgACAAoAAgAGAAIAAgACAAYABgBCAHYAggCqAMoAqgDeAKYA3gCyALoA2gCSAZosSrHzVj/2qJahLj2zRfoZ/2n5tf/x+Q38jfyV/Nn8ffzF/G38Xfwl//H7vfuR+2n7VftJ+yX7ZfsN+4H6/ft9+En5Scj9XkDXWEUHtfczQqrWLkoAlgAGAAIAAgAKAAIAAgACAAoABgACAAYAAgASAEYAagB+AKYAjgDiAKoAxgDaAIoBGgIeB+I3QqXbH2uNOAXsdfjkPVGlswHxrf/F+WH8Ofzh/KH8kfzB/Fn8afwp/BX/4fvR+4H7oftB+1n7bfrV+/36Pfn19rXVGYfJK6zQwHEMCZuj+z2u4k6GmjKaAAIABgACAAYAAgACAAYAAgACAAoAAgAKAAYATgBCAH4AmgBmAPYANgE+AC4BSgKiJ25qbrd7B59bZ6/0AeBWSKX88ikzEW9Fq73cMf01/CX9Afwx/JH8Qfwx/C3/6fvx+8n7pfu5+1n7ofsh+d3tkcxFoKVvuTNg9DS62HSoMG/oe6abXf8bVtkGoHJtxjoCEp4ABgACAAYABgAGAAIAAgASAAYALgAyABoAwgAKAWYAAgHOAWIiVkmWduqm0tvLEYtM44v7wff/SDoAdQCr8NZVAp0odVEtc7GJGZ7FqJ260cEhy/nIMc/xya3I0cftunmtLZ69hrltvVRVOsUVKPQs06yiSHQoSPAXM9zHr7d8F1bXJXr5gtPmrTqRRnWqXppKHjjSLYIlaiICHAIcjhwKIqYkOjAqPfZImllqb/6EXqIKu/rXyvtjIQdLU3PHnRPLN/HcHrhGoG44kbSytM0I6FkAyRSRKO06/UINSC1T0VLVVCFYjVX5TqVEpT9RL20ehQ2s/EjsCNlYvQifjHmsW4g2NBIH6GfHW5wjfT9ZjzYzGr8C2ulS1hrB3rBipxqX/oouhQqA5n++f6KCuoZGiKaSiplCpj6zMsJS2oLzOwRPIZ9Dk2DzhsekS8oH64wJTC68TLBtvIXQnIy17MZA1SzmaPLw/NELVQ81EmEWPRQNF10QKRFlCCUCFPVA6KDbjMeIsHyc8IQAbBxSDDN0Erfy09EztyuVe30TZCNIszDLHwcJTvxi8ZrlltuKzrrLxsQmy2rIEs3iyzLKAtCu247cLuwq/OsO2x+TMxNKm2JPe3uS160ryK/mZAOgGRA09E2AYLR25IJ0kbyg0K94tLTDuMZMznjQMNag0DzTtMzUzSTL1ME4vLC3qKW0mdiIvHpoZXhRkDp4IIATQ/nf4Q/Jm7R7pYuMe3nTawNff0xTPIs23y9LJTsi8xv7F/sX9xQXGaMZGxxvI+MiUyt/Mbs810sPV6tlY3bTgCeUo6ujuQ/Mw+KD8xAAABTUJTg21EA0UZhfyGYgbcR3UH+QgmSGLIvkiCCP9IgEj+yJ4IkEhjh/nHSkc1RkyF2YUoxDYDAgLdAl6BscByfxk+RL2qfL97/Ts8elo5+/kOeNJ4mfhPuB83gbd8dwH3fncAt283ADcBtyX3Unfg+Ci4YXjAOa452jpj+uK7ivxPPKf9P73sPrk/L/+UgHOA84EjgUoBw0JhQl8CcAKHgtwCjgKwQphC0QLkAqVCRAJmAj0B8EHMgeyBtgFSQTUAoQBxgAAAF3+5fwm/JH70frk+XL5Tvl6+G33a/d89yL3y/ah9uT2C/cJ9x/3J/fc9mv2Dfdj+P34PPks+ej4KPmj+R/6afoy+oL5dfkn+rr6Hvvr+mb6k/oI+xn72fqV+mb6K/qU+h/7Lvs0+zj7OvtE+z/7T/t4+5L74fok+sX6vvv0+zn71/r8+zb8GvvS+uT7SP09/YL8gfw7/Kj7xft8/N78xfw5/J37A/yc/Ab8tfvJ+9n74vv7+6b8x/w6/Hr7UPvj+/j75fv5+3n8oPwI/Pf7B/z8+wD8A/z4+wv89PtM+/b6Bfv++hv7+PvE/GX8+vsF/Pv7A/wC/Pj7CvyX+xD77voR+2T8nP2R/cP8Avz7+wb89/sN/PH7D/zv+0H7l/sN/Pf7Bvz7+wH8Afxy+2j7wvv1+hX6wvoq/CT8A/sY+/r79/tq++P7Yf3H/Q799/wC/Qf9l/wU/OD7M/un+5z8/fy//Ab8+PsK/PT7mfs9+y/87Pw7/PX7CPz8+wL8/fsC/P37BvyX+0D7+fsG/D37APtx+/r7Bvz7+wP8/vsA/AL8+/sG/Pj7Xfvy+mv77/sR/PD7VfuF+6D7vvoC+gH6wvqd+//7tvv/+gL7zPsI/Hf7Dfvz+g/71PsD/Hn7+PpH+937Lfvt+qf78/sM/Nr7FPv9+qD7Bvz4+wj8+fsw+//6BPwL/b/8HPzQ/A/9ZfwE/MX7+foI+4L8Av0f/EH7Ufzg/UD99fyC/QP+nf0M/PP7vfz6/AP9Af38/Ab9+fxx/Pv7Rvz//AD9Ofz8+338Tv0A/gD+Kf1Y/H38CP34/BP92P0J/vf9CP42/gn/+f5+/fv8A/3//OD8B/wC/Ef9Cf6f/Q799PwJ/av9A/6g/cL8Fvzh/MT9ZP3A+zz6XPvL/df+9f4X/qv8KPwC/c39W/34/Ab9/fwC/QD9/vwF/fv8Bv35/AX9wv3//R79s/tF++/80f2w/AT8o/wJ/u79Vfyn/B7+N/7L/CD8x/3L/sP9F/3n/DX92v1I/ff8hfxc/Or8G/24/W/96vwR/fP8CP36/E38/fsB/AD8APwA/AH8//tz/LT8A/z++9H8/vyD/AD8Lvz//AL9SPwH/Pj7RPz0/Az98/x4/PX7DPzz+wr8xPxk/A/7TPp4+/X92v6m/fb7u/so/QX+D/2f+xL8bv3A/ev8Ffz9+wX8/vsA/AD8//sA/AP8+PsI/PX7EPzQ/Ab9/fz8/Af95/wm/PX7Cfz3+8b7+foE+8v7Wvsc+oz5Zfvj/Gz78fqJ+wT8wfsl+7D8w/3f/Pr7TfzW/Cv86vsS/GX8CP3d/Aj8Avym/IL8V/z//P38Jfz8+5H89/wN/fH8D/2x/Xf9jPxH/B397P1A/VX8hPz1/DD99v0F/lP9hP3+/QP+/P0E/vz9df2X/D/8Ff3r/QD+A/75/Qv+0f0b/ez8bPzv+wz99/4E/x/+Bv75/Wv+vP4M/vT9DP72/Qf+/P0C/gH++/0K/vL9E/7q/Rb+w/61/Xr8rPx3/tP/Yv7c/bT+eP6b/uT/FgDx/wsA+/8CAAAA//8DAP//AQD/////AQAAAAIA//8AAAAAAQAAAP//AAAAAAEA//8BAAAA//8BAP//AAAAAAEAAAD/////AQAAAAAAAAAAAP//AAABAP//AQAAAAAAAQAAAAEAAAAAAAEA//8AAAAA//8AAP//AgAAAP////8AAP//AQD//wEAAAAAAAAAAAAAAAAA//8CAAAA//8AAAEA//8CAP//AQAAAAAAAAAAAP//AQAAAP//AAAAAAIAAAD/////AAABAAAAAAABAAAAAAABAP//AQD//wAAAAABAAAAAAABAAAAAAD//wAAAQD+/wEA//8AAP//AQD//wAAAQD//wEAAAD/////AQAAAAAAAAAAAP////8AAAEAAQD//wAAAAD//wEA//8BAP7/AgD+/wEAAAAAAP//AQAAAAEA/////wIA//8AAAAAAQAAAAAAAAD//wAAAQA='),
+          pong: Game.createAudio('data:audio/wav;base64,UklGRqQIAABXQVZFZm10IBAAAAABAAEAESsAABErAAABAAgAZGF0YYAIAAB0e4B/fn96d3h2en58fHx7eXl+e2duiY13bXd9dnN7enh3dXt+eXt9eHp9fXt5eXyAgoOFhHt2dm90iIR2goZ5fIB3f5KNfISJgICFhoF9gYSBgoiIiZKRhoWMjo2IhoWEiIiBhIuKiIeFhoN/g4N9foWEfnV5jZWLgn57foGChYR7eoGGhYKHh3ZvgIZ8goiAgYR3epCUhYKEgYOEf32DhXt6hIF9goaCfH2GiYWBfnx+f39/e3t+f3x3eHx8fYGBfn18eGttiJeIdnyAenh5fX98dnh9fn16eIGEenqBfHRyd3d0cXF2e3Zman9+eX99c3iAd3WHiXV0e3V5gX16e31+e32Df3l5fH6Bf3+CfX2EhX+AiYd+en2DgX+GiIF5fYB7eoR5dI+jj3qEioSGioaGjIyGhoeCgomCdYCJfX+JgX2Hg3+Kin18hIJ9g4eEgIKEg3x3eXyAhYR+gIKBgH9/f31/gX2Bg4OHhH58fYCAfYCEfn1/fn6DgX13anKIjn53fX54e3x8eXV4e3x8eXZ3fIB5cHZ+gX58fn59fYCCgnx1eH59dnV3c3V5eHV3dXN0d3l6gHlsPgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAi///////////////////////////////////////HAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//////////////////////////////////////pgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKT//////////////////////////////////////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD0/////////////////////////////////////9wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//////////////////////////////////////+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAATf//////////////////////////////////////XwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFbv////////////////////////////////////7mgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABStv///////////////////////////////////85vAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMab////////////////////////////////////ccRYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACiM1f//////////////////////////////////2449AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAkaKjm/////////////////////////////////8+WXSYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJVaGteL///////////////////////////////HOpHhQKQMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAyRHaYytzuv///////////////////////////jfxaqLbE8zGAEAAAAAAAAAAAAAAAAAAAAAAAAAABMpQVpzjKS7zuDy////////////////////+ezdzLqnk31pVEAuHg8DAAAAAAAAAAAAAAAAAAAAChYkM0RVZ3iKnKu5xdHb4+js8PLz8/Py8Ozn4NnRx72ypJeIeGlcT0E1KyIaFA8LCQgHBwgKDREVGyMqMjxIU2BteYaSnqixucDGzNDS1NXW1tTSz8vGwby2rqSakIV5bmNZTkY/ODItKSUiIR8gISIjJiktMjpAR1FbZW95g42Xn6atsre7v8LExcbFxcTCv7y3sqylnpaNhHpxaGBZUEpEQDw5NTMyMjMzMjQ2ODxBRkxTWmFpcXmCiZGXnaGmqq2wsrS1tbS0s7KwrqqmoZyWj4iDfHRuaWJcWVVPTUtJR0ZGRkZHSElLTlFVWl5iaG5zeX6DiI2RlZmbnaChoqOjo6OjoqCenJmWko2LiYV+enZyb2toZWNiYV9dXV1dXVxcXmBhY2Zoam1xcnV5fH6BhIWGiYqKjIyLjI2NjIuLioqJiYeFg4KBfn18e3l5eHZ2dnV1dXV1dXVzdHd4eHh4eHl5eXl5eXp6eXp6enp5eXp6enp6enp7e3p7e3p6enp5eXt7ent7enp8fHp6e3t6ent7enp6e3t6enp7e3p6enp6e3t7e3t7e3p7e3t7e3x8e3t7ent8fHx6enx9fHt8fHx7e3t8fHx8fHx8fHx7ent9fHt9fXt8fn59fXx8fX19fHx9fHx8fHx9fXx7fHx8fH18fHx8fHx8fHt7e3t8fXx8fHx8fHx7e3t9fn18fHx8fHx8e3x8fHx8fHt8e3p7fXt7fHx7fX59fX19fHx7fH19fHx8fHt8fXx8fHx8fHx8e3x8e3t8fHx8fHx8fHx7e3x8fHt8e3p6e3x8e3t8fHt7e3x8e3t8e3t8fHx7e3x8fHx7e319fH19fHx7e319e3x+fX1+fnx8fX19fX19fHx9fXx8fX5+fXx9fX1+fn5+f399fX19fHx+fn19fX5+fXx9fn16e35/f318fX59fX19fX19fX19fn58e31+fHx+fnx9f318fn99fX1+fX18fX1+fX19fX18fHx8fHx8fXx8fX18fH19fHx8fX19fHx8fH18ent+f317fX59e31+fXx8fHx8fHx8fHx8fX19fX18fHx8e3t8e3l7fXt7fHx7fX58fH18fHx9fXx8fXx9fXx8fX19fX59fH1+fXx9fX5+fX5+fn5+fXx9fn5+fn59fXx8f39+fn5/fn5+fn5+fn5+fn5+f318foB+fn9+'),
+          wall: Game.createAudio('data:audio/wav;base64,UklGRiQEAABXQVZFZm10IBAAAAABAAEAESsAABErAAABAAgAZGF0YQAEAACAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIADAg4kQ2eOs9Tt/P/24sWjfVc0GQcBBhcyVHqgxOH1//zu1baRakYmDwMCDSNBZoux0uv7//fkyaaAWjcbCAEFFS5PdZzA3vP+/fHavJdwSysTBAEKHjtdg6nM5/j/+urRr4ljPyINAgMPJkZqkLXV7vz/9uLHo31YNhoIAQYWLk91nL/d8/798dy9mXROLRUFAQgbN1h+pcfj9v/87dW1kWpGJxADAgwgPWGGrM3o+f/66s+uiWNAIg0CAw8lQ2eMstLr+v/45sqpg147HwsCBBEoR2yRttXu/P/248ilgFo4HQoBBBIrSm+UuNjv/P/14sWjflg3GwkBBRMsS2+WgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA+7VKBRl43P7FWwsPZs7/1G0TCFS//eGAHgNBrvjskywBMprx9aU7AiSI5vu4SwYXddr/yF4NDmHK/9hyFgZOufzlhiICPKj28JoxASyU7fiuQQMefuH9wFQIEmrT/9FpEQpXwf3ffR0DRK/57JMrATKa8PWmPAIiheX8uk8HFnDW/81kDwtbxf7dehsER7L66pAqATSd8fWlOwIjiOb8uU4GFnDW/81kDwtbxf7dehsERrH565ErATKa8PaoPQIiheT8vFEHFG3U/89nEQpVwP3hgB8DQKv375cvAS2U7fiuQwMdfd7+xFoLD2TN/9ZwFgZNuPvniSUCOKDz86I4AiWJ5vy5TgYWcNX/zmYQClfB/eB+HwNAq/fvmTEBLJPr+bFGBBp43P7IXg0NXsj+23gaBEex+euRLAExl+/3q0EDHn3f/sNaCw9jzP/ZdBcFSrX66o4qATOa8PapPwMfgOH9wVgKEGTN/9hyFwZLtfrqjigBM5rw9qk/Ax9+4P7D'),
+          goal: Game.createAudio('data:audio/wav;base64,UklGRropAABXQVZFZm10IBAAAAABAAEAESsAABErAAABAAgAZGF0YZYpAAD///////6hRAAAAAAAAAAAABA6d6zf///////////rsUoAAAAAAAAAAAAHTYav7v//////////0IY+AAAAAAAAAAAAM3Okxf3/////////+4dXRAAAAAAAAAAAFGagts3//////////7pfSx4AAAAAAAAAAEaZu77c/////////+JyWk0AAAAAAAAAAC59u7/E8v//+v///++NTUU7AAAAAAAAACZwr7220Pj/9ef+//+cQ0JSGwAAAAIKDTBoqcOyt9/77tDd//uaODtfOgAAACYsIztwr8exqtHy5cXM9u+PNERhLwAAAisyOE93sMy3sNTs2sHL69+DNFJmJgAAFDMxPVyBtcm1ud/r08PV7dFsMmRjGQAAJjctRmeLucGyw+XmzMTZ6LtYQHVbDgAPMzcvTGyRurWry+fdxsjh5KBEUoFRBwAnRDExU3aarqWozuLOvMzm2IdAYohNAAA7UTMvV4Wio5qr0dvBtsvlznE5cZdMAARVYCwpYJSjl5Gp0NKzqsXgx207eadbAANedDAeXpqkjYWly8emnr3bxm86gLZvCQBhizoYV5qphnadxcKfk7PWy3g2e8aBFQldk00XTpOniWyOwL6ZjavLy4o7b8uVJw5UmV8YRoqjjGWAuLqXiqbHzZZEa82iNBhTk2siPoCbjGVyrreUiaPAzKROYsyxQB1SlHIjOnqTiGJppLSTh6K+yapZYcq6RiJXkHInOneJgGNkm66PhaG9xq1iZsu7Sitcj3MpO3iFemJlmaqLhqO7wqtiaM65RzBjkXEpQnyCdmBnmqWHhqS5vallbc+zRDdqj2orSn5/c2NsmaOHiKe5vKVid9amPT91jF4wVX55cGVvmZ6Djau2uKBhhNaWN0d+iVEzY351b2h5m5iDlK6ztZdgmNV9NleCfEc5bHxubmp8nZCCmq+xsotlrctlOmeHbjlKeHNsb2+Gl4qIoa2ssYJqvr1TQ3SDYDlTeGxob3GJloWNp6usqHaCzZ1GWIJ7TjxodmJqcneNjoOXq6asoXCa0H5Db4pqP011altrdHqJh4afqaStkHa4vF1SgoJaQF53YV5xc4CMgYyopqWnf5HOkktxknNCSXluUWR1doKDgpypnqecfLDGalSMi1pD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eWRzioySm56hio/An2F/oHZPYXxkRmR+Z2qGiI6cnZ+Sirewa3CgiVNTe3RIU3twZIGJh5qin5aHq756Y5aZZUxsgFhHcXZieYuFkqSlnIufwZFhh5xxUmN3YUpndV1uj4eFnKqkjZS9pmt5moBaXnRnS154YmCHjoSRpKiXkbSudXeWg15cdGtIVnloWHmPh4uep5ySsbV9dJiMYldzd05Kc3FYbYmIiJmnnpCuvINvl5RmWHB3VUlsclpriISDl6edjanAi26Tl2xZbXdbTGhxW2eHhX6Tp6GPo8GYcI6ac1lqeF5LZnNbY4WHfI2jo5GewKFzip56Wmh7Yktkdl5egop7h6Kmkpm+qnaGoYJdY3tnR114YFd9jnx/namWkrezfoGhjGRjeW1LV3ZmVHSPgXuVp5qSsLSFf6CSZ2N6cU1RdW1TaoyFeo+kmpGrtot6nJxuXXd6VEpsc1lgg4d6iKKej6S7l3eUo31eb35hS2NyYF98h3qCnaCMl7iieIijimVpfWpPX3JjXXiIfHuXpZOQr62DgJ2RbWh5b1ZccGhcb4aBeIyimo+lr41/l5h3aXt5XFlvb19ngIZ5gpyfkJuul36PnYFodn5lWGlyZ2V4hX19k5+TlamggoedjW5wfm9bZG9qZnOAfXqLm5WRoqaLgpaXeGx7d2Fhb25nb36Ad4KXmI+YpJWCjJeFb3R6a2Fqb2pqd4B6e46Zk5Sgm4iHk413cXlyY2Rubmlxfnx3g5KTkZqej4WOk4NzdXhtY2hwbmx3fnl9i5KSlp2XiYiRjXtydnVpY21ybnJ7e3qDjpGTmpuRiIySiHdzeHJmZ3Bwb3d7en6Ij5KVmZaNiY2Pg3V2d21nbXFvc3p6eoCJj5KWl5KLiY6LfXV3cmdpbm5vdXp6e4ONk5WXl5GLi4+GeXd2bGhsbW5xdnp5fIWOkpSWk4yJjYuAeXlyamptbnBzeXt6gIuRk5aWkIqLjod8eXZuaWptb3B0enl6g4yPlJmVjIqNjIN7eHNraGptb3F3enl+iY6SmZqRi4yOioB5eHJqaWxub3N4eXqCio2UmpePjI2OiX55d29pa21ucnd6en6Gi5CZm5WPjY2Ohn16dWxqa2xvdHd4eoCHjJSamZSPjI2Mgnt4cWpqamtxdXd6fYKIj5aZl5KNjI6Kgnt2b2tqaW5ydXh6fYOKkJaZlpCLjY2Hf3hybmtnaW9zdXl7foaMkZealI6MjIuGfnZybmlna3Bzdnl6gIiNkpmYkYyLioqEeXRzbmhpbXJ1eXp9hImOlpuXko6MjIyEeXVya2dqbXJ1d3l+hImRmJqWkoyKjIp/d3Vxa2prcHR2eXt/hIuTl5iWkYuLjYd9eHRuamprb3N2enx+ho6Ul5iUjYqMi4R8d3JtamtucXR4e3t/iI+UmZmTjY2NioN7dnBraWtucXV6enuCio+Wm5eQjIyMiIB5dXBqamxvcnZ5eX2EiY+XmZSNi4yLhn13c2xnaWpscnZ3en6EiZGZmZONi4yLhn13cmtpamtvc3R2en6CiZOZmZONjI2LhHx3cWxpamtvcnV5fH+EjJSZmJKMjI6LhX14cmxqa21xc3Z5e3+FjZWamZONjY6Lg3t2cGppa2xvdHd4en+FjJOZmJKMjI2Lg3x3cmxra2xwdXd3en+GjJSYl5CLjI2IgXp1b2xramxxdXZ3e4CGjZSZl5CMjo6Kg3x1b2xqam1xdHV2eYCGjZWZl4+LjYyHgHhybmtqam1xdHZ3eoCHjpWZlY6MjYyHgHhzbmtqam1xdXd4fYSKkpiZlI6NjouGfnZxbGpqa25ydXZ4fYSLk5malI+Pj4uEfXZwa2pqa29zdnd6gYePl5uZko6OjYiBenRuamlqbG9zdnh8g4qSmpyZkpCRjoiAeXJsaWhqbHF1dnl+hYyVm5yWkI+Pi4R8dnBqaGlqbnJ1dnuCiJCZnZuUkJCOiIB4cmxnZmdqbnJ1eH6FjZWcnZiSj4+Lhn12cGpmZmdrcHN1eYCHkJidm5aRkI6JgXlzbGdlZmlucnV5foaNlZudmZOQj4uEfHZwamZlaGxwdHd7goqTm56cl5KQjoiAeHJsZ2Rmam5ydnqAh5CZnp6Zk5GPi4N7dG9pZWRna3B0eH6EjZadn5yWkpCNhn52cWtmZGZrcHV4fYOKlJufnZeSkI6IgHhybWdkZGdscXV5f4eQmZ6emZORjomCenNtaGRjZWpvdHh9hIyWnJ6ak5CPi4R8dW5pZGJkZ2xxdXqAiJKanpyVkI+Mhn53cWtmZGRnbXJ2e4CHkJien5mSj46Jgnp0bmhkY2Vqb3J3fYSMlZ2gnZWRkIyGfndxa2ZlZmpvc3d8g4qSmp+fmJGPjYeAenNsZmNjZmtxdXh+hY2VnaCclJCPioN9dm9qZmZna3F1eHyDipKan56XkI+Nhn95cmxnZWRnbHF1eX6GjpadoJuTj46Jgnx2b2lmZWdrcHR3fIKJkJidm5SOjouEfndwa2ZkZWdscXV4foWNlZyemZKPjYiCe3VvamdnaW1ydnl9g4qRmZ2blI6NioV+d3FsaGZmaW1zdnqBiJCXnqCak5COioR9dnBsaWhqbXN3en6Ei5OZnpyVj46Lhn94cmxoZ2hrcHV4e4GJkpmen5qTkI6Jgnt1cGtoaGpuc3d6f4aNlZuenJSPjouEfXZwa2dmZ2pvdHd8g4uTmp+emJGPjYeAeXJsaGZmaG1ydXl+ho6Vm56ak4+NiYJ6c21oZWRlaW9zdnuDi5Obn52WkI6LhX53cWxoZ2dpbnN2eoGJkJienpiRjoyHgHlybGdlZGZrcXV4foaOlp2fnJSQjoqEfHZvamdmZmpwdXd7gomRmp+el5GPjYeAeHFrZ2VlaG1ydnqAiI+Xn6Gck4+OiYJ7dG5pZ2Zna3F1eH6Ei5OboJ+XkI+Nh4B4cWtnZWVpbnN2e4GIkJedn5qSjo2IgXpzbWhlZWdrcHR4fYOKkpqfn5ePjYuFfnZvaWVjY2dscXV5foWNlZyempGMi4iCe3RuaWZlZ2twdHh8goqRmJ6emJCNi4eAeXFrZmRlaG1zd3p+hYyTmp6clI2LiYR9dm9qZmVnam90d3qAh4+WnJ+bko2Lh4F7dG5pZmZpbXN3en2DipGYnZ2WjouLhoB6c21pZ2hqb3V4e36FjJObn52Vj42Lhn93cWxnZ2hrcXZ5e4CGjZSbn5qSjYuJhH12cWtoZ2ltcnd5e4CHj5abnJaOiomGgXlzbmhlZ2ltc3d5fIGIj5abm5SNi4qHgXpzbWdmZ2pvdHh5fIOLkpmem5ONjIqFf3hybGdnaWxxdnh5foWMk5mcmZGMjIqEfnhya2doamxyd3l7gYmQl52fmZGNjImEfXdwamhpa292enp8gomPlpydl5COjYmDfXZvaWhpa3B2eXp9hIuSmZ2clI6Mi4aBenNtaWlqbHF2eHl9hIuSmZ2ak46Ni4aBenJrZ2doa3F2d3p+hYuSmJuYkYyLiYR+d3BqZ2hqbXJ1d3l+hIuSmZuXj4yLiIJ8dW5pZ2hqbXJ2eHuAho2TmZqVjouLiYN9dm9qaGlrb3N3eHuBiI6VmpqUjouLhn94cmxnZ2lrcHV4en6DipCXm5qUjo2LhoB5c21qaWttcXZ4en6FjJOZnJmSjo2LhX13cWtoaWttcnZ5e4CHjZSanJeRjY2Jg3x1b2lnZ2lscXZ3e4CHjpWbm5WPjIuGf3hybGdmaGpuc3Z5fIOKkJaamZONjIqEfXdwamZlZmhscnV3fYSMk5mcmZKNjIiCe3RuaGVlZ2pvdHd6f4eOlJqbl5GOjIeAeXJsZ2VmaWxydnl9hIuSmZ2clo+NioR9d3FrZ2Zoam90d3p+ho2Vmp2alI+Oi4V9dnFrZ2dobHF3en6Ei5KYnZ6alJCOiYN7dW9raGlrb3V5e3+GjZOZnZyXkY+Mhn52cGtnZmdqb3V5fYKJkZednpuUj42Jgnt0bmlmZWdrcHV4fIKKkZebm5aQjYqFfXZvaWRiY2ZrcXZ5foWNk5mbmZOPjImCenNuaWZlZmpvdXh8goqRl5ycmJKOi4Z+d3BqZmRkZ2txdnqAh4+Wm52blZCNioR9dnBraGdnanB2en6FjJOZnZ6Zk4+Mhn93cWtnZWZpbnR5fYKKkpmen5yXko+LhH12cGxpaGlscXZ6f4aNlZuenZiSjoqEfHVva2dlZWhtc3l+hIuTmZ2em5SPjIeBeXNtaGVkZmlvdXp+ho6Vmp2alZCNiIF5c21oZWRlaG1zeX2DipKXm5qWkIyJg3x2cGtnZWVnbHF3e4KKkpmcnJmTjouFfXZwamZjY2Rpb3Z8g4uTmp6fm5aRjYiBenNuamdlZGhudHqAiJGYnJ6blpGNiIB5c25pZ2Zna3F3fYOLlJqfoZ6YlJCKg3t1b2toZmZobXN4f4iSmp6hn5mUkIqCenRuamZlZWdtc3qBiZKZnp+cl5GNiIF5c21oZGNjZmtyeH+HkZmen5yXko2Hf3dvamViYWFkanF4f4eQl5yem5aRjIZ+d3FrZ2RjY2dsc3qBipKan6Cdl5GMhn11bmhjYWBhZWxzeoKMlZygoZ2XkYyFfndxa2ZkY2Rob3Z+ho+YnqKhnZeSjIV9dW9pZWJiZGlxeYGJkpqgo6Kdl5KLhHx1b2llY2Rma3N7g4yVnqOlpJ+Zk4yDenJrZWFgYGNpcXqDjJaeoqOgm5WOhn11bmhjX19gY2pye4WOl56jo5+alIyEfHRtZmBcW1xhaHF7hZCZn6OinZeQioJ5cWpiXltbXmRsdX6Jk5uho6KemJKKgXhwaWJdW1teZG12gIuWnqSmpJ6Zkol/dm9oYl9dXmFpcXqDjpmhpqilnpiSioB3b2hiXlxdYWhxe4WRnKOoqKWfmZKJf3ZuZ2FdXF1iaXJ7hpKcpKiopJ+ZkoqAdm5nYV1cXWFqc3uGkZujp6ijnZeRh350a2VgXV1eY2pze4WRm6KmpqGblY+GfHNrZF9cW1xhZ3B5g46ZoKWloJmTjIN5b2dgW1hYWmBocXmDjpmgpaWhmpSPh31za2ReWlpbYGdweICLlp6jpaGalI6HfXNrY15cW11ianN7gouVnqOmpJ2WkYuCeXBqZGFfYGNqcnqBiZSdpKimoJiTjYV7c2tlYWBhY2lyeoKJkZmhpaWgmJOOh351bmhjYWFjaXB5f4WMlZ2ipKGak46IgHdvaWRhYWNnbnZ8gYeQmJ6hoJqTjoqDenJsZ2JhYWRpcHd8gYiRmZ6fnJWOiYR9dm9qZWJjZmlweH6Ch46Vm56dmZKNioR9dW9pZWNlZ2tyd3yAho6Vmp2blpCMiIJ6dG9pZmZpbHF3e36CiI+WmpyZko2LiIJ7dXBrZ2hqbXJ3fH+EjJOYnJ6alI+NiYJ7dXBraWttb3R5fYCEi5KXnJ2Zk5COioN7dW9qaWtsbnN3en2DipGXm5uWkIyKhX95c25qaWprbXJ2eXyCiZCWmpqVj42Lhn94cmtnZmdoa3B0d3qAh46Tl5eTjYuJhH12cGpmZmdnam90dnmAh4+Wm5uWkI6Lhn95c2tnZ2hqbHF2eHuCipGWmpqUj4yLhX55cmtnZmdoa3B2eXyCipGYnZ2YkpCOiYJ6dG1paGttcHV5fICGjZSZnZ6ZkpCOiIF6dG5paGpsbnN4fH+FjZSanp+ak4+NiIJ7dW9qaGpsb3R5fH6DipCVmZuYko6MiYJ7dW9qaGlrbXJ3e32Bh4+UmZyZkoyKhn95dG9qZ2lrbXB1eXp9g4qPlJaVj4qIhYB6dG9pZmdpa250eXp8gYiOkpaWkoyIh4J9eHNuampsbm9zdnh5foWLkZaYlY+LiYV/enVxbWttb3F0eXx+goeNkpaYl5GNi4mEfnp1cG5vcXJ0eHt9gIaLkZWZmZWPjIuGgHt3c29vcXJ0eHx9foOIjpOXmZaQjYuHgn15dG9tbnBxdHh7fYGGi5CUl5WQi4mGgnx4c29tbW5wc3d5e32Ch42SlZWRjIqHgnx3c25ramtsb3J2eHuBhouPk5SRjImGgn15dnFtbGxtb3N3enyAhouPk5SSjoqHg354dHBsamtsb3N3e36CiIyRlZeWkY2KhYB7eHVxb29vcnV5fYCFipCVmJmWko6LhoB6dXJvb29wcnZ7gIOHjZKWmJmWko6Lh4F8eHRwbm5vcnZ7f4KHjZKWmZmVkIyIgnt1cW5sa2tsb3R5foKHjZKWl5aTj4uHgXp1cW1qaWprbnN4fYKHjpKVlpOPioaBe3VwbGlmZmhqbnN5foOIjpOVlpSQjIiCe3VwbGloZ2lrcHV6f4aMkpaXlpKOiYR+d3JuamhoaWtuc3h9g4mPlJeYlZGNioV/eXRwbWtrbW9zeX+Eio+UmJqZlpKOiYN9eHNvbWxtb3J2e4CFipGWmZualpOOiYN8d3JubGxucHN4fYKIjpSXmJeVkYyGgXt2cm5sa2ttcXV5foOIjZKVlpSRjomEfnhzbmtoaGltcXV6f4OIjpGTkpCMiYR+eXNvbGppaWttcXV5foOHjJCSkI6Lh4F8d3Jua2lpam1xdXp/hImOkpSTkY2KhX96dnFubGtrbHB0eX6DiI2RlJSTkY+LhoF8d3Nwb29wc3d8gIWKjpKVlpaTkIyIg355dXJwcHFydXl9goaLkJSXl5aTkIuGgHp1cnBubm9xdXp/hImNkZSVlJGOioaBe3dzcG5tbW9ydnp+hIiNkZOTkY+Mh4N+eHNvbWxsbnF0eX2ChoqNkJGQjYqHgn14c3BsampqbHB0eHyCh4yQkZGPjIiEgHt3c29tbGxucXV5foOHjI+QkI+MiYaCfXl1cm9ubW1wdHh9g4eMkJOVlJKPjIeDfnp1cnFxcXN2en6Dh4yQk5WUkpCMiYSAe3h1c3Jyc3V4fIGGi4+TlZaWk5CMh4J+end1c3JydHd8gIWJjZGTk5KQjYqGgn56dnNwb25vcnV5foOIjI+QkY+MiYaBfHdzcG5ubm9xdXp+goaKjY+PjoyIhIF8eHRxbm1sbW5wc3d7gIWJjI6OjYqHg397d3RycG9vcHJ1eX2BhYmLjY2Mi4mFgn56d3Rxb29vcXR3e3+Dh4uOkJCPjImGgXx5dnRzc3R1d3t+gYWJjI+QkZCOjImGgn57eHZ1dHR1d3p9gYWJjI+QkI6MiYaCf3x5d3V1dXd5e3+ChomMjo+Qj46LiIWBfHh1c3FwcXJ0d3p+goaJi4yNi4mGgn56d3VzcnJzdHZ4enx/goWIiouLiYeEgn57d3VycG9vcHF0d3t/goWIiouKiIaEgX16d3VzcnJydHd5fH6BhIeJi4uLiYeFgn57d3VzcnNzdXd5fICEh4uNjo6Ni4mGg4B+fHp5eHh4ent+gYOGiYyOj4+OjIqHhYJ+e3h3dnZ4enx/goWIioyOjo6NjIqHhIF+fHp5eXl5enx+gIOFiIuNjo2LiYeEgX57eHV0dHR1d3l7foGEh4mLi4qJh4aEgn57eXd2dXR0dnd6fH6Bg4WHiIeGhYOAfXp3dXNycnN0dXd4en1/goSFhoaGhoWCgH17eHd1dHR0dXd5e36Bg4aHiYmIhoSCf316eHZ2dXZ3eXt9f4GDhoiKi4yMi4qJhoOAfXt6eXh4eXt+gIKFh4qMjo+PjoyJhoSBfnx7enp6ent8fX+ChYiKjI2NjYyLiYaDgH16eXh4eHp8foCCg4WHiYqKiYeGhIF/fHp3d3d3d3d4ent9gIKEh4mKiYiGg4B9enh3dnV1dXV3eHp7fYCCg4WFhYSDgoF/fXt5d3Z2dXV2dnh6fH6Bg4WGh4aFg4F/fHp5eHd3d3d4eXp7fH2AgoOFhoaGhYOCgH9+fHt7e3t7fH5/gYOGh4mKioqKiIeFg4KAf359fHx9fX5/gIGCg4WHiImJiYiGhYOBf359fn5+f3+AgoOEhYaHh4eHhoWDgoKBgH9+fX19fX5+fn+AgYKDhISFhYSEg4KAfnx8e3t7e3x8fX5+fn5/f4CAgH9+fXx8e3p6eXl4eHl5ent8fX+AgICAgH9+fXx7enl5eXl4eHl6e3x8fX1+fn5/f39/f39+fXx7eXl5ent7fH1+foCBgoKCgoGBgH9+fX19fX19fn5/gIGCg4WGhoeHhoaGhISDgoGAf359fX5/gYKDhISFhYSEhIODgoGAgH9/f4CAgYKDg4SEhYWFhYWGhYSDgoGAgIB/fn5+f4CAgYKCg4ODgoKBf35+fn59fX19fn5+fn5/gIGBgQ==')
+        };
+      }
+    },
+
+    play: function(name) {
+      if (this.supported && this.game.cfg.sound && this.files[name])
+        this.files[name].play();
+    },
+
+    ping: function() { this.play('ping'); },
+    pong: function() { this.play('pong'); },
+    wall: function() { /*this.play('wall');*/ },
+    goal: function() { /*this.play('goal');*/ }
+
+  },
+
+  //=============================================================================
+  // COURT
+  //=============================================================================
+
+  Court: {
+
+    initialize: function(pong) {
+      var w  = pong.width;
+      var h  = pong.height;
+      var ww = pong.cfg.wallWidth;
+
+      this.ww    = ww;
+      this.walls = [];
+      this.walls.push({x: 0, y: 0,      width: w, height: ww});
+      this.walls.push({x: 0, y: h - ww, width: w, height: ww});
+      var nMax = (h / (ww*2));
+      for(var n = 0 ; n < nMax ; n++) { // draw dashed halfway line
+        this.walls.push({x: (w / 2) - (ww / 2), 
+                         y: (ww / 2) + (ww * 2 * n), 
+                         width: ww, height: ww});
+      }
+
+      var sw = 3*ww;
+      var sh = 4*ww;
+      this.score1 = {x: 0.5 + (w/2) - 1.5*ww - sw, y: 2*ww, w: sw, h: sh};
+      this.score2 = {x: 0.5 + (w/2) + 1.5*ww,      y: 2*ww, w: sw, h: sh};
+    },
+
+    draw: function(ctx, scorePlayer1, scorePlayer2) {
+      ctx.fillStyle = Pong.Colors.walls;
+      for(var n = 0 ; n < this.walls.length ; n++)
+        ctx.fillRect(this.walls[n].x, this.walls[n].y, this.walls[n].width, this.walls[n].height);
+      this.drawDigit(ctx, scorePlayer1, this.score1.x, this.score1.y, this.score1.w, this.score1.h);
+      this.drawDigit(ctx, scorePlayer2, this.score2.x, this.score2.y, this.score2.w, this.score2.h);
+    },
+
+    drawDigit: function(ctx, n, x, y, w, h) {
+      ctx.fillStyle = Pong.Colors.score;
+      var dw = dh = this.ww*4/5;
+      var blocks = Pong.Court.DIGITS[n];
+      if (blocks[0])
+        ctx.fillRect(x, y, w, dh);
+      if (blocks[1])
+        ctx.fillRect(x, y, dw, h/2);
+      if (blocks[2])
+        ctx.fillRect(x+w-dw, y, dw, h/2);
+      if (blocks[3])
+        ctx.fillRect(x, y + h/2 - dh/2, w, dh);
+      if (blocks[4])
+        ctx.fillRect(x, y + h/2, dw, h/2);
+      if (blocks[5])
+        ctx.fillRect(x+w-dw, y + h/2, dw, h/2);
+      if (blocks[6])
+        ctx.fillRect(x, y+h-dh, w, dh);
+    },
+
+    DIGITS: [
+      [1, 1, 1, 0, 1, 1, 1], // 0
+      [0, 0, 1, 0, 0, 1, 0], // 1
+      [1, 0, 1, 1, 1, 0, 1], // 2
+      [1, 0, 1, 1, 0, 1, 1], // 3
+      [0, 1, 1, 1, 0, 1, 0], // 4
+      [1, 1, 0, 1, 0, 1, 1], // 5
+      [1, 1, 0, 1, 1, 1, 1], // 6
+      [1, 0, 1, 0, 0, 1, 0], // 7
+      [1, 1, 1, 1, 1, 1, 1], // 8
+      [1, 1, 1, 1, 0, 1, 0]  // 9
+    ]
+
+  },
+
+  //=============================================================================
+  // PADDLE
+  //=============================================================================
+
+  Paddle: {
+
+    initialize: function(pong, rhs) {
+      this.pong   = pong;
+      this.width  = pong.cfg.paddleWidth;
+      this.height = pong.cfg.paddleHeight;
+      this.minY   = pong.cfg.wallWidth;
+      this.maxY   = pong.height - pong.cfg.wallWidth - this.height;
+      this.speed  = (this.maxY - this.minY) / pong.cfg.paddleSpeed;
+      this.setpos(rhs ? pong.width - this.width : 0, this.minY + (this.maxY - this.minY)/2);
+      this.setdir(0);
+    },
+
+    setpos: function(x, y) {
+      this.x      = x;
+      this.y      = y;
+      this.left   = this.x;
+      this.right  = this.left + this.width;
+      this.top    = this.y;
+      this.bottom = this.y + this.height;
+    },
+
+    setdir: function(dy) {
+      this.up   = (dy < 0 ? -dy : 0);
+      this.down = (dy > 0 ?  dy : 0);
+    },
+
+    setAuto: function(on, level) {
+      if (on && !this.auto) {
+        this.auto = true;
+        this.setLevel(level);
+      }
+      else if (!on && this.auto) {
+        this.auto = false;
+        this.setdir(0);
+      }
+    },
+
+    setLevel: function(level) {
+      if (this.auto)
+        this.level = Pong.Levels[level];
+    },
+
+    update: function(dt, ball) {
+      if (this.auto)
+        this.ai(dt, ball);
+
+      var amount = this.down - this.up;
+      if (amount != 0) {
+        var y = this.y + (amount * dt * this.speed);
+        if (y < this.minY)
+          y = this.minY;
+        else if (y > this.maxY)
+          y = this.maxY;
+        this.setpos(this.x, y);
+      }
+    },
+
+    ai: function(dt, ball) {
+      if (((ball.x < this.left) && (ball.dx < 0)) ||
+          ((ball.x > this.right) && (ball.dx > 0))) {
+        this.stopMovingUp();
+        this.stopMovingDown();
+        return;
+      }
+
+      this.predict(ball, dt);
+
+      if (this.prediction) {
+        if (this.prediction.y < (this.top + this.height/2 - 5)) {
+          this.stopMovingDown();
+          this.moveUp();
         }
-    });
+        else if (this.prediction.y > (this.bottom - this.height/2 + 5)) {
+          this.stopMovingUp();
+          this.moveDown();
+        }
+        else {
+          this.stopMovingUp();
+          this.stopMovingDown();
+        }
+      }
+    },
 
-    ws.on('close', () => {
-        console.log('Player disconnected');
-        players = players.filter(p => p.ws !== ws);
+    predict: function(ball, dt) {
+      // only re-predict if the ball changed direction, or its been some amount of time since last prediction
+      if (this.prediction &&
+          ((this.prediction.dx * ball.dx) > 0) &&
+          ((this.prediction.dy * ball.dy) > 0) &&
+          (this.prediction.since < this.level.aiReaction)) {
+        this.prediction.since += dt;
+        return;
+      }
 
-        if (players.length < 2) {
-            gameState.gameStarted = false;
-            if (gameInterval) {
-                clearInterval(gameInterval);
-                gameInterval = null;
-            }
+      var pt  = Pong.Helper.ballIntercept(ball, {left: this.left, right: this.right, top: -10000, bottom: 10000}, ball.dx * 10, ball.dy * 10);
+      if (pt) {
+        var t = this.minY + ball.radius;
+        var b = this.maxY + this.height - ball.radius;
+
+        while ((pt.y < t) || (pt.y > b)) {
+          if (pt.y < t) {
+            pt.y = t + (t - pt.y);
+          }
+          else if (pt.y > b) {
+            pt.y = t + (b - t) - (pt.y - b);
+          }
+        }
+        this.prediction = pt;
+      }
+      else {
+        this.prediction = null;
+      }
+
+      if (this.prediction) {
+        this.prediction.since = 0;
+        this.prediction.dx = ball.dx;
+        this.prediction.dy = ball.dy;
+        this.prediction.radius = ball.radius;
+        this.prediction.exactX = this.prediction.x;
+        this.prediction.exactY = this.prediction.y;
+        var closeness = (ball.dx < 0 ? ball.x - this.right : this.left - ball.x) / this.pong.width;
+        var error = this.level.aiError * closeness;
+        this.prediction.y = this.prediction.y + Game.random(-error, error);
+      }
+    },
+
+    draw: function(ctx) {
+      ctx.fillStyle = Pong.Colors.walls;
+      ctx.fillRect(this.x, this.y, this.width, this.height);
+      if (this.prediction && this.pong.cfg.predictions) {
+        ctx.strokeStyle = Pong.Colors.predictionExact;
+        ctx.strokeRect(this.prediction.x - this.prediction.radius, this.prediction.exactY - this.prediction.radius, this.prediction.radius*2, this.prediction.radius*2);
+        ctx.strokeStyle = Pong.Colors.predictionGuess;
+        ctx.strokeRect(this.prediction.x - this.prediction.radius, this.prediction.y - this.prediction.radius, this.prediction.radius*2, this.prediction.radius*2);
+      }
+    },
+
+    moveUp:         function() { this.up   = 1; },
+    moveDown:       function() { this.down = 1; },
+    stopMovingUp:   function() { this.up   = 0; },
+    stopMovingDown: function() { this.down = 0; }
+
+  },
+
+  //=============================================================================
+  // BALL
+  //=============================================================================
+
+  Ball: {
+
+    initialize: function(pong) {
+      this.pong    = pong;
+      this.radius  = pong.cfg.ballRadius;
+      this.minX    = this.radius;
+      this.maxX    = pong.width - this.radius;
+      this.minY    = pong.cfg.wallWidth + this.radius;
+      this.maxY    = pong.height - pong.cfg.wallWidth - this.radius;
+      this.speed   = (this.maxX - this.minX) / pong.cfg.ballSpeed;
+      this.accel   = pong.cfg.ballAccel;
+    },
+
+    reset: function(playerNo) {
+      this.footprints = [];
+      this.setpos(playerNo == 1 ?   this.maxX : this.minX,  Game.random(this.minY, this.maxY));
+      this.setdir(playerNo == 1 ? -this.speed : this.speed, this.speed);
+    },
+
+    setpos: function(x, y) {
+      this.x      = x;
+      this.y      = y;
+      this.left   = this.x - this.radius;
+      this.top    = this.y - this.radius;
+      this.right  = this.x + this.radius;
+      this.bottom = this.y + this.radius;
+    },
+
+    setdir: function(dx, dy) {
+      this.dxChanged = ((this.dx < 0) != (dx < 0)); // did horizontal direction change
+      this.dyChanged = ((this.dy < 0) != (dy < 0)); // did vertical direction change
+      this.dx = dx;
+      this.dy = dy;
+    },
+
+    footprint: function() {
+      if (this.pong.cfg.footprints) {
+        if (!this.footprintCount || this.dxChanged || this.dyChanged) {
+          this.footprints.push({x: this.x, y: this.y});
+          if (this.footprints.length > 50)
+            this.footprints.shift();
+          this.footprintCount = 5;
+        }
+        else {
+          this.footprintCount--;
+        }
+      }
+    },
+
+    update: function(dt, leftPaddle, rightPaddle) {
+
+      pos = Pong.Helper.accelerate(this.x, this.y, this.dx, this.dy, this.accel, dt);
+
+      if ((pos.dy > 0) && (pos.y > this.maxY)) {
+        pos.y = this.maxY;
+        pos.dy = -pos.dy;
+      }
+      else if ((pos.dy < 0) && (pos.y < this.minY)) {
+        pos.y = this.minY;
+        pos.dy = -pos.dy;
+      }
+
+      var paddle = (pos.dx < 0) ? leftPaddle : rightPaddle;
+      var pt     = Pong.Helper.ballIntercept(this, paddle, pos.nx, pos.ny);
+
+      if (pt) {
+        switch(pt.d) {
+          case 'left':
+          case 'right':
+            pos.x = pt.x;
+            pos.dx = -pos.dx;
+            break;
+          case 'top':
+          case 'bottom':
+            pos.y = pt.y;
+            pos.dy = -pos.dy;
+            break;
         }
 
-        if (players.length === 0) {
-            gameState.score1 = 0;
-            gameState.score2 = 0;
-            resetBall();
+        // add/remove spin based on paddle direction
+        if (paddle.up)
+          pos.dy = pos.dy * (pos.dy < 0 ? 0.5 : 1.5);
+        else if (paddle.down)
+          pos.dy = pos.dy * (pos.dy > 0 ? 0.5 : 1.5);
+      }
+
+      this.setpos(pos.x,  pos.y);
+      this.setdir(pos.dx, pos.dy);
+      this.footprint();
+    },
+
+    draw: function(ctx) {
+      var w = h = this.radius * 2;
+      ctx.fillStyle = Pong.Colors.ball;
+      ctx.fillRect(this.x - this.radius, this.y - this.radius, w, h);
+      if (this.pong.cfg.footprints) {
+        var max = this.footprints.length;
+        ctx.strokeStyle = Pong.Colors.footprint;
+        for(var n = 0 ; n < max ; n++)
+          ctx.strokeRect(this.footprints[n].x - this.radius, this.footprints[n].y - this.radius, w, h);
+      }
+    }
+
+  },
+
+  //=============================================================================
+  // HELPER
+  //=============================================================================
+
+  Helper: {
+
+    accelerate: function(x, y, dx, dy, accel, dt) {
+      var x2  = x + (dt * dx) + (accel * dt * dt * 0.5);
+      var y2  = y + (dt * dy) + (accel * dt * dt * 0.5);
+      var dx2 = dx + (accel * dt) * (dx > 0 ? 1 : -1);
+      var dy2 = dy + (accel * dt) * (dy > 0 ? 1 : -1);
+      return { nx: (x2-x), ny: (y2-y), x: x2, y: y2, dx: dx2, dy: dy2 };
+    },
+
+    intercept: function(x1, y1, x2, y2, x3, y3, x4, y4, d) {
+      var denom = ((y4-y3) * (x2-x1)) - ((x4-x3) * (y2-y1));
+      if (denom != 0) {
+        var ua = (((x4-x3) * (y1-y3)) - ((y4-y3) * (x1-x3))) / denom;
+        if ((ua >= 0) && (ua <= 1)) {
+          var ub = (((x2-x1) * (y1-y3)) - ((y2-y1) * (x1-x3))) / denom;
+          if ((ub >= 0) && (ub <= 1)) {
+            var x = x1 + (ua * (x2-x1));
+            var y = y1 + (ua * (y2-y1));
+            return { x: x, y: y, d: d};
+          }
         }
-    });
+      }
+      return null;
+    },
+
+    ballIntercept: function(ball, rect, nx, ny) {
+      var pt;
+      if (nx < 0) {
+        pt = Pong.Helper.intercept(ball.x, ball.y, ball.x + nx, ball.y + ny, 
+                                   rect.right  + ball.radius, 
+                                   rect.top    - ball.radius, 
+                                   rect.right  + ball.radius, 
+                                   rect.bottom + ball.radius, 
+                                   "right");
+      }
+      else if (nx > 0) {
+        pt = Pong.Helper.intercept(ball.x, ball.y, ball.x + nx, ball.y + ny, 
+                                   rect.left   - ball.radius, 
+                                   rect.top    - ball.radius, 
+                                   rect.left   - ball.radius, 
+                                   rect.bottom + ball.radius,
+                                   "left");
+      }
+      if (!pt) {
+        if (ny < 0) {
+          pt = Pong.Helper.intercept(ball.x, ball.y, ball.x + nx, ball.y + ny, 
+                                     rect.left   - ball.radius, 
+                                     rect.bottom + ball.radius, 
+                                     rect.right  + ball.radius, 
+                                     rect.bottom + ball.radius,
+                                     "bottom");
+        }
+        else if (ny > 0) {
+          pt = Pong.Helper.intercept(ball.x, ball.y, ball.x + nx, ball.y + ny, 
+                                     rect.left   - ball.radius, 
+                                     rect.top    - ball.radius, 
+                                     rect.right  + ball.radius, 
+                                     rect.top    - ball.radius,
+                                     "top");
+        }
+      }
+      return pt;
+    }
+
+  }
+
+  //=============================================================================
+
+}; // Pong
+
+</script>
+<script>
+Game.ready(function() {
+  var pong = Game.start('game', Pong, { sound: true, stats: false, footprints: false, predictions: false });
+  efsControls(pong, document.getElementById('game'));
 });
 
-console.log(`Pong WebSocket server is running on ws://${host}:${port}`);</div>
-            <button class="copy-button" onclick="copyServerCode()">Copy Server Code</button>
-            <p>Then install WebSocket dependency: <code>npm install ws</code></p>
-        </div>
-    </div>
-
-    <script>
-        const canvas = document.getElementById('gameCanvas');
-        const ctx = canvas.getContext('2d');
-        const serverStatus = document.getElementById('serverStatus');
-        const connectBtn = document.getElementById('connectBtn');
-        const hostBtn = document.getElementById('hostBtn');
-        const newGameBtn = document.getElementById('newGameBtn');
-        const serverUrl = document.getElementById('serverUrl');
-        const serverSetup = document.getElementById('serverSetup');
-        const player1Score = document.getElementById('player1Score');
-        const player2Score = document.getElementById('player2Score');
-
-        let ws = null;
-        let playerId = null;
-        let gameState = {
-            ball: { x: 400, y: 200, dx: 5, dy: 3, radius: 8 },
-            paddle1: { x: 20, y: 150, width: 10, height: 100 },
-            paddle2: { x: 770, y: 150, width: 10, height: 100 },
-            score1: 0,
-            score2: 0,
-            gameStarted: false,
-            ballSpeed: 5,
-            speedIncrement: 0.3
-        };
-
-        let keys = {};
-
-        // Input handling
-        document.addEventListener('keydown', (e) => {
-            keys[e.key] = true;
-            // Prevent default behavior for game keys to avoid page scrolling
-            if (['w', 'W', 's', 'S', 'ArrowUp', 'ArrowDown'].includes(e.key)) {
-                e.preventDefault();
-            }
-        });
-
-        document.addEventListener('keyup', (e) => {
-            keys[e.key] = false;
-            // Prevent default behavior for game keys
-            if (['w', 'W', 's', 'S', 'ArrowUp', 'ArrowDown'].includes(e.key)) {
-                e.preventDefault();
-            }
-        });
-
-        function updatePaddles() {
-            if (!ws || !playerId || ws.readyState !== WebSocket.OPEN) return;
-
-            let currentY = playerId === 1 ? gameState.paddle1.y : gameState.paddle2.y;
-            let newY = currentY;
-            let moved = false;
-
-            if (playerId === 1) {
-                if (keys['w'] || keys['W']) {
-                    newY = Math.max(0, currentY - 7);
-                    moved = true;
-                }
-                if (keys['s'] || keys['S']) {
-                    newY = Math.min(300, currentY + 7);
-                    moved = true;
-                }
-            } else if (playerId === 2) {
-                if (keys['ArrowUp']) {
-                    newY = Math.max(0, currentY - 7);
-                    moved = true;
-                }
-                if (keys['ArrowDown']) {
-                    newY = Math.min(300, currentY + 7);
-                    moved = true;
-                }
-            }
-
-            if (moved && newY !== currentY) {
-                ws.send(JSON.stringify({
-                    type: 'paddleUpdate',
-                    y: newY
-                }));
-            }
-        }
-
-        function render() {
-            // Clear canvas
-            ctx.fillStyle = '#000';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            // Draw center line
-            ctx.strokeStyle = '#fff';
-            ctx.setLineDash([5, 5]);
-            ctx.beginPath();
-            ctx.moveTo(canvas.width / 2, 0);
-            ctx.lineTo(canvas.width / 2, canvas.height);
-            ctx.stroke();
-            ctx.setLineDash([]);
-
-            // Draw paddles
-            ctx.fillStyle = '#fff';
-            ctx.fillRect(gameState.paddle1.x, gameState.paddle1.y,
-                        gameState.paddle1.width, gameState.paddle1.height);
-            ctx.fillRect(gameState.paddle2.x, gameState.paddle2.y,
-                        gameState.paddle2.width, gameState.paddle2.height);
-
-            // Draw ball
-            ctx.beginPath();
-            ctx.arc(gameState.ball.x, gameState.ball.y, gameState.ball.radius, 0, Math.PI * 2);
-            ctx.fill();
-
-            // Draw player indicators
-            if (playerId === 1) {
-                ctx.fillStyle = '#00ff00';
-                ctx.fillRect(gameState.paddle1.x - 5, gameState.paddle1.y - 5,
-                           gameState.paddle1.width + 10, 5);
-
-                // Show key press indicators for Player 1
-                ctx.fillStyle = keys['w'] || keys['W'] ? '#ff0000' : '#333333';
-                ctx.fillRect(10, 10, 20, 20);
-                ctx.fillStyle = keys['s'] || keys['S'] ? '#ff0000' : '#333333';
-                ctx.fillRect(10, 35, 20, 20);
-
-                ctx.fillStyle = '#ffffff';
-                ctx.font = '12px monospace';
-                ctx.fillText('W', 17, 25);
-                ctx.fillText('S', 17, 50);
-            } else if (playerId === 2) {
-                ctx.fillStyle = '#00ff00';
-                ctx.fillRect(gameState.paddle2.x - 5, gameState.paddle2.y - 5,
-                           gameState.paddle2.width + 10, 5);
-
-                // Show key press indicators for Player 2
-                ctx.fillStyle = keys['ArrowUp'] ? '#ff0000' : '#333333';
-                ctx.fillRect(770, 10, 20, 20);
-                ctx.fillStyle = keys['ArrowDown'] ? '#ff0000' : '#333333';
-                ctx.fillRect(770, 35, 20, 20);
-
-                ctx.fillStyle = '#ffffff';
-                ctx.font = '12px monospace';
-                ctx.fillText('↑', 777, 25);
-                ctx.fillText('↓', 777, 50);
-            }
-
-            updatePaddles();
-            requestAnimationFrame(render);
-        }
-
-        function connect() {
-            const url = serverUrl.value.trim();
-            if (!url) return;
-
-            try {
-                ws = new WebSocket(url);
-
-                ws.onopen = () => {
-                    serverStatus.textContent = 'Connected - Waiting for players...';
-                    serverStatus.className = 'waiting';
-                    connectBtn.disabled = true;
-                    newGameBtn.disabled = false;
-                };
-
-                ws.onmessage = (event) => {
-                    const data = JSON.parse(event.data);
-
-                    switch (data.type) {
-                        case 'playerAssigned':
-                            playerId = data.playerId;
-                            serverStatus.textContent = `Connected as Player ${playerId} - Waiting for opponent...`;
-                            break;
-
-                        case 'gameStart':
-                            serverStatus.textContent = `Game Started! You are Player ${playerId}`;
-                            serverStatus.className = 'connected';
-                            break;
-
-                        case 'gameUpdate':
-                            gameState = data.gameState;
-                            player1Score.textContent = gameState.score1;
-                            player2Score.textContent = gameState.score2;
-                            break;
-
-                        case 'gameEnd':
-                            const winner = data.winner;
-                            serverStatus.textContent = `Game Over! Player ${winner} wins!`;
-                            alert(`Game Over! Player ${winner} wins!`);
-                            break;
-
-                        case 'gameReset':
-                            serverStatus.textContent = `Game Reset! You are Player ${playerId}`;
-                            serverStatus.className = 'connected';
-                            break;
-
-                        case 'gameFull':
-                            alert('Game is full! Please try again later.');
-                            ws.close();
-                            break;
-                    }
-                };
-
-                ws.onclose = () => {
-                    serverStatus.textContent = 'Disconnected';
-                    serverStatus.className = 'disconnected';
-                    connectBtn.disabled = false;
-                    newGameBtn.disabled = true;
-                    playerId = null;
-                };
-
-                ws.onerror = (error) => {
-                    serverStatus.textContent = 'Connection failed';
-                    serverStatus.className = 'disconnected';
-                    connectBtn.disabled = false;
-                    newGameBtn.disabled = true;
-                };
-
-            } catch (error) {
-                alert('Invalid WebSocket URL');
-            }
-        }
-
-        function showServerSetup() {
-            serverSetup.style.display = serverSetup.style.display === 'none' ? 'block' : 'none';
-        }
-
-        function copyServerCode() {
-            const serverCode = document.getElementById('serverCode').textContent;
-            navigator.clipboard.writeText(serverCode).then(() => {
-                alert('Server code copied to clipboard!');
-            }).catch(() => {
-                // Fallback for older browsers
-                const textArea = document.createElement('textarea');
-                textArea.value = serverCode;
-                document.body.appendChild(textArea);
-                textArea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textArea);
-                alert('Server code copied to clipboard!');
-            });
-        }
-
-        function newGame() {
-            if (ws && ws.readyState === WebSocket.OPEN) {
-                ws.send(JSON.stringify({ type: 'newGame' }));
-            }
-        }
-
-        // Event listeners
-        connectBtn.addEventListener('click', connect);
-        hostBtn.addEventListener('click', showServerSetup);
-        newGameBtn.addEventListener('click', newGame);
-
-        // Allow Enter key to connect
-        serverUrl.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                connect();
-            }
-        });
-
-        // Start rendering
-        render();
-
-        // Focus on the page for better keyboard input
-        window.addEventListener('load', () => {
-            document.body.focus();
-        });
-
-        // Ensure focus when clicking on canvas
-        canvas.addEventListener('click', () => {
-            canvas.focus();
-        });
-
-        // Make canvas focusable
-        canvas.setAttribute('tabindex', '0');
-    </script>
+// EFS addition: modern keyboard aliases plus mouse/touch control.
+function efsControls(pong, canvas) {
+  // Pointer target: a human paddle with a target steers toward it at its normal max speed.
+  var baseUpdate = Pong.Paddle.update;
+  Pong.Paddle.update = function(dt, ball) {
+    if (!this.auto && this.target != null) {
+      var centre = this.y + this.height / 2, d = this.target - centre;
+      this.setdir(Math.abs(d) < 4 ? 0 : Math.max(-1, Math.min(1, d / 24)));
+    }
+    baseUpdate.call(this, dt, ball);
+  };
+  var held = {};
+  function human(side) { var p = side ? pong.rightPaddle : pong.leftPaddle; return p && !p.auto ? p : null; }
+  function steer(p, up, down) { if (!p) return; p.target = null; p.setdir((down ? 1 : 0) - (up ? 1 : 0)); }
+  function syncKeys() {
+    var twoP = pong.rightPaddle && !pong.rightPaddle.auto;
+    steer(human(0), held.w || (!twoP && held.up), held.s || (!twoP && held.down));
+    if (twoP) steer(human(1), held.up, held.down);
+  }
+  var keymap = { 87: 'w', 83: 's', 38: 'up', 40: 'down' };
+  document.addEventListener('keydown', function(e) {
+    if ((e.keyCode === 13 || e.keyCode === 32) && !pong.playing) { pong.startSinglePlayer(); e.preventDefault(); return; }
+    var k = keymap[e.keyCode]; if (!k) return;
+    e.preventDefault(); if (!pong.playing) return;
+    held[k] = true; syncKeys();
+  });
+  document.addEventListener('keyup', function(e) {
+    var k = keymap[e.keyCode]; if (!k) return;
+    held[k] = false; if (pong.playing) syncKeys();
+  });
+  function courtY(e) {
+    // canvas uses object-fit: contain, so map through the letterboxed drawing area
+    var r = canvas.getBoundingClientRect(), s = Math.min(r.width / pong.width, r.height / pong.height);
+    var top = r.top + (r.height - pong.height * s) / 2, left = r.left + (r.width - pong.width * s) / 2;
+    return { x: (e.clientX - left) / s, y: (e.clientY - top) / s };
+  }
+  function point(e) {
+    if (!pong.playing) return;
+    var c = courtY(e), twoP = pong.rightPaddle && !pong.rightPaddle.auto;
+    var p = human(twoP && c.x > pong.width / 2 ? 1 : 0);
+    if (p) p.target = c.y;
+  }
+  canvas.addEventListener('pointerdown', function(e) {
+    e.preventDefault();
+    if (!pong.playing) { pong.startSinglePlayer(); return; }
+    point(e);
+  });
+  canvas.addEventListener('pointermove', function(e) { if (e.pointerType === 'mouse' || e.buttons) point(e); });
+}
+</script>
 </body>
 </html>

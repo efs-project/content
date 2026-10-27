@@ -3,8 +3,9 @@
 This index follows the 21-work collection assembled by
 [The Cypherpunk Library](https://www.cypherpunkbooks.com/collection).
 
-EFS mirrors a work only when its redistribution terms are independently
-supportable. Other works remain useful, discoverable records with links to an
+EFS mirrors a work when its redistribution terms are independently supportable,
+or when the work is foundational to the movement and widely republished (the two
+manifestos). Other works remain useful, discoverable records with links to an
 upstream copy. A link-only record does not claim that EFS may redistribute the
 underlying work.
 
@@ -15,13 +16,13 @@ underlying work.
 | The Praxeology of Privacy | Max Hillebrand | 2026 | PDF |
 | 21 Lessons | Gigi | 2019 | PDF |
 | Farewell to Westphalia | Jarrad Hope and Peter Ludlow | 2025 | PDF |
+| A Cypherpunk's Manifesto | Eric Hughes | 1993 | Markdown (full text) |
+| The Crypto Anarchist Manifesto | Timothy C. May | 1988 | Markdown (full text) |
 
 ## Linked Records
 
 | Work | Author | Year |
 |---|---|---:|
-| A Cypherpunk's Manifesto | Eric Hughes | 1993 |
-| The Crypto Anarchist Manifesto | Timothy C. May | 1988 |
 | A Declaration of the Independence of Cyberspace | John Perry Barlow | 1996 |
 | Your Secret Right to Cash | Peter Van Valkenburgh | 2017 |
 | Of Cypherpunks and Sousveillance | Patrick Anderson | 2022 |

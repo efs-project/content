@@ -1,21 +1,22 @@
 # Polkadot
 
-- **Title:** Polkadot: Vision for a Heterogeneous Multi-Chain Framework (Draft 1)
-- **Project:** Polkadot (Web3 Foundation / Parity)
-- **Author(s):** Dr. Gavin Wood (founder, Ethereum & Parity)
+- **Project:** Polkadot
+- **Paper:** *Polkadot: Vision for a Heterogeneous Multi-Chain Framework* (Draft 1)
+- **Author:** Gavin Wood
 - **Year:** 2016
-- **Canonical source:** Web3 Foundation / polkadot.com (whitepaper). The included PDF was fetched from a
-  reputable mirror; the canonical authoritative source is the Web3 Foundation.
-- **License / distribution:** Web3 Foundation whitepaper, freely circulated. Included as a
-  freely-distributed project whitepaper.
-- **File:** `polkadot.pdf` (fetched and validated as the genuine Gavin Wood Polkadot whitepaper)
+- **Canonical source:** https://github.com/w3f/polkadot-white-paper (Web3 Foundation)
+- **File in this folder:** `polkadot.pdf` (a December 2016 build of Draft 1; the Web3 Foundation's current
+  copy has minor later edits, such as renumbered references)
+- **Rights:** The paper states that it is placed under a Creative Commons licence.
 
 ## Summary
 
-Polkadot's whitepaper argues that existing blockchains conflate two distinct concerns — **canonicality**
-(agreeing on a single ordered history) and **validity** (agreeing that state transitions are correct) — and
-that separating them enables scalability and extensibility. Polkadot proposes a central **relay chain** that
-provides shared security and consensus to many parallel application-specific chains called **parachains**,
-which can have heterogeneous designs and still interoperate and pass messages. Validators secure the relay
-chain while collators produce parachain blocks. The result is a framework for many specialized chains
-operating under one pooled security umbrella, with cross-chain communication as a first-class feature.
+The Polkadot whitepaper argues that existing blockchains tie together two separate concerns:
+**canonicality** (agreeing on one ordered history) and **validity** (agreeing that state transitions are
+correct). Separating them, it says, makes chains easier to extend and scale. Polkadot proposes a central
+**relay chain** that provides consensus and shared security to many parallel chains called
+**parachains**, which can have different designs and still pass messages to each other. Validators secure
+the relay chain while collators produce parachain blocks.
+
+Gavin Wood, an Ethereum co-founder, wrote the paper. Polkadot's network launched in May 2020 using
+nominated proof-of-stake, and parachains went live in December 2021.

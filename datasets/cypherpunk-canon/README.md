@@ -13,10 +13,10 @@ third-party bytes.
 ## Contents
 
 - 21 represented works.
-- 3 works included locally as PDFs.
-- 18 link-only metadata records.
+- 5 works included locally: three PDFs and the full texts of the two manifestos.
+- 16 link-only metadata records.
 - 25 deployable EFS entries: one index, three PDFs, three human-readable about
-  cards, and eighteen records.
+  cards, two manifesto texts, and sixteen records.
 
 Open [`collection.md`](./collection.md) for the human-readable shelf.
 `manifest.json` is the deployable, machine-readable inventory.
@@ -28,6 +28,8 @@ Open [`collection.md`](./collection.md) for the human-readable shelf.
 | The Praxeology of Privacy | PDF | Explicit public-domain dedication in the work and on the author's site |
 | 21 Lessons | PDF | CC BY-SA 4.0 in the work and on the author's site |
 | Farewell to Westphalia | PDF | CC BY-SA 4.0 in the book |
+| A Cypherpunk's Manifesto | Markdown | No explicit grant; hosted in full as a foundational, widely republished text (owner decision, 2026-10-27) |
+| The Crypto Anarchist Manifesto | Markdown | No explicit grant; the source page says "freely distributable with attribution"; hosted in full (owner decision, 2026-10-27) |
 
 The binary files are unmodified.
 
