@@ -1,18 +1,20 @@
 # Litecoin
 
-- **Title:** (no formal whitepaper exists)
 - **Project:** Litecoin
-- **Author(s):** Charlie Lee
-- **Year:** 2011 (network launch October 2011)
-- **Canonical source:** https://litecoin.org
-- **License / distribution:** N/A — there is no whitepaper to license.
-- **File:** none — **flagged: no whitepaper exists** (this is accurate, not a fetch failure)
+- **Paper:** none; Litecoin was released as software without a whitepaper
+- **Creator:** Charlie Lee
+- **Year:** 2011 (first released on GitHub on 7 October 2011)
+- **Official site:** https://litecoin.org
+- **File in this folder:** this card only
 
 ## Summary
 
-Litecoin was created by Charlie Lee in 2011 as a fork of the Bitcoin Core client. It was never accompanied
-by a formal academic-style whitepaper; instead it was released as open-source software with a design that
-deliberately mirrors Bitcoin while changing a few parameters: a faster ~2.5-minute block time, a larger
-maximum coin supply (84 million), and the **scrypt** hashing algorithm in place of SHA-256 (intended at the
-time to be more resistant to specialized ASIC mining). It is often described as "silver to Bitcoin's gold."
-Because no whitepaper was ever written, this entry exists to document that fact rather than to host a file.
+Litecoin was created by Charlie Lee, a former Google engineer, as a fork of Bitcoin's code. It keeps
+Bitcoin's overall design (a proof-of-work blockchain with a fixed supply) but changes a few parameters:
+blocks arrive every 2.5 minutes instead of 10, the maximum supply is 84 million coins instead of 21 million,
+and mining uses the **scrypt** hash function instead of SHA-256. The block reward started at 50 LTC and
+halves every 840,000 blocks.
+
+Because there is no Litecoin whitepaper, its design is defined by its code and Bitcoin's paper. Dogecoin
+has been merge-mined with Litecoin since 2014, and in May 2022 Litecoin activated the MimbleWimble Extension
+Blocks (MWEB) upgrade, which adds optional confidential transactions.

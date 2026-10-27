@@ -1,18 +1,18 @@
 # Dogecoin
 
-- **Title:** (no whitepaper exists)
 - **Project:** Dogecoin
-- **Author(s):** Billy Markus and Jackson Palmer
-- **Year:** 2013 (launched December 6, 2013)
-- **Canonical source:** https://dogecoin.com
-- **License / distribution:** N/A — there is no whitepaper to license.
-- **File:** none — **flagged: no whitepaper exists** (created as a joke; this is accurate)
+- **Paper:** none; Dogecoin was released as software without a whitepaper
+- **Creators:** Billy Markus and Jackson Palmer
+- **Year:** 2013 (launched 6 December 2013)
+- **Official site:** https://dogecoin.com
+- **File in this folder:** this card only
 
 ## Summary
 
-Dogecoin was created in late 2013 by software engineers Billy Markus and Jackson Palmer as a deliberate
-joke, parodying the speculative frenzy around cryptocurrencies and built around the popular "Doge" Shiba
-Inu meme. Technically it derives from Luckycoin/Litecoin (scrypt-based proof-of-work) but it arrived with
-no whitepaper, no roadmap, and no grand technical claims — its identity is a "fun and friendly internet
-currency." Despite (or because of) its origins it became one of the most widely held cryptocurrencies. It
-is included here specifically to flag, honestly, that no whitepaper has ever existed for it.
+Dogecoin was created by software engineers Billy Markus and Jackson Palmer as a light-hearted
+cryptocurrency themed on the "Doge" Shiba Inu internet meme. Markus based its code on Luckycoin and
+Litecoin, so it uses a **scrypt** proof-of-work like Litecoin, but with one-minute blocks.
+
+Unlike Bitcoin and Litecoin, Dogecoin has no supply cap. A planned limit of 100 billion coins was dropped in
+2014, and the block reward is now a fixed 10,000 DOGE, which adds about 5 billion coins a year. Since 2014,
+Dogecoin has been merge-mined with Litecoin, so the same mining work can secure both chains.

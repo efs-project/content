@@ -1,25 +1,25 @@
 # Polygon (Matic Network)
 
-- **Title:** Matic Network: Scalable and Instant Token Transfers and Payments (litepaper)
-- **Project:** Polygon (formerly Matic Network)
-- **Author(s):** Jaynti Kanani, Sandeep Nailwal, Anurag Arjun (founders)
-- **Year:** 2019 (litepaper); project launched 2017
-- **Canonical source:** https://github.com/maticnetwork/whitepaper (project repo);
-  litepaper PDF mirrored at allcryptowhitepapers.com
-- **License / distribution:** Matic Network whitepaper, freely published in the project's open-source repo.
-  Included as a freely-distributed project document.
-- **Files:**
-  - `matic-whitepaper.md` — **authoritative** Matic Whitepaper v1.1, fetched from the official
-    `maticnetwork/whitepaper` GitHub repo (the project publishes it as a GitBook/markdown, not a single PDF).
-  - `matic-litepaper.pdf` — supplementary 5-page litepaper PDF from a whitepaper mirror; valid PDF, but the
-    markdown above is the authoritative source.
+- **Project:** Polygon (originally Matic Network)
+- **Papers:**
+  - *Matic Whitepaper* (version 1.1): Jaynti Kanani, Sandeep Nailwal, Anurag Arjun. Published in the
+    project's GitHub repository from June 2018; last revised March 2019.
+  - *Matic Network* litepaper: an undated 5-page summary from about 2019 (no authors listed).
+- **Canonical sources:** https://github.com/maticnetwork/whitepaper (whitepaper);
+  https://www.allcryptowhitepapers.com/wp-content/uploads/2019/04/matic-litepaper.pdf (litepaper; a
+  third-party archive, as the project no longer hosts it)
+- **Files in this folder:** `matic-whitepaper.md` (whitepaper full text from the repository's `README.md`,
+  with formatting cleaned up) and `matic-litepaper.pdf` (byte-identical to the archive copy above)
 
 ## Summary
 
-Polygon, originally Matic Network, is an Ethereum scaling solution. Its early litepaper describes a system
-built on an adapted **Plasma** framework plus a proof-of-stake sidechain layer to deliver fast,
-very-low-cost transactions while periodically committing state back to the Ethereum mainnet for security.
-The goal is to address Ethereum's throughput and fee problems without sacrificing the ability to withdraw
-assets safely to the root chain. Polygon later expanded into a broader suite of scaling technologies
-(PoS chain, zk-rollups, etc.), but this document captures the founding Matic design. Newer Polygon papers
-(e.g. the POL token paper) exist at https://polygon.technology/papers.
+Matic Network was designed to scale Ethereum. Its whitepaper describes sidechains built on an adapted
+**Plasma** framework, with a small set of block producers creating blocks quickly and a larger set of
+proof-of-stake validators ("stakers") periodically committing checkpoints of those blocks to Ethereum.
+Fraud proofs let anyone on Ethereum challenge invalid transactions, and users can withdraw their assets
+back to the Ethereum main chain. The aim was fast, very low-cost transactions without giving up the
+security of the root chain. The litepaper is a short, less technical overview of the same design.
+
+The project was founded in 2017 by Jaynti Kanani, Sandeep Nailwal, Anurag Arjun and Mihailo Bjelic, and
+rebranded as Polygon in February 2021. It later grew into a family of scaling technologies, and in 2024
+began migrating its token from MATIC to POL.

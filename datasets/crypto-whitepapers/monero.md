@@ -1,22 +1,24 @@
 # Monero (CryptoNote)
 
-- **Title:** CryptoNote v 2.0
 - **Project:** Monero (built on the CryptoNote protocol)
-- **Author(s):** Nicolas van Saberhagen (pseudonym)
-- **Year:** 2013 (dated October 17, 2013)
-- **Canonical source:** https://cryptonote.org/whitepaper.pdf (original site defunct; archived copy used) —
-  Monero's own annotated copy: https://www.getmonero.org/resources/research-lab/pubs/whitepaper_annotated.pdf
-- **License / distribution:** **FLAG (mild).** The original 2013 CryptoNote v2 paper carries no explicit
-  license statement. It is universally mirrored (Monero, Bytecoin, Zenodo, etc.), and the Zenodo archival
-  copy is published under CC-BY 4.0. Included on that basis, but confirm before durable public hosting.
-- **File:** `cryptonote.pdf` (fetched from Web Archive mirror and validated as the real CryptoNote v2 paper)
+- **Paper:** *CryptoNote v 2.0*
+- **Author:** Nicolas van Saberhagen (pseudonym)
+- **Year:** 2013 (dated 17 October 2013)
+- **Canonical source:** originally https://cryptonote.org/whitepaper.pdf (site now offline; archived at
+  https://web.archive.org/web/2020/https://cryptonote.org/whitepaper.pdf). Monero's annotated copy:
+  https://www.getmonero.org/resources/research-lab/pubs/whitepaper_annotated.pdf
+- **File in this folder:** `cryptonote.pdf` (byte-identical to the archived cryptonote.org copy)
 
 ## Summary
 
-CryptoNote v2 is the protocol paper that Monero is built on; it is the foundational document of the
-privacy-coin lineage. It identifies traceability and linkability weaknesses in Bitcoin's transparent ledger
-and proposes cryptographic fixes: **ring signatures** to obscure which input actually spent funds (hiding
-the sender among a set of plausible signers) and **one-time stealth addresses** so that recipients cannot be
-linked across payments. It also discusses an egalitarian, memory-hard proof-of-work. Monero implemented and
-extended these ideas (later adding RingCT to hide amounts), becoming the most prominent privacy-focused
-cryptocurrency. Note this file is the CryptoNote protocol paper, not a Monero-branded document.
+CryptoNote is the protocol paper that Monero is built on, and the founding document of the privacy-coin
+family. It sets out two privacy goals that Bitcoin does not meet, **untraceability** (every possible sender
+of a payment is equally likely) and **unlinkability** (two payments cannot be shown to go to the same
+person), and proposes fixes: **ring signatures**, which hide the real signer of a transaction among a group
+of possible signers, and **one-time addresses**, so that a recipient's payments cannot be linked together.
+It also proposes a proof-of-work function meant to give ordinary CPUs a fair chance against GPUs and
+specialized hardware.
+
+Monero launched in April 2014 as a fork of Bytecoin, an earlier CryptoNote-based coin. It has since extended the
+design, for example by hiding transaction amounts with Ring Confidential Transactions (2017) and adopting the
+RandomX proof-of-work (2019). This file is the CryptoNote paper, not a Monero-branded document.

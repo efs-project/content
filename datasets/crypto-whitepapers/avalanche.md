@@ -1,23 +1,27 @@
 # Avalanche
 
-- **Title:** Snowflake to Avalanche: A Novel Metastable Consensus Protocol Family for Cryptocurrencies
-  (consensus); plus the Ava Labs Avalanche Platform whitepaper
 - **Project:** Avalanche (Ava Labs)
-- **Author(s):** Team Rocket (pseudonymous, consensus paper); Ava Labs (platform paper)
-- **Year:** 2018–2020 (consensus paper 2018; arXiv 1906.08936, 2019; platform paper 2020)
-- **Canonical source:** https://arxiv.org/abs/1906.08936 (consensus);
-  https://www.avalabs.org/whitepapers (platform)
-- **License / distribution:** Consensus paper hosted on arXiv (freely available preprint); platform paper
-  freely published by Ava Labs. Included as freely-distributed documents.
-- **Files:** `avalanche-consensus.pdf` (arXiv), `avalanche-platform.pdf` (Ava Labs) — both fetched and validated
+- **Papers:**
+  - *Scalable and Probabilistic Leaderless BFT Consensus through Metastability*: Team Rocket, Maofan Yin,
+    Kevin Sekniqi, Robbert van Renesse, Emin Gün Sirer (Cornell University). arXiv:1906.08936v2, 2020.
+  - *Avalanche Platform*: Kevin Sekniqi, Daniel Laine, Stephen Buttolph, Emin Gün Sirer. 30 June 2020.
+- **Year:** 2020 (the consensus protocol was first described by the pseudonymous "Team Rocket" in 2018)
+- **Canonical sources:** https://arxiv.org/abs/1906.08936 (consensus paper);
+  https://assets.website-files.com/5d80307810123f5ffbb34d6e/6008d7bbf8b10d1eb01e7e16_Avalanche%20Platform%20Whitepaper.pdf
+  (platform paper, as published by Ava Labs)
+- **Files in this folder:** `avalanche-consensus.pdf` (arXiv v2, byte-identical) and `avalanche-platform.pdf`
+  (byte-identical to the Ava Labs copy)
 
 ## Summary
 
-Avalanche introduced a new family of **leaderless, metastable consensus protocols** — Slush, Snowflake,
-Snowball, and Avalanche — based on repeated randomized sub-sampling of the network: each node repeatedly
-queries small random samples of peers and shifts its preference toward the majority answer, rapidly driving
-the whole network to an irreversible decision with high probability. This achieves Byzantine-fault-tolerant
-agreement that is highly scalable and quick to finalize without a leader or proof-of-work, while gracefully
-tolerating large numbers of participants. The Avalanche platform paper builds a multi-chain network (the
-X-Chain, P-Chain, and C-Chain) on this consensus, supporting custom subnets and EVM-compatible smart
-contracts.
+The consensus paper introduces the **Snow** family of leaderless Byzantine-fault-tolerant protocols (Slush,
+Snowflake, Snowball and Avalanche). Each node repeatedly asks a small random sample of other nodes for their
+preference and shifts towards the majority answer. This quickly tips the whole network into agreement with
+high probability, without a leader and without proof-of-work, and no node has to process more than a
+logarithmic amount of data per decision. The paper reports about 3,400 transactions per second in a large
+deployment.
+
+The platform paper describes the first release of the Avalanche network (codenamed "Borealis"). It splits
+the system into chains, execution environments and validator sets called **subnets**, where each subnet
+validates one or more blockchains and the AVAX token secures the network. Avalanche's mainnet launched in
+September 2020.

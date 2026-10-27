@@ -1,20 +1,23 @@
 # Algorand
 
-- **Title:** Algorand: Scaling Byzantine Agreements for Cryptocurrencies
 - **Project:** Algorand
-- **Author(s):** Jing Chen, Silvio Micali (foundational theory); related work by Gilad et al.
-- **Year:** 2017 (IACR ePrint 2017/454)
+- **Paper:** *Algorand: Scaling Byzantine Agreements for Cryptocurrencies*
+- **Authors:** Yossi Gilad, Rotem Hemo, Silvio Micali, Georgios Vlachos, Nickolai Zeldovich (MIT CSAIL)
+- **Year:** 2017 (SOSP 2017; IACR ePrint 2017/454)
 - **Canonical source:** https://eprint.iacr.org/2017/454
-- **License / distribution:** Academic preprint on the IACR Cryptology ePrint Archive; freely available.
-  Included as an academic preprint.
-- **File:** `algorand.pdf` (fetched and validated)
+- **File in this folder:** `algorand.pdf` (the ePrint revision of 24 September 2017)
+- **Related work:** Jing Chen and Silvio Micali's earlier theory paper, *Algorand* (2016,
+  https://arxiv.org/abs/1607.01341), introduced the underlying ideas.
 
 ## Summary
 
-Algorand, originated by Turing Award winner Silvio Micali, is a pure proof-of-stake protocol that aims to
-reach consensus with both high speed and strong security while avoiding forks. Its key idea is
-**cryptographic sortition**: in each round a small committee of users is selected secretly and at random,
-weighted by stake, using verifiable random functions, so that participants prove their own selection only
-after the fact. This lets the network run a Byzantine agreement that scales to many users, confirms blocks
-quickly, and resists attackers who cannot predict or target the committee in advance. The result is a
-permissionless ledger with negligible forking probability and low computational cost.
+This paper presents Algorand as a cryptocurrency that confirms transactions in about a minute while scaling
+to many users, and in which users never see conflicting confirmed transactions, even if some are malicious
+or the network is temporarily partitioned. It uses a new Byzantine Agreement protocol run by a small
+committee. Committee members are chosen by **cryptographic sortition**: each user privately checks, using a
+verifiable random function weighted by stake, whether they have been selected, and includes a proof of that
+selection in their messages.
+
+Because participants keep no private state apart from their keys, they can be replaced after every message,
+which protects against attacks on known committee members. Silvio Micali, a Turing Award winner and MIT
+professor, founded Algorand in 2017, and its main network launched in June 2019.
