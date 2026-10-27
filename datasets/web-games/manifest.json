@@ -118,11 +118,10 @@
       "name": "pong.html",
       "tags": ["arcade", "classic"],
       "license": "MIT",
-      "author": "Drake Axelrod",
-      "source": "https://github.com/drakeaxelrod/single-html-file-apps",
-      "modificationStatus": "presentation-adjusted",
-      "changes": "Adjusted page layout so the Pong playfield and controls fit inside an EFS iframe without document scrollbars.",
-      "mirrors": ["https://raw.githubusercontent.com/drakeaxelrod/single-html-file-apps/main/apps/pong.html"]
+      "author": "Jake Gordon",
+      "source": "https://github.com/jakesgordon/javascript-pong/tree/ca3240536e4f79ab7144388e56ed19de715b6662",
+      "modificationStatus": "adapted",
+      "changes": "Combined game.js, pong.js, the menu images and sounds into one file (assets inlined as data URIs); replaced the sidebar with an on-page controls hint; scaled the canvas to fit its frame; added Enter/W/S/arrow keys and mouse/touch paddle control; Esc quits without window.confirm, which sandboxed iframes block; FPS overlay off. The MIT notice is kept at the top of the file."
     },
     {
       "path": "tiny-yurts.html",
@@ -131,6 +130,8 @@
       "license": "MIT",
       "author": "burntcustard",
       "source": "https://github.com/burntcustard/tiny-yurts",
+      "modificationStatus": "sandbox-adjusted",
+      "changes": "Added a small script before the game that substitutes in-memory storage when localStorage/sessionStorage throw, so the game starts in the explorer's sandboxed iframe. Game code is unchanged; progress lasts until the page closes.",
       "mirrors": ["https://raw.githubusercontent.com/burntcustard/tiny-yurts/main/dist/index.html"]
     },
     {

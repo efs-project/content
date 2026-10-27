@@ -21,14 +21,16 @@ A flat collection of **real, existing single-file HTML5 games**: each one is a w
 | Missile Command | `missile-command.html` | straker | CC0-1.0 | [gist](https://gist.github.com/straker/afc4e2a30b6df772a5f9f6ef01751d41) | arcade, classic |
 | Frogger | `frogger.html` | straker | CC0-1.0 | [gist](https://gist.github.com/straker/82a4368849cbd441b05bd6a044f2b2d3) | arcade, classic |
 | Bomberman | `bomberman.html` | straker | CC0-1.0 | [gist](https://gist.github.com/straker/769fb461e066147ea16ac2cb9463beae) | arcade, maze, classic |
-| Pong | `pong.html` | Drake Axelrod | MIT | [repo](https://github.com/drakeaxelrod/single-html-file-apps) | arcade, classic |
+| Pong | `pong.html` | Jake Gordon | MIT | [repo](https://github.com/jakesgordon/javascript-pong) (adapted to a single file) | arcade, classic |
 | Tiny Yurts | `tiny-yurts.html` | burntcustard | MIT | [repo](https://github.com/burntcustard/tiny-yurts) (js13k 2023) | cozy, sim, js13k |
 | Infernal Throne | `infernal-throne.html` | Ariel Wexler | MIT | [repo](https://github.com/arikwex/infernal-sigil) (js13k 2022) | action, platformer, js13k |
 | Dante | `dante.html` | Salvatore Previti (music: Ryan Malm) | MIT | [repo](https://github.com/SalvatorePreviti/js13k-2022) (js13k 2022 winner) | webgl, exploration, js13k |
 
 All fifteen games were verified in a local headless Chrome smoke test: every file rendered, and the run reported zero console errors, exceptions, network failures, or external requests. Most files are kept **verbatim** from upstream; a small number have presentation-only CSS/layout adjustments so they fit cleanly inside the EFS iframe without document scrollbars. Those adjusted files are marked in `manifest.json`. The eight added straker games carry the same upstream CC0 notice used by the existing straker entries.
 
-**Caveat — Pong:** single-player works fully offline; it also has an *optional* online-multiplayer mode that needs a WebSocket server you run yourself. Ignore that and it's a clean self-contained game.
+**Pong:** Jake Gordon's Javascript Pong, combined into one file with its images and sounds inlined. Play the computer (its skill adapts to the score), two players on one keyboard, or a demo; keyboard, mouse or touch. It replaced an earlier Pong that only worked with a WebSocket server.
+
+**Tiny Yurts:** a small script before the game substitutes in-memory storage, because Web Storage throws inside the explorer's sandboxed iframe. The game code is unchanged.
 
 **Note on attribution:** CC0 is public-domain (no attribution required, but we credit anyway); MIT requires the copyright notice be preserved — each MIT game keeps its in-file notice, and a seeded copy should carry it too (e.g. as a PROPERTY or a sibling about-card).
 
@@ -46,7 +48,7 @@ Great targets if you'd rather curate than write. **Check (1) the license permits
 Honesty section — why curation takes judgment:
 - **Untrusted** (edit-the-JS adventure — perfect for a hacker crowd): license is **CC-BY-NC** (non-commercial) + needs a build + CDN deps. Link to it, don't re-host.
 - **Hextris** (GPLv3): redistributable but pulls Google Fonts/Analytics from CDNs — breaks offline/sandbox unless you strip those tags.
-- **drakeaxelrod `snake.html`/`slots.html`**: MIT but load Phaser/React/Tailwind from CDNs (their `pong.html` is clean — that's the one we used).
+- **drakeaxelrod `snake.html`/`slots.html`**: MIT but load Phaser/React/Tailwind from CDNs. Their `pong.html` was used until 2026-10-27, but it only works with a WebSocket server.
 - **Path to Glory**: excellent js13k game, but upstream asks people not to distribute or use it commercially without contacting the author first.
 - **Dying Dreams**: strong js13k candidate, but custom terms restrict redistribution to non-commercial/open-source projects.
 - **Edge Not Found**: polished, but published under a Charity License with a commercial-exploitation restriction.
