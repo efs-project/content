@@ -11,6 +11,7 @@
   (platform paper, as published by Ava Labs)
 - **Files in this folder:** `avalanche-consensus.pdf` (arXiv v2, byte-identical) and `avalanche-platform.pdf`
   (byte-identical to the Ava Labs copy)
+- **Rights:** The consensus paper is an arXiv preprint and the platform paper is published openly by Ava Labs; neither PDF states a licence.
 
 ## Summary
 

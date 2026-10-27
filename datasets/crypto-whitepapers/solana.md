@@ -6,6 +6,7 @@
 - **Year:** first drafted 2017; this version 2018
 - **Canonical source:** https://solana.com/solana-whitepaper.pdf
 - **File in this folder:** `solana.pdf` (byte-identical to the solana.com copy)
+- **Rights:** Published openly by Solana Labs; no explicit licence stated.
 
 ## Summary
 

@@ -10,6 +10,7 @@
   third-party archive, as the project no longer hosts it)
 - **Files in this folder:** `matic-whitepaper.md` (whitepaper full text from the repository's `README.md`,
   with formatting cleaned up) and `matic-litepaper.pdf` (byte-identical to the archive copy above)
+- **Rights:** Published in the Matic Network open-source repository; no explicit licence stated.
 
 ## Summary
 

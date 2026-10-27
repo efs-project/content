@@ -7,6 +7,7 @@
 - **Canonical source:** https://ethereum.org/en/whitepaper/
 - **File in this folder:** `ethereum-whitepaper-2014.pdf` (the PDF edition published by ethereum.org;
   byte-identical to https://ethereum.org/content/whitepaper/whitepaper-pdf/Ethereum_Whitepaper_-_Buterin_2014.pdf)
+- **Rights:** Published openly on ethereum.org. An earlier note recorded it as CC BY (from the original Ethereum wiki); that has not been independently verified.
 
 ## Summary
 

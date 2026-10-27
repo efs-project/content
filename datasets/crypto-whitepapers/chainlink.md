@@ -6,6 +6,7 @@
 - **Year:** 2017 (dated 4 September 2017)
 - **Canonical source:** https://research.chain.link/whitepaper-v1.pdf
 - **File in this folder:** `chainlink-whitepaper-v1.pdf` (byte-identical to the research.chain.link copy)
+- **Rights:** Published openly by the Chainlink project (research.chain.link); no explicit licence stated.
 
 ## Summary
 

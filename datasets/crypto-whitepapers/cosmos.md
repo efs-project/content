@@ -7,6 +7,7 @@
 - **Canonical source:** https://github.com/cosmos/cosmos/blob/master/WHITEPAPER.md
 - **File in this folder:** `cosmos-whitepaper.md` (the full text, identical to `WHITEPAPER.md` in the
   Cosmos repository, where the whitepaper is published as Markdown)
+- **Rights:** Published in the Cosmos project's open-source repository; the paper states no separate licence.
 
 ## Summary
 

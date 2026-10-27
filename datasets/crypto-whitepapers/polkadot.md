@@ -7,6 +7,7 @@
 - **Canonical source:** https://github.com/w3f/polkadot-white-paper (Web3 Foundation)
 - **File in this folder:** `polkadot.pdf` (a December 2016 build of Draft 1; the Web3 Foundation's current
   copy has minor later edits, such as renumbered references)
+- **Rights:** The paper states that it is placed under a Creative Commons licence.
 
 ## Summary
 

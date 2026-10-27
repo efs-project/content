@@ -6,6 +6,7 @@
 - **Year:** 2016 (IACR ePrint 2016/889; published at CRYPTO 2017)
 - **Canonical source:** https://eprint.iacr.org/2016/889
 - **File in this folder:** `ouroboros.pdf` (the ePrint revision of 20 July 2019)
+- **Rights:** Academic preprint, freely available on the IACR Cryptology ePrint Archive (2016/889); no explicit licence stated.
 
 ## Summary
 

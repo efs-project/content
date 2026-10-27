@@ -8,6 +8,7 @@
   https://app.uniswap.org/whitepaper-v3.pdf (v3)
 - **Files in this folder:** `uniswap-v2-core.pdf` and `uniswap-v3-core.pdf` (both byte-identical to the
   uniswap.org copies)
+- **Rights:** Published openly by Uniswap Labs; neither paper states a licence.
 
 ## Summary
 

@@ -9,6 +9,7 @@
 - **Canonical sources:** https://tezos.com/position-paper.pdf and https://tezos.com/whitepaper.pdf
 - **Files in this folder:** `tezos-position-paper.pdf` and `tezos-whitepaper.pdf` (both byte-identical to the
   tezos.com copies)
+- **Rights:** Published openly by the Tezos project; neither paper states a licence.
 
 ## Summary
 

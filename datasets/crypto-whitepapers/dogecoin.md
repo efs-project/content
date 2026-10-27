@@ -6,6 +6,7 @@
 - **Year:** 2013 (launched 6 December 2013)
 - **Official site:** https://dogecoin.com
 - **File in this folder:** this card only
+- **Rights:** No whitepaper exists, so none is hosted; this card is original EFS text.
 
 ## Summary
 

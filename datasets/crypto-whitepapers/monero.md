@@ -8,6 +8,7 @@
   https://web.archive.org/web/2020/https://cryptonote.org/whitepaper.pdf). Monero's annotated copy:
   https://www.getmonero.org/resources/research-lab/pubs/whitepaper_annotated.pdf
 - **File in this folder:** `cryptonote.pdf` (byte-identical to the archived cryptonote.org copy)
+- **Rights:** The 2013 CryptoNote v2.0 paper carries no explicit licence statement; it is widely mirrored by the Monero and Bytecoin projects and archived on Zenodo.
 
 ## Summary
 

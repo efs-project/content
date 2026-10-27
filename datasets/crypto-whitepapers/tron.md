@@ -7,6 +7,7 @@
 - **Canonical source:** https://tron.network/static/doc/white_paper_v_2_1.pdf (version 2.0:
   https://tron.network/static/doc/white_paper_v_2_0.pdf)
 - **File in this folder:** this card only (the whitepaper is linked above)
+- **Rights:** Published by TRON DAO; no explicit licence stated. Not hosted here; linked above.
 
 ## Summary
 

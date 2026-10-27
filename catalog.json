@@ -22,7 +22,7 @@
       "manifest": "datasets/crypto-whitepapers/manifest.json",
       "anchorPath": "/whitepapers",
       "fileCount": 40,
-      "bytes": 14472971,
+      "bytes": 14475183,
       "status": "deployable",
       "licensePosture": "papers hosted as published by their projects or authors; most carry no licence (owner decision 2026-10-27: no licence field required for documents)",
       "description": "Major cryptocurrency whitepapers and reference notes."

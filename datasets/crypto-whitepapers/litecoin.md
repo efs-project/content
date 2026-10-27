@@ -6,6 +6,7 @@
 - **Year:** 2011 (first released on GitHub on 7 October 2011)
 - **Official site:** https://litecoin.org
 - **File in this folder:** this card only
+- **Rights:** No whitepaper exists, so none is hosted; this card is original EFS text.
 
 ## Summary
 

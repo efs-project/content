@@ -8,6 +8,7 @@
 - **File in this folder:** `algorand.pdf` (the ePrint revision of 24 September 2017)
 - **Related work:** Jing Chen and Silvio Micali's earlier theory paper, *Algorand* (2016,
   https://arxiv.org/abs/1607.01341), introduced the underlying ideas.
+- **Rights:** Academic preprint, freely available on the IACR Cryptology ePrint Archive (2017/454); no explicit licence stated.
 
 ## Summary
 

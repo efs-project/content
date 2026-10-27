@@ -6,6 +6,7 @@
 - **Year:** 2008
 - **Canonical source:** https://bitcoin.org/bitcoin.pdf
 - **File in this folder:** `bitcoin.pdf` (9 pages; byte-identical to the bitcoin.org copy)
+- **Rights:** Published openly on bitcoin.org and universally mirrored; the paper itself carries no licence statement.
 
 ## Summary
 

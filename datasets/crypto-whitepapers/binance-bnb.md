@@ -6,6 +6,7 @@
 - **Year:** BNB launched in 2017; BNB Smart Chain launched on 1 September 2020
 - **Canonical source:** https://github.com/bnb-chain/whitepaper
 - **File in this folder:** this card only (the whitepaper is linked above)
+- **Rights:** Published by the BNB Chain project; no explicit licence stated. Not hosted here; linked above.
 
 ## Summary
 

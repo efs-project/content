@@ -7,6 +7,7 @@
 - **Canonical source:** https://research.protocol.ai/publications/filecoin-a-decentralized-storage-network/
 - **File in this folder:** `filecoin.pdf` (36 pages; same text as the Protocol Labs copy, in a
   recompressed PDF)
+- **Rights:** Published openly by Protocol Labs. An earlier note recorded it as Creative Commons–licensed; the hosted PDF itself states no licence.
 
 ## Summary
 

@@ -8,6 +8,7 @@
 - **Canonical source:** http://zerocash-project.org/paper
 - **File in this folder:** `zerocash.pdf` (the authors' extended version, byte-identical to
   http://zerocash-project.org/media/pdf/zerocash-extended-20140518.pdf)
+- **Rights:** The hosted file is the authors' extended version; the conference version (IEEE S&P 2014) is copyrighted by IEEE.
 
 ## Summary
 

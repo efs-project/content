@@ -6,6 +6,7 @@
 - **Year:** 2014
 - **Canonical source:** https://ripple.com/files/ripple_consensus_whitepaper.pdf
 - **File in this folder:** `ripple-consensus-whitepaper.pdf` (8 pages; byte-identical to the ripple.com copy)
+- **Rights:** Published openly by Ripple Labs; no explicit licence stated.
 
 ## Summary
 
