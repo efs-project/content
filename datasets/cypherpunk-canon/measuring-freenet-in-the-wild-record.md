@@ -5,7 +5,7 @@
 - **Source:** https://freenetproject.org/assets/papers/roos-pets2014.pdf
 - **Publication:** Privacy Enhancing Technologies Symposium 2014
 - **Rights status:** NOASSERTION
-- **EFS status:** Link-only; the paper is not mirrored without a clear license.
+- **EFS status:** Link-only; the paper is not hosted in EFS. Read it at the source link.
 
 ## Summary
 

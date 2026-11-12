@@ -9,8 +9,8 @@
       "path": "datasets/web-games",
       "manifest": "datasets/web-games/manifest.json",
       "anchorPath": "/games",
-      "fileCount": 15,
-      "bytes": 365441,
+      "fileCount": 16,
+      "bytes": 417483,
       "status": "deployable",
       "licensePosture": "CC0-1.0 and MIT; preserve in-file MIT notices",
       "description": "Single-file HTML5 games, playable in a sandboxed iframe."
@@ -21,10 +21,10 @@
       "path": "datasets/crypto-whitepapers",
       "manifest": "datasets/crypto-whitepapers/manifest.json",
       "anchorPath": "/whitepapers",
-      "fileCount": 40,
-      "bytes": 14474579,
-      "status": "deployable-with-review",
-      "licensePosture": "mixed; review per-file markdown and README notes",
+      "fileCount": 43,
+      "bytes": 15079829,
+      "status": "deployable",
+      "licensePosture": "papers hosted as published by their projects or authors; most carry no licence (owner decision 2026-10-27: no licence field required for documents)",
       "description": "Major cryptocurrency whitepapers and reference notes."
     },
     {
@@ -33,8 +33,8 @@
       "path": "datasets/ethereum-eips",
       "manifest": "datasets/ethereum-eips/manifest.json",
       "anchorPath": "/standards",
-      "fileCount": 10,
-      "bytes": 245523,
+      "fileCount": 16,
+      "bytes": 354321,
       "status": "deployable",
       "licensePosture": "CC0-1.0",
       "description": "Landmark Ethereum standards (EIPs/ERCs), public domain under CC0."
@@ -45,11 +45,35 @@
       "path": "datasets/cypherpunk-canon",
       "manifest": "datasets/cypherpunk-canon/manifest.json",
       "anchorPath": "/cypherpunk",
-      "fileCount": 25,
-      "bytes": 23391250,
+      "fileCount": 27,
+      "bytes": 23476165,
       "status": "deployable-mixed",
-      "licensePosture": "local payloads are CC0, CC BY-SA, or public domain; linked works are represented by CC0 records and are not mirrored",
-      "description": "A rights-aware shelf representing 21 cypherpunk works with local reading files or link-only records."
+      "licensePosture": "local PDFs are CC BY-SA or public domain; the two manifestos are hosted in full (owner decision 2026-10-27); other works are CC0 link-only records",
+      "description": "A reading shelf of 22 cypherpunk works: nine short classics in full, three books as PDFs, and links to the rest."
+    },
+    {
+      "id": "history",
+      "title": "Ethereum History",
+      "path": "datasets/history",
+      "manifest": "datasets/history/manifest.json",
+      "anchorPath": "/history",
+      "fileCount": 12,
+      "bytes": 114224,
+      "status": "deployable",
+      "licensePosture": "Ethereum Foundation blog posts and essays converted to markdown (no stated licence; hosted by owner decision 2026-10-27), EIPs under CC0, and EFS-authored cards (CC0)",
+      "description": "Ethereum's story in its own words: the announcement, Devcon 0, launch, the DAO, the Merge."
+    },
+    {
+      "id": "media",
+      "title": "Media",
+      "path": "datasets/media",
+      "manifest": "datasets/media/manifest.json",
+      "anchorPath": "/media",
+      "fileCount": 7,
+      "bytes": 1312174,
+      "status": "deployable",
+      "licensePosture": "public-domain images (NASA; a public-domain text logo with a trademark note), each with a CC0 about-card",
+      "description": "Public-domain images about archives that outlast their medium: Pale Blue Dot, the Voyager Golden Record, the Ethereum diamond."
     }
   ]
 }

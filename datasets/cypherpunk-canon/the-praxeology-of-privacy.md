@@ -13,4 +13,4 @@ A book-length bridge between Austrian economic reasoning and cypherpunk
 engineering. It treats privacy as selective disclosure and examines the
 technical systems that can preserve private action under pressure.
 
-Local file: [`the-praxeology-of-privacy.pdf`](./the-praxeology-of-privacy.pdf)
+The PDF is in this folder as `the-praxeology-of-privacy.pdf`.

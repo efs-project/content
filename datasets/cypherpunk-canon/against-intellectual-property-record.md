@@ -5,8 +5,7 @@
 - **Linked book edition:** 2008
 - **Source:** https://mises.org/library/book/against-intellectual-property
 - **Rights status:** NOASSERTION
-- **EFS status:** Link-only; availability from the publisher is not treated as
-  a redistribution license.
+- **EFS status:** Link-only; the book is not hosted in EFS. Read it at the source link.
 
 ## Summary
 

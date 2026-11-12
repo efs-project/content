@@ -1,24 +1,24 @@
 # Zcash (Zerocash)
 
-- **Title:** Zerocash: Decentralized Anonymous Payments from Bitcoin (extended version)
 - **Project:** Zcash (built on the Zerocash construction)
-- **Author(s):** Eli Ben-Sasson, Alessandro Chiesa, Christina Garman, Matthew Green, Ian Miers,
-  Eran Tromer, Madars Virza
-- **Year:** 2014 (IEEE S&P 2014; extended version dated May 18, 2014)
+- **Paper:** *Zerocash: Decentralized Anonymous Payments from Bitcoin* (extended version)
+- **Authors:** Eli Ben-Sasson, Alessandro Chiesa, Christina Garman, Matthew Green, Ian Miers, Eran Tromer,
+  Madars Virza
+- **Year:** 2014 (IEEE Symposium on Security and Privacy 2014; extended version dated 18 May 2014)
 - **Canonical source:** http://zerocash-project.org/paper
-- **License / distribution:** **FLAG (mild).** The official conference version is **IEEE-copyrighted**.
-  The file included here is the **authors' freely-hosted extended version** from zerocash-project.org —
-  redistributing an author preprint is standard and acceptable, but it is not the IEEE version. Noting the
-  distinction for James.
-- **File:** `zerocash.pdf` (authors' extended version; fetched and validated)
+- **File in this folder:** `zerocash.pdf` (the authors' extended version, byte-identical to
+  http://zerocash-project.org/media/pdf/zerocash-extended-20140518.pdf)
+- **Rights:** The hosted file is the authors' extended version; the conference version (IEEE S&P 2014) is copyrighted by IEEE.
 
 ## Summary
 
 Zerocash is the academic protocol behind Zcash and a landmark in applied zero-knowledge cryptography. It
-shows how to build a decentralized anonymous payment scheme on top of a Bitcoin-like ledger using
-**zk-SNARKs** (zero-knowledge succinct non-interactive arguments of knowledge): users can prove a
-transaction is valid — that inputs exist and balances are conserved — without revealing the sender,
-recipient, or amount. This provides much stronger privacy than mixing or ring signatures, with fully shielded
-transactions. Zcash implemented these ideas as a live cryptocurrency offering both transparent and shielded
-addresses. The trade-off historically involved a trusted setup for the SNARK parameters, which the paper and
-later work address.
+shows how to build a payment system on a Bitcoin-like ledger in which transactions hide the sender, the
+recipient and the amount. Users prove that a transaction is valid, meaning the coins exist and the amounts
+balance, using **zk-SNARKs** (zero-knowledge succinct non-interactive arguments of knowledge) without
+revealing anything else. The paper reports transactions under 1 kB that take under 6 ms to verify.
+
+The construction needs a one-time trusted setup to generate its public parameters. Zcash launched in
+October 2016 with both transparent and shielded addresses, after a multi-party ceremony to generate those
+parameters. Later research, starting with the Halo technique in 2019, showed how to remove the need for a
+trusted setup.

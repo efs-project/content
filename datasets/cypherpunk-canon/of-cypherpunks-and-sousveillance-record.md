@@ -4,8 +4,7 @@
 - **Year:** 2022
 - **Source:** https://doi.org/10.24908/ss.v20i1.14322
 - **Work license:** CC BY-NC-ND 4.0
-- **EFS status:** Link-only pending an explicit decision about mirroring
-  noncommercial, no-derivatives works.
+- **EFS status:** Link-only; the article is not hosted in EFS. Read it at the source link.
 
 ## Summary
 

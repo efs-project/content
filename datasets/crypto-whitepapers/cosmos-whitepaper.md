@@ -1,3 +1,5 @@
+> Full text of *Cosmos: A Network of Distributed Ledgers* (Jae Kwon and Ethan Buchman, 2016), copied verbatim from `WHITEPAPER.md` in https://github.com/cosmos/cosmos, where it is published as Markdown.
+
 # Cosmos
 **A Network of Distributed Ledgers**
 

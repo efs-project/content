@@ -16,4 +16,4 @@
 An exploration of blockchains and smart contracts as infrastructure for
 voluntary governance beyond the territorial nation-state.
 
-Local file: [`farewell-to-westphalia.pdf`](./farewell-to-westphalia.pdf)
+The PDF is in this folder as `farewell-to-westphalia.pdf`.

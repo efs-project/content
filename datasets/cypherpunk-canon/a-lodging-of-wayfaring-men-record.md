@@ -4,7 +4,7 @@
 - **Year:** 2003
 - **Source:** https://www.cypherpunkbooks.com/book/a-lodging-of-wayfaring-men
 - **Rights status:** NOASSERTION
-- **EFS status:** Link-only; the novel is not mirrored without clearer terms.
+- **EFS status:** Link-only; the novel is not hosted in EFS. Read it at the source link.
 
 ## Summary
 

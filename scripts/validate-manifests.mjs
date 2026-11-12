@@ -17,6 +17,20 @@ if (!Array.isArray(catalog.datasets)) {
   for (const dataset of catalog.datasets) {
     validateDataset(dataset);
   }
+  // Fail closed: a dataset folder with a manifest that the catalog doesn't list would be
+  // published by the seeder (it scans datasets/) without ever being validated here.
+  const registered = new Set(catalog.datasets.map(dataset => path.resolve(repoRoot, dataset.manifest)));
+  const datasetsDir = path.join(repoRoot, "datasets");
+  for (const entry of readdirSync(datasetsDir, { withFileTypes: true })) {
+    if (entry.isSymbolicLink()) {
+      failures.push(`datasets/${entry.name} is a symlink; dataset folders must be real directories.`);
+      continue;
+    }
+    const manifestPath = path.join(datasetsDir, entry.name, "manifest.json");
+    if (entry.isDirectory() && existsSync(manifestPath) && !registered.has(manifestPath)) {
+      failures.push(`datasets/${entry.name}/manifest.json is not registered in catalog.json.`);
+    }
+  }
 }
 
 if (warnings.length > 0) {
@@ -91,7 +105,15 @@ function validateDataset(dataset) {
     if (entry.aboutCard !== undefined) validateSidecar(label, datasetDir, entry.path, entry.aboutCard, "aboutCard");
   }
 
-  const actualFiles = listFiles(datasetDir).filter(file => file !== "manifest.json" && file !== "README.md" && file !== "ADDRESSES.md");
+  // Curator notes stay on disk but aren't published; a README is published when it's listed.
+  const listed = new Set(files.map(entry => entry.path));
+  const actualFiles = listFiles(datasetDir).filter(
+    file =>
+      file !== "manifest.json" &&
+      file !== "ADDRESSES.md" &&
+      file !== "CURATION.md" &&
+      (file !== "README.md" || listed.has(file)),
+  );
   if (dataset.fileCount !== files.length) warnings.push(`${label}: catalog fileCount ${dataset.fileCount} differs from manifest count ${files.length}.`);
   if (actualFiles.length < files.length) warnings.push(`${label}: fewer payload files on disk than manifest entries.`);
   if (typeof dataset.bytes === "number" && dataset.bytes !== manifestBytes) {
