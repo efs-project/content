@@ -1,30 +1,40 @@
-# Ethereum Standards (EIPs / ERCs) — EFS reference dataset
+# Ethereum Standards
 
-The landmark standards that define how Ethereum works — the token standards, the fee market, account abstraction, typed signing. A fourth reference dataset for the EFS × OnionDAO buildathon, alongside [`../crypto-whitepapers/`](../crypto-whitepapers/), [`../cypherpunk-canon/`](../cypherpunk-canon/), and [`../web-games/`](../web-games/).
+The proposals that define how Ethereum works: the token standards, typed signing, the fee market, blobs,
+account abstraction, naming, and the process that produces them all. Ethereum Improvement Proposals
+(EIPs) change the protocol itself; Ethereum Request for Comments (ERCs) are application-level standards
+that contracts and wallets agree to follow.
 
-**License: CC0** — EIPs and ERCs are released into the public domain ([EIP-1](https://eips.ethereum.org/EIPS/eip-1)), so they are cleanly redistributable onto EFS. Fetched from the canonical repos (`ethereum/EIPs`, `ethereum/ERCs`). The text is verbatim except that links to other EIPs (`./eip-N.md`) and to the CC0 licence (`../LICENSE.md`) were converted to absolute URLs, so they work outside the EIPs repo.
+Every file here is the full text of the proposal as published in the
+[ethereum/EIPs](https://github.com/ethereum/EIPs) and [ethereum/ERCs](https://github.com/ethereum/ERCs)
+repositories, including its header with authors, status and discussion links. The only change is that
+relative links (to other EIPs, the licence and supporting assets) now point to absolute URLs, so they work
+on their own. EIPs and ERCs are dedicated to the public domain under
+[CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 
-**Modeled the EFS way: flat files + tags, not folders.** Each standard is one item; its category is a **tag** (a token standard is `tokens`; ERC-721 is both `tokens` and `nft`). On EFS each `.md` = a DATA at a stable anchor with TAG edges. They render natively in the markdown pane.
+| Standard | What it does | Upgrade |
+|---|---|---|
+| [EIP-1: EIP Purpose and Guidelines](https://app.efs.eth.limo/explorer/standards/eip-1.md) | How proposals are written, reviewed and finalized | |
+| [ERC-20: Token Standard](https://app.efs.eth.limo/explorer/standards/erc-20.md) | Fungible tokens | |
+| [ERC-721: Non-Fungible Token Standard](https://app.efs.eth.limo/explorer/standards/erc-721.md) | NFTs | |
+| [ERC-1155: Multi Token Standard](https://app.efs.eth.limo/explorer/standards/erc-1155.md) | Many token types in one contract | |
+| [ERC-4626: Tokenized Vaults](https://app.efs.eth.limo/explorer/standards/erc-4626.md) | Yield-bearing vaults | |
+| [EIP-155: Simple replay attack protection](https://app.efs.eth.limo/explorer/standards/eip-155.md) | Chain ID in transaction signatures | Spurious Dragon (2016) |
+| [EIP-712: Typed structured data hashing and signing](https://app.efs.eth.limo/explorer/standards/eip-712.md) | Human-readable signed messages | |
+| [ERC-1271: Standard Signature Validation Method for Contracts](https://app.efs.eth.limo/explorer/standards/erc-1271.md) | Signatures from smart contract accounts | |
+| [ERC-137: Ethereum Domain Name Service](https://app.efs.eth.limo/explorer/standards/erc-137.md) | The original ENS specification | |
+| [ERC-4804: Web3 URL to EVM Call Message Translation](https://app.efs.eth.limo/explorer/standards/erc-4804.md) | `web3://` URLs; EFS uses them to reference on-chain content | |
+| [EIP-1559: Fee market change](https://app.efs.eth.limo/explorer/standards/eip-1559.md) | Base fee burn and priority tips | London (2021) |
+| [ERC-4337: Account Abstraction Using Alt Mempool](https://app.efs.eth.limo/explorer/standards/erc-4337.md) | Smart accounts without protocol changes | |
+| [EIP-4844: Shard Blob Transactions](https://app.efs.eth.limo/explorer/standards/eip-4844.md) | Blobs for cheap rollup data | Dencun (2024) |
+| [EIP-7702: Set Code for EOAs](https://app.efs.eth.limo/explorer/standards/eip-7702.md) | Smart-account features for ordinary accounts | Pectra (2025) |
+| [EIP-7594: PeerDAS](https://app.efs.eth.limo/explorer/standards/eip-7594.md) | Data availability sampling for blobs | Fusaka (2025) |
 
-## Manifest
-
-| Standard | File | Title | Tags | Source |
-|---|---|---|---|---|
-| ERC-20 | `erc-20.md` | Token Standard | tokens, fungible, foundational | ethereum/ERCs |
-| ERC-721 | `erc-721.md` | Non-Fungible Token Standard | tokens, nft, foundational | ethereum/ERCs |
-| ERC-1155 | `erc-1155.md` | Multi Token Standard | tokens, nft, multi-token | ethereum/ERCs |
-| ERC-4626 | `erc-4626.md` | Tokenized Vaults | defi, tokens, vaults | ethereum/ERCs |
-| ERC-4337 | `erc-4337.md` | Account Abstraction (via entry point) | account-abstraction, infrastructure | ethereum/ERCs |
-| EIP-712 | `eip-712.md` | Typed structured data hashing & signing | signing, infrastructure | ethereum/EIPs |
-| ERC-1271 | `erc-1271.md` | Standard signature validation for contracts | signing, smart-wallets | ethereum/ERCs |
-| EIP-1559 | `eip-1559.md` | Fee market change | core, economics, fees | ethereum/EIPs |
-| EIP-155 | `eip-155.md` | Simple replay attack protection (chainId) | core, security | ethereum/EIPs |
-| EIP-4844 | `eip-4844.md` | Shard Blob Transactions (proto-danksharding) | core, scaling, data | ethereum/EIPs |
-
-Per-standard authors, status, and discussion links live in each file's YAML frontmatter (preserved verbatim).
-
-**Why this set:** the standards a crypto-native crowd actually recognizes, and two (EIP-712 + ERC-1271) are exactly what EFS leans on for smart-wallet / delegated attestation — nice for the SDK track to reference.
-
-**Cosmetic note:** a few files contain relative links to reference implementations (`../assets/...`) and ERC-4337 embeds 3 SVG sequence diagrams; those relative paths don't resolve standalone (the prose is self-contained and unaffected). Read them at [eips.ethereum.org](https://eips.ethereum.org) with assets intact.
-
-Retrieval/seeding addresses (IPFS CID / Arweave) get recorded in an `ADDRESSES.md` here once we pin, matching the other datasets.
+Files are tagged rather than sorted into folders, for example
+[`tokens`](https://app.efs.eth.limo/explorer/standards?tags=tokens),
+[`signing`](https://app.efs.eth.limo/explorer/standards?tags=signing),
+[`account-abstraction`](https://app.efs.eth.limo/explorer/standards?tags=account-abstraction) and
+[`core`](https://app.efs.eth.limo/explorer/standards?tags=core).
+The rendered versions live at [eips.ethereum.org](https://eips.ethereum.org/) and
+[ercs.ethereum.org](https://ercs.ethereum.org/). For how these upgrades fit into Ethereum's story, see the
+[Ethereum history timeline](https://app.efs.eth.limo/explorer/history/timeline.md).
