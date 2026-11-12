@@ -22,6 +22,10 @@ if (!Array.isArray(catalog.datasets)) {
   const registered = new Set(catalog.datasets.map(dataset => path.resolve(repoRoot, dataset.manifest)));
   const datasetsDir = path.join(repoRoot, "datasets");
   for (const entry of readdirSync(datasetsDir, { withFileTypes: true })) {
+    if (entry.isSymbolicLink()) {
+      failures.push(`datasets/${entry.name} is a symlink; dataset folders must be real directories.`);
+      continue;
+    }
     const manifestPath = path.join(datasetsDir, entry.name, "manifest.json");
     if (entry.isDirectory() && existsSync(manifestPath) && !registered.has(manifestPath)) {
       failures.push(`datasets/${entry.name}/manifest.json is not registered in catalog.json.`);
