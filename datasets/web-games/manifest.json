@@ -9,6 +9,7 @@
     {
       "path": "README.md",
       "name": "README.md",
+      "license": "CC0-1.0",
       "title": "About the games",
       "description": "What this folder is, where to start, and how the games run on EFS.",
       "contentType": "text/markdown"

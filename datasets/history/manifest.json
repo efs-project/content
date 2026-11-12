@@ -11,6 +11,7 @@
     {
       "path": "README.md",
       "name": "README.md",
+      "license": "CC0-1.0",
       "contentType": "text/markdown",
       "title": "Ethereum History",
       "description": "Overview of the folder: what each document is and how to read it, starting from the timeline.",
@@ -22,6 +23,7 @@
     {
       "path": "timeline.md",
       "name": "timeline.md",
+      "license": "CC0-1.0",
       "contentType": "text/markdown",
       "title": "Ethereum Timeline",
       "description": "Dated index of Ethereum's history from the 2013 whitepaper to the Fusaka upgrade, linking each event to its documents.",
@@ -33,6 +35,7 @@
     {
       "path": "ethereum-now-going-public.md",
       "name": "ethereum-now-going-public.md",
+      "license": "NOASSERTION",
       "contentType": "text/markdown",
       "title": "Ethereum: Now Going Public",
       "description": "Vitalik Buterin's January 2014 post introducing Ethereum, its team and the planned ether sale.",
@@ -46,6 +49,7 @@
     {
       "path": "dapps-what-web3-looks-like.md",
       "name": "dapps-what-web3-looks-like.md",
+      "license": "NOASSERTION",
       "contentType": "text/markdown",
       "title": "ĐApps: What Web 3.0 Looks Like",
       "description": "Gavin Wood's 2014 essay describing the four components of a decentralised, post-Snowden web.",
@@ -59,6 +63,7 @@
     {
       "path": "devcon-0-recap.md",
       "name": "devcon-0-recap.md",
+      "license": "NOASSERTION",
       "contentType": "text/markdown",
       "title": "ÐΞVcon-0 Recap",
       "description": "A day-by-day recap of Devcon 0, the first Ethereum developer conference, held in Berlin in November 2014.",
@@ -73,6 +78,7 @@
     {
       "path": "ethereum-launches.md",
       "name": "ethereum-launches.md",
+      "license": "NOASSERTION",
       "contentType": "text/markdown",
       "title": "Ethereum Launches",
       "description": "The 30 July 2015 announcement that Frontier, the first live release of Ethereum, had launched.",
@@ -86,6 +92,7 @@
     {
       "path": "genesis-block.md",
       "name": "genesis-block.md",
+      "license": "CC0-1.0",
       "contentType": "text/markdown",
       "title": "The Genesis Block",
       "description": "Mainnet block 0 read by RPC: its hash, zero timestamp, extra data and 5,000 gas limit, explained.",
@@ -98,6 +105,7 @@
     {
       "path": "critical-update-re-dao-vulnerability.md",
       "name": "critical-update-re-dao-vulnerability.md",
+      "license": "NOASSERTION",
       "contentType": "text/markdown",
       "title": "CRITICAL UPDATE Re: DAO Vulnerability",
       "description": "Vitalik Buterin's 17 June 2016 notice on the attack draining The DAO and the first proposed response.",
@@ -126,6 +134,7 @@
     {
       "path": "mainnet-merge-announcement.md",
       "name": "mainnet-merge-announcement.md",
+      "license": "NOASSERTION",
       "contentType": "text/markdown",
       "title": "Mainnet Merge Announcement",
       "description": "The Ethereum Foundation's 24 August 2022 announcement of the Bellatrix epoch and Terminal Total Difficulty for The Merge.",
@@ -154,6 +163,7 @@
     {
       "path": "last-proof-of-work-block.md",
       "name": "last-proof-of-work-block.md",
+      "license": "CC0-1.0",
       "contentType": "text/markdown",
       "title": "The Last Proof-of-Work Block",
       "description": "Block 15,537,393 read by RPC: the terminal proof-of-work block of The Merge, with its miner and decoded extra data.",

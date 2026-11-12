@@ -8,6 +8,7 @@
     {
       "path": "README.md",
       "name": "README.md",
+      "license": "CC0-1.0",
       "contentType": "text/markdown",
       "title": "Crypto Whitepapers",
       "description": "Overview of the collection: what each project's paper is and how to read the folder.",
@@ -18,6 +19,7 @@
     {
       "path": "bitcoin.md",
       "name": "bitcoin.md",
+      "license": "CC0-1.0",
       "contentType": "text/markdown",
       "title": "About: Bitcoin",
       "description": "Who wrote the Bitcoin whitepaper, where it comes from, and what it proposes.",
@@ -30,6 +32,7 @@
     {
       "path": "bitcoin.pdf",
       "name": "bitcoin.pdf",
+      "license": "NOASSERTION",
       "contentType": "application/pdf",
       "title": "Bitcoin: A Peer-to-Peer Electronic Cash System",
       "description": "Satoshi Nakamoto's nine-page design for electronic cash secured by proof-of-work.",
@@ -42,6 +45,7 @@
     {
       "path": "ethereum.md",
       "name": "ethereum.md",
+      "license": "CC0-1.0",
       "contentType": "text/markdown",
       "title": "About: Ethereum",
       "description": "Background and summary of the 2014 Ethereum whitepaper.",
@@ -54,6 +58,7 @@
     {
       "path": "ethereum-whitepaper-2014.pdf",
       "name": "ethereum-whitepaper-2014.pdf",
+      "license": "NOASSERTION",
       "contentType": "application/pdf",
       "title": "Ethereum: A Next-Generation Smart Contract and Decentralized Application Platform",
       "description": "Vitalik Buterin's whitepaper proposing a blockchain with a built-in Turing-complete language.",
@@ -66,6 +71,7 @@
     {
       "path": "yellowpaper.md",
       "name": "yellowpaper.md",
+      "license": "CC0-1.0",
       "contentType": "text/markdown",
       "title": "About: Ethereum Yellow Paper",
       "description": "Background, version and licence of the Ethereum Yellow Paper.",
@@ -78,6 +84,7 @@
     {
       "path": "yellowpaper.pdf",
       "name": "yellowpaper.pdf",
+      "license": "CC-BY-SA-4.0",
       "contentType": "application/pdf",
       "title": "Ethereum: A Secure Decentralised Generalised Transaction Ledger",
       "description": "The Yellow Paper: Gavin Wood's formal specification of the Ethereum protocol (Shanghai version, 2025-02-04).",
@@ -90,6 +97,7 @@
     {
       "path": "solana.md",
       "name": "solana.md",
+      "license": "CC0-1.0",
       "contentType": "text/markdown",
       "title": "About: Solana",
       "description": "Background and summary of the Solana whitepaper and its Proof of History design.",
@@ -102,6 +110,7 @@
     {
       "path": "solana.pdf",
       "name": "solana.pdf",
+      "license": "NOASSERTION",
       "contentType": "application/pdf",
       "title": "Solana: A new architecture for a high performance blockchain",
       "description": "Anatoly Yakovenko's whitepaper introducing Proof of History (v0.8.13).",
@@ -114,6 +123,7 @@
     {
       "path": "xrp-ripple.md",
       "name": "xrp-ripple.md",
+      "license": "CC0-1.0",
       "contentType": "text/markdown",
       "title": "About: XRP Ledger",
       "description": "Background and summary of the Ripple consensus whitepaper behind the XRP Ledger.",
@@ -126,6 +136,7 @@
     {
       "path": "ripple-consensus-whitepaper.pdf",
       "name": "ripple-consensus-whitepaper.pdf",
+      "license": "NOASSERTION",
       "contentType": "application/pdf",
       "title": "The Ripple Protocol Consensus Algorithm",
       "description": "Ripple Labs' 2014 paper describing the consensus algorithm of the XRP Ledger.",
@@ -138,6 +149,7 @@
     {
       "path": "cardano.md",
       "name": "cardano.md",
+      "license": "CC0-1.0",
       "contentType": "text/markdown",
       "title": "About: Cardano (Ouroboros)",
       "description": "Background and summary of Ouroboros, the proof-of-stake protocol behind Cardano.",
@@ -150,6 +162,7 @@
     {
       "path": "ouroboros.pdf",
       "name": "ouroboros.pdf",
+      "license": "NOASSERTION",
       "contentType": "application/pdf",
       "title": "Ouroboros: A Provably Secure Proof-of-Stake Blockchain Protocol",
       "description": "The proof-of-stake protocol behind Cardano, presented as the first with rigorous security guarantees.",
@@ -162,6 +175,7 @@
     {
       "path": "polkadot.md",
       "name": "polkadot.md",
+      "license": "CC0-1.0",
       "contentType": "text/markdown",
       "title": "About: Polkadot",
       "description": "Background and summary of Gavin Wood's Polkadot paper.",
@@ -174,6 +188,7 @@
     {
       "path": "polkadot.pdf",
       "name": "polkadot.pdf",
+      "license": "NOASSERTION",
       "contentType": "application/pdf",
       "title": "Polkadot: Vision for a Heterogeneous Multi-Chain Framework",
       "description": "Gavin Wood's 2016 draft describing a relay chain that secures many parallel chains.",
@@ -186,6 +201,7 @@
     {
       "path": "avalanche.md",
       "name": "avalanche.md",
+      "license": "CC0-1.0",
       "contentType": "text/markdown",
       "title": "About: Avalanche",
       "description": "Background and summary of the Avalanche consensus and platform papers.",
@@ -198,6 +214,7 @@
     {
       "path": "avalanche-consensus.pdf",
       "name": "avalanche-consensus.pdf",
+      "license": "NOASSERTION",
       "contentType": "application/pdf",
       "title": "Scalable and Probabilistic Leaderless BFT Consensus through Metastability",
       "description": "The paper describing the Snow family of metastable consensus protocols behind Avalanche.",
@@ -210,6 +227,7 @@
     {
       "path": "avalanche-platform.pdf",
       "name": "avalanche-platform.pdf",
+      "license": "NOASSERTION",
       "contentType": "application/pdf",
       "title": "Avalanche Platform",
       "description": "Ava Labs' 2020 whitepaper describing the Avalanche platform built on that consensus.",
@@ -222,6 +240,7 @@
     {
       "path": "cosmos.md",
       "name": "cosmos.md",
+      "license": "CC0-1.0",
       "contentType": "text/markdown",
       "title": "About: Cosmos",
       "description": "Background and summary of the Cosmos whitepaper.",
@@ -234,6 +253,7 @@
     {
       "path": "cosmos-whitepaper.md",
       "name": "cosmos-whitepaper.md",
+      "license": "NOASSERTION",
       "contentType": "text/markdown",
       "title": "Cosmos: A Network of Distributed Ledgers",
       "description": "Full text of the 2016 Cosmos whitepaper: a network of Tendermint chains linked by inter-blockchain communication.",
@@ -246,6 +266,7 @@
     {
       "path": "algorand.md",
       "name": "algorand.md",
+      "license": "CC0-1.0",
       "contentType": "text/markdown",
       "title": "About: Algorand",
       "description": "Background and summary of the Algorand paper.",
@@ -258,6 +279,7 @@
     {
       "path": "algorand.pdf",
       "name": "algorand.pdf",
+      "license": "NOASSERTION",
       "contentType": "application/pdf",
       "title": "Algorand: Scaling Byzantine Agreements for Cryptocurrencies",
       "description": "The SOSP 2017 paper describing Algorand's committee-based Byzantine agreement.",
@@ -270,6 +292,7 @@
     {
       "path": "tezos.md",
       "name": "tezos.md",
+      "license": "CC0-1.0",
       "contentType": "text/markdown",
       "title": "About: Tezos",
       "description": "Background and summary of the Tezos position paper and whitepaper.",
@@ -282,6 +305,7 @@
     {
       "path": "tezos-whitepaper.pdf",
       "name": "tezos-whitepaper.pdf",
+      "license": "NOASSERTION",
       "contentType": "application/pdf",
       "title": "Tezos: A Self-Amending Crypto-Ledger (White Paper)",
       "description": "The 2014 Tezos whitepaper describing a blockchain that can amend its own protocol.",
@@ -294,6 +318,7 @@
     {
       "path": "tezos-position-paper.pdf",
       "name": "tezos-position-paper.pdf",
+      "license": "NOASSERTION",
       "contentType": "application/pdf",
       "title": "Tezos: A Self-Amending Crypto-Ledger (Position Paper)",
       "description": "The 2014 position paper setting out the case for a self-amending blockchain.",
@@ -306,6 +331,7 @@
     {
       "path": "polygon.md",
       "name": "polygon.md",
+      "license": "CC0-1.0",
       "contentType": "text/markdown",
       "title": "About: Polygon",
       "description": "Background and summary of the Matic Network whitepaper and litepaper.",
@@ -318,6 +344,7 @@
     {
       "path": "matic-whitepaper.md",
       "name": "matic-whitepaper.md",
+      "license": "NOASSERTION",
       "contentType": "text/markdown",
       "title": "Matic Whitepaper",
       "description": "Full text of the Matic Network whitepaper (v1.1), the scaling project that became Polygon.",
@@ -330,6 +357,7 @@
     {
       "path": "matic-litepaper.pdf",
       "name": "matic-litepaper.pdf",
+      "license": "NOASSERTION",
       "contentType": "application/pdf",
       "title": "Matic Network Litepaper",
       "description": "A five-page summary of the Matic Network design, from about 2019.",
@@ -342,6 +370,7 @@
     {
       "path": "chainlink.md",
       "name": "chainlink.md",
+      "license": "CC0-1.0",
       "contentType": "text/markdown",
       "title": "About: Chainlink",
       "description": "Background and summary of the original Chainlink whitepaper.",
@@ -354,6 +383,7 @@
     {
       "path": "chainlink-whitepaper-v1.pdf",
       "name": "chainlink-whitepaper-v1.pdf",
+      "license": "NOASSERTION",
       "contentType": "application/pdf",
       "title": "ChainLink: A Decentralized Oracle Network",
       "description": "The 2017 whitepaper (v1.0) for a decentralized network of oracles feeding data to smart contracts.",
@@ -366,6 +396,7 @@
     {
       "path": "uniswap.md",
       "name": "uniswap.md",
+      "license": "CC0-1.0",
       "contentType": "text/markdown",
       "title": "About: Uniswap",
       "description": "Background and summary of the Uniswap v2 and v3 core papers.",
@@ -378,6 +409,7 @@
     {
       "path": "uniswap-v2-core.pdf",
       "name": "uniswap-v2-core.pdf",
+      "license": "NOASSERTION",
       "contentType": "application/pdf",
       "title": "Uniswap v2 Core",
       "description": "The 2020 paper describing Uniswap v2's constant-product automated market maker.",
@@ -390,6 +422,7 @@
     {
       "path": "uniswap-v3-core.pdf",
       "name": "uniswap-v3-core.pdf",
+      "license": "NOASSERTION",
       "contentType": "application/pdf",
       "title": "Uniswap v3 Core",
       "description": "The 2021 paper introducing concentrated liquidity in Uniswap v3.",
@@ -402,6 +435,7 @@
     {
       "path": "filecoin.md",
       "name": "filecoin.md",
+      "license": "CC0-1.0",
       "contentType": "text/markdown",
       "title": "About: Filecoin",
       "description": "Background and summary of the Filecoin whitepaper.",
@@ -414,6 +448,7 @@
     {
       "path": "filecoin.pdf",
       "name": "filecoin.pdf",
+      "license": "NOASSERTION",
       "contentType": "application/pdf",
       "title": "Filecoin: A Decentralized Storage Network",
       "description": "Protocol Labs' 2017 design for a storage market secured by Proof-of-Replication and Proof-of-Spacetime.",
@@ -426,6 +461,7 @@
     {
       "path": "monero.md",
       "name": "monero.md",
+      "license": "CC0-1.0",
       "contentType": "text/markdown",
       "title": "About: Monero (CryptoNote)",
       "description": "Background and summary of CryptoNote, the protocol Monero is built on.",
@@ -438,6 +474,7 @@
     {
       "path": "cryptonote.pdf",
       "name": "cryptonote.pdf",
+      "license": "NOASSERTION",
       "contentType": "application/pdf",
       "title": "CryptoNote v 2.0",
       "description": "The 2013 CryptoNote paper introducing ring signatures and one-time addresses for private payments.",
@@ -450,6 +487,7 @@
     {
       "path": "zcash.md",
       "name": "zcash.md",
+      "license": "CC0-1.0",
       "contentType": "text/markdown",
       "title": "About: Zcash (Zerocash)",
       "description": "Background and summary of Zerocash, the construction behind Zcash.",
@@ -462,6 +500,7 @@
     {
       "path": "zerocash.pdf",
       "name": "zerocash.pdf",
+      "license": "NOASSERTION",
       "contentType": "application/pdf",
       "title": "Zerocash: Decentralized Anonymous Payments from Bitcoin",
       "description": "The 2014 paper (extended version) using zk-SNARKs for fully private payments.",
@@ -474,6 +513,7 @@
     {
       "path": "litecoin.md",
       "name": "litecoin.md",
+      "license": "CC0-1.0",
       "contentType": "text/markdown",
       "title": "About: Litecoin",
       "description": "A short history of Litecoin, which launched as software without a whitepaper.",
@@ -486,6 +526,7 @@
     {
       "path": "dogecoin.md",
       "name": "dogecoin.md",
+      "license": "CC0-1.0",
       "contentType": "text/markdown",
       "title": "About: Dogecoin",
       "description": "A short history of Dogecoin, which launched as software without a whitepaper.",
@@ -498,6 +539,7 @@
     {
       "path": "tron.md",
       "name": "tron.md",
+      "license": "CC0-1.0",
       "contentType": "text/markdown",
       "title": "About: TRON",
       "description": "Background and summary of the TRON whitepaper, with a link to the official copy.",
@@ -509,6 +551,7 @@
     {
       "path": "binance-bnb.md",
       "name": "binance-bnb.md",
+      "license": "CC0-1.0",
       "contentType": "text/markdown",
       "title": "About: BNB Chain",
       "description": "Background and summary of the BNB Smart Chain whitepaper, with a link to the official copy.",
