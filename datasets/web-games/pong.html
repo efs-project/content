@@ -1019,6 +1019,10 @@ function efsControls(pong, canvas) {
   var keymap = { 87: 'w', 83: 's', 38: 'up', 40: 'down' };
   document.addEventListener('keydown', function(e) {
     if ((e.keyCode === 13 || e.keyCode === 32) && !pong.playing) { pong.startSinglePlayer(); e.preventDefault(); return; }
+    // The original Q/A (left) and P/L (right) keys are handled by the game itself; drop any
+    // pointer target so the paddle follows them instead of the last mouse position.
+    var original = { 81: 0, 65: 0, 80: 1, 76: 1 }[e.keyCode];
+    if (original !== undefined) { var op = human(original); if (op) op.target = null; }
     var k = keymap[e.keyCode]; if (!k) return;
     e.preventDefault(); if (!pong.playing) return;
     held[k] = true; syncKeys();

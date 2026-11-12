@@ -8,7 +8,7 @@ This repository is the portable content source for EFS demos and chain deploymen
 
 | Dataset | Anchor | Files | Bytes | Description |
 |---|---:|---:|---:|---|
-| [Web Games](./datasets/web-games/) | `/games` | 16 | 416752 | Single-file HTML5 games, playable in a sandboxed iframe. |
+| [Web Games](./datasets/web-games/) | `/games` | 16 | 417080 | Single-file HTML5 games, playable in a sandboxed iframe. |
 | [Crypto Whitepapers](./datasets/crypto-whitepapers/) | `/whitepapers` | 43 | 15079829 | Major cryptocurrency whitepapers and reference notes. |
 | [Ethereum Standards](./datasets/ethereum-eips/) | `/standards` | 16 | 354321 | Landmark Ethereum standards (EIPs/ERCs), public domain under CC0. |
 | [Cypherpunk Canon](./datasets/cypherpunk-canon/) | `/cypherpunk` | 27 | 23476165 | A reading shelf of 22 cypherpunk works: nine short classics in full, three books as PDFs, and links to the rest. |
