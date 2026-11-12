@@ -8,12 +8,14 @@ This repository is the portable content source for EFS demos and chain deploymen
 
 | Dataset | Anchor | Files | Bytes | Description |
 |---|---:|---:|---:|---|
-| [Web Games](./datasets/web-games/) | `/games` | 15 | 413841 | Single-file HTML5 games, playable in a sandboxed iframe. |
-| [Crypto Whitepapers](./datasets/crypto-whitepapers/) | `/whitepapers` | 40 | 14475183 | Major cryptocurrency whitepapers and reference notes. |
-| [Ethereum Standards](./datasets/ethereum-eips/) | `/standards` | 10 | 247026 | Landmark EIPs/ERCs, public domain under CC0. |
-| [Cypherpunk Canon](./datasets/cypherpunk-canon/) | `/cypherpunk` | 25 | 23400126 | A rights-aware shelf representing 21 works with local files or link-only records. |
+| [Web Games](./datasets/web-games/) | `/games` | 16 | 416752 | Single-file HTML5 games, playable in a sandboxed iframe. |
+| [Crypto Whitepapers](./datasets/crypto-whitepapers/) | `/whitepapers` | 43 | 15079829 | Major cryptocurrency whitepapers and reference notes. |
+| [Ethereum Standards](./datasets/ethereum-eips/) | `/standards` | 16 | 354321 | Landmark Ethereum standards (EIPs/ERCs), public domain under CC0. |
+| [Cypherpunk Canon](./datasets/cypherpunk-canon/) | `/cypherpunk` | 27 | 23476165 | A reading shelf of 22 cypherpunk works: nine short classics in full, three books as PDFs, and links to the rest. |
+| [Ethereum History](./datasets/history/) | `/history` | 12 | 114224 | Ethereum's story in its own words: the announcement, Devcon 0, launch, the DAO, the Merge. |
+| [Media](./datasets/media/) | `/media` | 7 | 1312174 | Public-domain images about archives that outlast their medium: Pale Blue Dot, the Voyager Golden Record, the Ethereum diamond. |
 
-`catalog.json` is the machine-readable table of contents. Each dataset folder owns its own `manifest.json`, `README.md`, and source files.
+`catalog.json` is the machine-readable table of contents. Each dataset folder owns its own `manifest.json`, a visitor-facing `README.md` (published as the folder's Overview), curator notes in `CURATION.md`, and its source files.
 
 ## Layout
 
