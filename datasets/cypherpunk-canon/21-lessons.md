@@ -13,4 +13,4 @@
 Twenty-one short reflections on what Bitcoin teaches about money, time,
 knowledge, incentives, privacy, and personal responsibility.
 
-Local file: [`21-lessons.pdf`](./21-lessons.pdf)
+The PDF is in this folder as `21-lessons.pdf`.

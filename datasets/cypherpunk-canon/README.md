@@ -1,80 +1,34 @@
 # Cypherpunk Canon
 
-A rights-aware reading shelf for foundational cypherpunk writing, privacy
-research, and adjacent books. The dataset is deployed at `/cypherpunk`.
+The writing behind ideas that Bitcoin and Ethereum inherited: private
+communication, digital cash, pseudonymous identity, and cryptography as a
+check on power. The shelf covers 22 works, from a 1986 hacker zine to books
+published this decade.
 
-The initial 21-work shelf was discovered through
-[The Cypherpunk Library](https://www.cypherpunkbooks.com/collection). That
-collection is a useful editorial source, but its blanket public-domain claim is
-not treated as sufficient rights evidence. EFS verifies redistribution terms
-against the work, author, publisher, or another primary source before copying
-third-party bytes.
+## Start here
 
-## Contents
+- **A Cypherpunk's Manifesto**, Eric Hughes (1993): the movement's founding statement.
+- **The Crypto Anarchist Manifesto**, Timothy C. May (1988).
+- **b-money**, Wei Dai (1998): money and contracts among untraceable pseudonyms, cited as reference [1] in the [Bitcoin whitepaper](https://bitcoin.org/bitcoin.pdf).
+- **Protecting Privacy with Electronic Cash**, Hal Finney (1993): public-key cryptography, anonymous remailers and digital cash, explained for a general reader.
+- **A Declaration of the Independence of Cyberspace**, John Perry Barlow (1996).
 
-- 21 represented works.
-- 5 works included locally: three PDFs and the full texts of the two manifestos.
-- 16 link-only metadata records.
-- 25 deployable EFS entries: one index, three PDFs, three human-readable about
-  cards, two manifesto texts, and sixteen records.
+## What's in this folder
 
-Open [`collection.md`](./collection.md) for the human-readable shelf.
-`manifest.json` is the deployable, machine-readable inventory.
+- **Nine classic texts in full**, stored on chain as Markdown: the two
+  manifestos, *b-money*, *The Conscience of a Hacker*, *Why I Wrote PGP*,
+  *Libertaria in Cyberspace*, *Protecting Privacy with Electronic Cash*,
+  *The Beauty of ECash* and *A Declaration of the Independence of Cyberspace*.
+- **Three books as PDFs**, each with a short about-card: *21 Lessons* (Gigi),
+  *Farewell to Westphalia* (Jarrad Hope and Peter Ludlow) and
+  *The Praxeology of Privacy* (Max Hillebrand).
+- **Ten link records** for longer or more recent works: a summary and a link
+  to the work at its source.
 
-## Locally Included Works
+`collection.md` lists every work with its author and year. Each full text ends
+with a link to the copy it was taken from.
 
-| Work | Format | Rights basis |
-|---|---|---|
-| The Praxeology of Privacy | PDF | Explicit public-domain dedication in the work and on the author's site |
-| 21 Lessons | PDF | CC BY-SA 4.0 in the work and on the author's site |
-| Farewell to Westphalia | PDF | CC BY-SA 4.0 in the book |
-| A Cypherpunk's Manifesto | Markdown | No explicit grant; hosted in full as a foundational, widely republished text (owner decision, 2026-10-27) |
-| The Crypto Anarchist Manifesto | Markdown | No explicit grant; the source page says "freely distributable with attribution"; hosted in full (owner decision, 2026-10-27) |
-
-The binary files are unmodified.
-
-## Link-Only Records
-
-The remaining works are represented by EFS-authored Markdown records. Those
-records are CC0-1.0 and may be deployed, pinned, and mirrored. The underlying
-third-party works are not included and retain their own rights.
-
-A record remains link-only when:
-
-- no explicit redistribution license was found;
-- the license has noncommercial or no-derivatives restrictions that need an
-  operator decision; or
-- availability from a website was the only evidence found.
-
-This lets EFS preserve discovery and provenance without confusing "available
-online" with "safe to mirror everywhere."
-
-## Metadata Convention
-
-- `redistributionStatus: deployable` means the local bytes may be seeded.
-- `redistributionStatus: link-only` applies to an EFS-authored record, not the
-  linked work.
-- `workLicense: NOASSERTION` means the linked work's redistribution terms have
-  not been established.
-- `aboutCard` points from included content to its human-readable provenance and
-  rights note. Each referenced card is also a manifest payload so it follows
-  the dataset into EFS.
-- `sha256` records the retrieved binary artifact; the deployment seeder also
-  computes the on-chain content hash from local bytes.
-
-## Validation
-
-From the repository root:
-
-```sh
-npm run validate
-```
-
-The current v1 dataset seeder deploys payload paths, content types, hashes,
-sizes, and tags. Rich manifest fields remain catalog metadata; the about-card
-payloads make the important human-readable details available inside EFS.
-
-The seeder skips an existing on-chain placement when its content hash already
-matches. A metadata-only change to the manifest therefore does not update an
-unchanged payload's on-chain tags or properties; change the relevant card file
-when the human-readable metadata needs a new deployment.
+The shelf follows the collection assembled by
+[The Cypherpunk Library](https://www.cypherpunkbooks.com/collection), with
+*b-money* added. The texts belong to their authors; EFS stores copies and does
+not relicense them.
