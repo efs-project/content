@@ -1011,10 +1011,14 @@ function efsControls(pong, canvas) {
   var held = {};
   function human(side) { var p = side ? pong.rightPaddle : pong.leftPaddle; return p && !p.auto ? p : null; }
   function steer(p, up, down) { if (!p) return; p.target = null; p.setdir((down ? 1 : 0) - (up ? 1 : 0)); }
-  function syncKeys() {
-    var twoP = pong.rightPaddle && !pong.rightPaddle.auto;
-    steer(human(0), held.w || (!twoP && held.up), held.s || (!twoP && held.down));
-    if (twoP) steer(human(1), held.up, held.down);
+  function twoPlayers() { return pong.rightPaddle && !pong.rightPaddle.auto; }
+  // W/S steer the left paddle; the arrows steer the right paddle in two-player mode and the
+  // left one otherwise. Only the paddle a key belongs to is touched, so one player's keys
+  // never cancel the other's (original Q/A/P/L keys or mouse).
+  function sideOf(k) { return (k === 'up' || k === 'down') && twoPlayers() ? 1 : 0; }
+  function syncKeys(side) {
+    if (side === 1) steer(human(1), held.up, held.down);
+    else steer(human(0), held.w || (!twoPlayers() && held.up), held.s || (!twoPlayers() && held.down));
   }
   var keymap = { 87: 'w', 83: 's', 38: 'up', 40: 'down' };
   document.addEventListener('keydown', function(e) {
@@ -1025,11 +1029,11 @@ function efsControls(pong, canvas) {
     if (original !== undefined) { var op = human(original); if (op) op.target = null; }
     var k = keymap[e.keyCode]; if (!k) return;
     e.preventDefault(); if (!pong.playing) return;
-    held[k] = true; syncKeys();
+    held[k] = true; syncKeys(sideOf(k));
   });
   document.addEventListener('keyup', function(e) {
     var k = keymap[e.keyCode]; if (!k) return;
-    held[k] = false; if (pong.playing) syncKeys();
+    held[k] = false; if (pong.playing) syncKeys(sideOf(k));
   });
   function courtY(e) {
     // canvas uses object-fit: contain, so map through the letterboxed drawing area
