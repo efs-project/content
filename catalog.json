@@ -50,6 +50,30 @@
       "status": "deployable-mixed",
       "licensePosture": "local PDFs are CC BY-SA or public domain; the two manifestos are hosted in full (owner decision 2026-10-27); other works are CC0 link-only records",
       "description": "A rights-aware shelf representing 21 cypherpunk works with local reading files or link-only records."
+    },
+    {
+      "id": "history",
+      "title": "Ethereum History",
+      "path": "datasets/history",
+      "manifest": "datasets/history/manifest.json",
+      "anchorPath": "/history",
+      "fileCount": 0,
+      "bytes": 0,
+      "status": "deployable",
+      "licensePosture": "Ethereum Foundation blog posts and essays converted to markdown (no stated licence; hosted by owner decision 2026-10-27), EIPs under CC0, and EFS-authored cards (CC0)",
+      "description": "Ethereum's story in its own words: the announcement, Devcon 0, launch, the DAO, the Merge."
+    },
+    {
+      "id": "media",
+      "title": "Media",
+      "path": "datasets/media",
+      "manifest": "datasets/media/manifest.json",
+      "anchorPath": "/media",
+      "fileCount": 7,
+      "bytes": 1312174,
+      "status": "deployable",
+      "licensePosture": "public-domain images (NASA; a public-domain text logo with a trademark note), each with a CC0 about-card",
+      "description": "Public-domain images about archives that outlast their medium: Pale Blue Dot, the Voyager Golden Record, the Ethereum diamond."
     }
   ]
 }

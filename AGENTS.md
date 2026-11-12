@@ -14,7 +14,7 @@ Curate useful files that can follow EFS to every chain: games, standards, whitep
 - Do not imply EFS owns or relicenses third-party works.
 - Use SPDX license ids when possible, such as `CC0-1.0`, `MIT`, and `CC-BY-4.0`.
 - Use `NOASSERTION` or `LicenseRef-*` for unclear or nonstandard rights status.
-- Treat unclear redistribution rights as not deployable until reviewed.
+- Hosting policy (owner decision, 2026-10-27): documents (text, markdown, PDFs such as whitepapers, standards, essays and manifestos) may be hosted when their redistribution rights are unclear; record that as `license: "NOASSERTION"` and keep any rights note. Media (games, images, audio, video) must carry a real licence; the seeder refuses media without one.
 - Keep manifests compatible with the current seeder: `dataset`, `anchorPath`, `defaults`, and `files[].path` must keep working.
 - Add rich metadata incrementally instead of doing broad rewrites.
 - Validate manifests before committing with `npm run validate`.

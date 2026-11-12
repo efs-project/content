@@ -73,6 +73,7 @@
       "author": "Wei Dai",
       "originalYear": 1998,
       "source": "https://www.weidai.com/bmoney.txt",
+      "license": "NOASSERTION",
       "redistributionStatus": "deployable",
       "modificationStatus": "verbatim"
     },
@@ -86,6 +87,7 @@
       "author": "John Perry Barlow",
       "originalYear": 1996,
       "source": "https://www.eff.org/cyberspace-independence",
+      "license": "NOASSERTION",
       "redistributionStatus": "deployable",
       "modificationStatus": "verbatim"
     },
@@ -233,6 +235,7 @@
       "author": "Hal Finney",
       "originalYear": 1993,
       "source": "https://cdn.nakamotoinstitute.org/docs/protecting-privacy-with-electronic-cash.pdf",
+      "license": "NOASSERTION",
       "redistributionStatus": "deployable",
       "modificationStatus": "verbatim"
     },
@@ -247,6 +250,7 @@
       "originalYear": 1991,
       "sourceRevisionYear": 1999,
       "source": "https://www.philzimmermann.com/EN/essays/WhyIWrotePGP.html",
+      "license": "NOASSERTION",
       "redistributionStatus": "deployable",
       "modificationStatus": "verbatim"
     },
@@ -276,6 +280,7 @@
       "author": "Loyd Blankenship (The Mentor)",
       "originalYear": 1986,
       "source": "https://phrack.org/issues/7/hackers-manifesto.html",
+      "license": "NOASSERTION",
       "redistributionStatus": "deployable",
       "modificationStatus": "verbatim"
     },
@@ -321,6 +326,7 @@
       "author": "Hal Finney",
       "originalYear": 1994,
       "source": "https://web.archive.org/web/20140421063207/http://www.finney.org/~hal/beauty_ecash.html",
+      "license": "NOASSERTION",
       "redistributionStatus": "deployable",
       "modificationStatus": "verbatim"
     },
@@ -366,6 +372,7 @@
       "author": "Timothy C. May",
       "originalYear": 1992,
       "source": "https://mailing-list-archive.cryptoanarchy.wiki/archive/1993/08/afd51441bdcebe887e3841a08dc769cd76f81c8291dc56525bec4c2d2368c56b",
+      "license": "NOASSERTION",
       "redistributionStatus": "deployable",
       "modificationStatus": "verbatim"
     },
